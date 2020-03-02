@@ -51,6 +51,8 @@
   },
   "dependencies": {
     "@storybook/react": "^5.2.4",
+    "global": "^4.4.0",
+    "netlify-cli": "^2.36.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
   }
