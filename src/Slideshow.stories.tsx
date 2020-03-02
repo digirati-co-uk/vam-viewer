@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default { title: 'CATEGORY LABEL| COMPONENT_NAME' };
+export default { title: 'CATEGORY LABEL| Slideshow' };
 
-export const ExampleName: React.FC = () => {
-  return <div>Some story</div>;
+export const Slideshow: React.FC = () => {
+  return <div>I will be a slideshow example</div>;
 };
