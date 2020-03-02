@@ -43,7 +43,6 @@
     "dist",
     "lib",
     "__mocks__",
-    "**/*.stories.tsx",
     "**/*.test.ts"
   ]
 }

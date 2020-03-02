@@ -20,7 +20,7 @@
   "devDependencies": {
     "@fesk/babel-config": "^1.3.0-next.2945936d",
     "@fesk/eslint-config-standard": "^1.2.2",
-    "@fesk/scripts": "^1.4.0-pr.b3558389",
+    "@fesk/scripts": "1.4.0-pr.b1c982eb",
     "@storybook/addon-knobs": "^5.2.4",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.9",
