@@ -1,7 +1,13 @@
 import React from 'react';
+import { Slideshow } from './Slideshow';
 
 export default { title: 'Slideshow| Slideshow' };
 
-export const Slideshow: React.FC = () => {
-  return <div>I will be a slideshow example</div>;
+export const SlideshowStory: React.FC = () => {
+  return (
+    <>
+      <div>BLAH</div>
+      <Slideshow />
+    </>
+  );
 };
