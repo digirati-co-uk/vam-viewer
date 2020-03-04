@@ -1,5 +1,5 @@
 {
-  "name": "fesk-ts",
+  "name": "vam-viewer",
   "version": "1.0.0",
   "license": "MIT",
   "files": [
@@ -50,8 +50,12 @@
     }
   },
   "dependencies": {
-    "@storybook/react": "^5.2.4",
+    "@canvas-panel/core": "^0.2.0",
+    "@canvas-panel/slideshow": "^0.2.0",
+    "@storybook/react": "^5.3.10",
+    "manifesto.js": "^4.0.0",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "react-flip-move": "^3.0.2"
   }
 }
