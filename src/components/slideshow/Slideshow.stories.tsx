@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slideshow } from './Slideshow';
+import { SlideShow } from '../../canvasPanelComponents/slideshow/src/index.js';
 
 export default { title: 'Slideshow| Slideshow' };
 
@@ -7,7 +7,7 @@ export const SlideshowStory: React.FC = () => {
   return (
     <>
       <div>BLAH</div>
-      <Slideshow />
+      <SlideShow />
     </>
   );
 };

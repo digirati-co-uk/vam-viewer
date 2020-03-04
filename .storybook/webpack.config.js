@@ -5,16 +5,16 @@ module.exports = (props) => {
     'node-fetch': 'fetch',
     'fetch-cookie/node-fetch': 'fetch',
   };
-  props.config.module.rules.push({
-    test: /\.scss$/,
-    use: [
-      'style-loader',
-      'css-loader',
-      'sass-loader',
-    ],
-  });
-  // Taking our the default css one here, as it seems to be conflicting with the scss one
-  const reducedRules = props.config.module.rules.filter(rule => String(rule.test) !== String(/\.css$/));
-  props.config.module.rules = reducedRules;
+  // props.config.module.rules.push({
+  //   test: /\.scss$/,
+  //   use: [
+  //     'style-loader',
+  //     'css-loader',
+  //     'sass-loader',
+  //   ],
+  // });
+  // // Taking our the default css one here, as it seems to be conflicting with the scss one
+  // const reducedRules = props.config.module.rules.filter(rule => String(rule.test) !== String(/\.css$/));
+  // props.config.module.rules = reducedRules;
   return config(props);
 };

@@ -55,6 +55,7 @@
     "@storybook/react": "^5.3.10",
     "manifesto.js": "^4.0.0",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "react-flip-move": "^3.0.2"
   }
 }
