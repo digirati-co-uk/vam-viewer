@@ -11,7 +11,7 @@ import MobilePageView from '../MobilePageView/MobilePageView';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Slide from '../Slide/Slide';
-import CanvasNavigation from '../CanvasNavigation/CanvasNavigation';
+import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 
 import './SlideShow.scss';
 

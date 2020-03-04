@@ -1,5 +1,5 @@
 import CanvasDetail from './components/CanvasDetail/CanvasDetail';
-import CanvasNavigation from './components/CanvasNavigation/CanvasNavigation';
+import CanvasNavigation from './components/CanvasNavigation/CanvasNavigation.tsx';
 import FullscreenButton from './components/FullscreenButton/FullscreenButton';
 import MobilePageView from './components/MobilePageView/MobilePageView';
 import MobileViewer from './components/MobileViewer/MobileViewer';
