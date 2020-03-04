@@ -50,6 +50,7 @@
     }
   },
   "dependencies": {
+    "bezier-easing": "^2.1.0",
     "@canvas-panel/core": "^0.2.0",
     "@canvas-panel/slideshow": "^0.2.0",
     "@storybook/react": "^5.3.10",
