@@ -95,8 +95,6 @@ class PatchworkPlugin extends Component {
 
   static propTypes = {};
 
-  componentDidMount = () => console.log(this.props);
-
   setViewport = viewport => (this.viewport = viewport);
 
   onClickAnnotation = (annotation, bounds) => {
@@ -105,7 +103,8 @@ class PatchworkPlugin extends Component {
 
     if (
       clickToClose &&
-      this.state.annotation && this.state.annotation.id === annotation.id
+      this.state.annotation &&
+      this.state.annotation.id === annotation.id
     ) {
       return this.onClose();
     }
