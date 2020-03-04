@@ -1,9 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { withBemClass } from '@canvas-panel/core';
+import withLocation from '../withLocation/withLocation';
 
 import './CanvasNavigation.scss';
 
 class CanvasNavigation extends Component {
+  componentDidMount() {
+    if (this.props.addressable && this.props.hash) {
+      let slideId =
+        this.props.hash.includes('slide') && this.props.hash.split('=')[1];
+      if (
+        !this.props.hash ||
+        !slideId ||
+        slideId < 0 ||
+        !Number.isInteger(parseInt(slideId)) ||
+        slideId >= this.props.canvasList.length
+      ) {
+        this.goToSlide(0);
+        return;
+      } else {
+        this.props.goToRange(parseInt(slideId));
+      }
+    }
+  }
+  goToSlide = index => {
+    if (this.props.addressable) {
+      document.location.hash = '#?slide=' + index;
+    }
+  };
+
   render() {
     const {
       previousRange,
@@ -12,7 +37,6 @@ class CanvasNavigation extends Component {
       currentIndex,
       bem,
     } = this.props;
-
     const size = canvasList ? canvasList.length : this.props.size;
     return (
       <div className={bem}>
@@ -23,6 +47,7 @@ class CanvasNavigation extends Component {
           onClick={ev => {
             ev.preventDefault();
             previousRange();
+            this.goToSlide(currentIndex - 1);
           }}
         >
           <svg viewBox="0 0 100 100" width="20px" height="20px">
@@ -43,13 +68,10 @@ class CanvasNavigation extends Component {
           onClick={ev => {
             ev.preventDefault();
             nextRange();
+            this.goToSlide(currentIndex + 1);
           }}
         >
-          <svg
-            viewBox="0 0 100 100"
-            width="20px"
-            height="20px"
-          >
+          <svg viewBox="0 0 100 100" width="20px" height="20px">
             <path fill="none" d="M-1-1h582v402H-1z" />
             <g>
               <path
@@ -65,4 +87,6 @@ class CanvasNavigation extends Component {
   }
 }
 
-export default withBemClass('canvas-navigation')(CanvasNavigation);
+const navigation = withBemClass('canvas-navigation')(CanvasNavigation);
+
+export default withLocation(navigation);
