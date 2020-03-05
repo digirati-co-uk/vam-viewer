@@ -11,26 +11,29 @@ import MobilePageView from '../MobilePageView/MobilePageView';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Slide from '../Slide/Slide';
-import CanvasNavigation from '../CanvasNavigation/CanvasNavigation';
+import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 
 import './SlideShow.scss';
 
 class SlideShow extends Component {
   state = {
     innerWidth: window.innerWidth,
+    rangeProps: {},
   };
 
   static propTypes = {
     manifestUri: PropTypes.string,
     jsonLd: PropTypes.object,
     mobileBreakpoint: PropTypes.number,
+    addressable: PropTypes.bool,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static defaultProps = {
     mobileBreakpoint: 767,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     window.addEventListener('resize', this.setSize);
   }
 
@@ -69,6 +72,7 @@ class SlideShow extends Component {
                     previousRange,
                     nextRange,
                     region,
+                    goToRange,
                   } = rangeProps;
                   return (
                     <div className={bem.element('inner-frame')} ref={ref}>
@@ -97,6 +101,9 @@ class SlideShow extends Component {
                             nextRange={nextRange}
                             canvasList={canvasList}
                             currentIndex={currentIndex}
+                            addressable={this.props.addressable}
+                            goToRange={goToRange}
+                            id={this.props.id}
                           />
                           <ProgressIndicator
                             currentCanvas={currentIndex}
