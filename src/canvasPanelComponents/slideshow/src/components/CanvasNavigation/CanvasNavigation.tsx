@@ -79,6 +79,7 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
     } else {
       slide = qParam.slide;
     }
+    if (!slide) slide = '0';
     return parseInt(slide);
   };
 
