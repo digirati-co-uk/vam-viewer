@@ -48,7 +48,12 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
           document.location.hash = queryString.stringify(qParam);
         }
       } else {
-        document.location.hash = `#${buildId(currentIndex)}`;
+        if (parseInt(qParam.id) !== id) {
+          document.location.hash =
+            document.location.hash + `&${buildId(currentIndex)}`;
+        } else {
+          document.location.hash = `#${buildId(currentIndex)}`;
+        }
       }
     }
   };
