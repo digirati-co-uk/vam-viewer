@@ -15,6 +15,7 @@ interface CanvasNavigationProps {
   hash: string;
   size: Number;
   addressable: boolean;
+  id: string | number;
 }
 
 const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
@@ -56,6 +57,10 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    goToSlide(currentIndex);
+  }, [currentIndex]);
+
   return (
     // @ts-ignore
     <div className={bem}>
@@ -67,7 +72,6 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
         onClick={ev => {
           ev.preventDefault();
           previousRange();
-          goToSlide(currentIndex - 1);
         }}
       >
         <svg viewBox="0 0 100 100" width="20px" height="20px">
@@ -89,7 +93,6 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
         onClick={ev => {
           ev.preventDefault();
           nextRange();
-          goToSlide(currentIndex + 1);
         }}
       >
         <svg viewBox="0 0 100 100" width="20px" height="20px">

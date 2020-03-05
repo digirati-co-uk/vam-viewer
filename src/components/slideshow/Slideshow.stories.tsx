@@ -13,6 +13,7 @@ export const SingleSlideShow: React.FC = () => {
         element={slideShowEl}
         manifestUri="https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json"
         addressable={true}
+        id={0}
       />
     </div>
   );
@@ -27,11 +28,13 @@ export const MultipleSlideShows: React.FC = () => {
         element={slideShowEl}
         manifestUri="https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json"
         addressable={true}
+        id={0}
       />
       <SlideShow
         element={slideShowEl}
         manifestUri="https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json"
         addressable={true}
+        id={1}
       />
     </div>
   );

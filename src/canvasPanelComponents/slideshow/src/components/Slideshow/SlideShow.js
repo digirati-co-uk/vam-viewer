@@ -26,6 +26,7 @@ class SlideShow extends Component {
     jsonLd: PropTypes.object,
     mobileBreakpoint: PropTypes.number,
     addressable: PropTypes.bool,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static defaultProps = {
@@ -102,6 +103,7 @@ class SlideShow extends Component {
                             currentIndex={currentIndex}
                             addressable={this.props.addressable}
                             goToRange={goToRange}
+                            id={this.props.id}
                           />
                           <ProgressIndicator
                             currentCanvas={currentIndex}
