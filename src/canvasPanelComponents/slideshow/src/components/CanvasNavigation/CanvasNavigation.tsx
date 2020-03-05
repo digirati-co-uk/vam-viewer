@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 // @ts-ignore
 import { withBemClass } from '@canvas-panel/core';
 import withLocation from '../withLocation/withLocation';
+import queryString from 'query-string';
 
 import './CanvasNavigation.scss';
 
@@ -10,10 +11,10 @@ interface CanvasNavigationProps {
   nextRange: () => void;
   canvasList: Array<Object>;
   currentIndex: number;
-  goToRange: (arg0: Number) => void;
+  goToRange: (arg0: number) => void;
   bem: string | Object;
-  hash: string;
-  size: Number;
+  hash: any;
+  size: number;
   addressable: boolean;
   id: string | number;
 }
@@ -29,36 +30,80 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   addressable = false,
   // @ts-ignore
   size = canvasList ? canvasList.length : size,
+  id,
 }) => {
   const goToSlide = (index: number | string) => {
+    index = index + '';
     if (addressable) {
-      document.location.hash = '#?slide=' + index;
+      const qParam = queryString.parse(window.location.hash);
+      if (
+        qParam.id &&
+        Array.isArray(qParam.id) &&
+        qParam.slide &&
+        Array.isArray(qParam.slide)
+      ) {
+        const indexOfQueryId = qParam.id.find(query => parseInt(query) === id);
+        if (indexOfQueryId) {
+          qParam.slide[parseInt(indexOfQueryId)] = currentIndex + '';
+          document.location.hash = queryString.stringify(qParam);
+        }
+      } else {
+        document.location.hash = `#${buildId(currentIndex)}`;
+      }
     }
+  };
+
+  const buildId = (index: number | string) => {
+    return `id=${id}&slide=${index}`;
+  };
+
+  const getSlideByID = () => {
+    const qParam = queryString.parse(window.location.hash);
+    let slide: any;
+    if (
+      qParam.id &&
+      Array.isArray(qParam.id) &&
+      qParam.slide &&
+      Array.isArray(qParam.slide)
+    ) {
+      const indexOfQueryId = qParam.id.find(
+        (query: string) => parseInt(query) === id
+      );
+      if (indexOfQueryId) slide = qParam.slide[parseInt(indexOfQueryId)];
+      if (!slide || slide < 0 || slide >= canvasList.length) slide = '0';
+    } else {
+      slide = qParam.slide;
+    }
+    return parseInt(slide);
   };
 
   useEffect(() => {
     if (addressable && hash) {
-      let slideId = hash.includes('slide') && hash.split('=')[1];
-      if (slideId) {
-        parseInt(slideId);
-      }
-      let intSlideId = slideId ? parseInt(slideId) : 0;
-      if (
-        !hash ||
-        !intSlideId ||
-        intSlideId < 0 ||
-        intSlideId >= canvasList.length
-      ) {
-        goToSlide(0);
-        return;
+      if (typeof hash.slide === 'string') {
+        let slideId = hash.slide;
+        if (slideId) {
+          parseInt(slideId);
+        }
+        let intSlideId = slideId ? parseInt(slideId) : 0;
+        if (
+          !hash ||
+          !intSlideId ||
+          intSlideId < 0 ||
+          intSlideId >= canvasList.length
+        ) {
+          goToSlide(currentIndex);
+          return;
+        } else {
+          goToRange(intSlideId);
+        }
       } else {
-        goToRange(intSlideId);
+        goToRange(getSlideByID());
       }
     }
   }, []);
 
   useEffect(() => {
-    goToSlide(currentIndex);
+    goToSlide(getSlideByID());
   }, [currentIndex]);
 
   return (

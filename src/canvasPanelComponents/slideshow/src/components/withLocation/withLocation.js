@@ -9,7 +9,7 @@ const withLocation = ComponentToWrap => props => (
         <ComponentToWrap
           {...props}
           search={location.search ? queryString.parse(location.search) : {}}
-          hash={location.hash ? location.hash : ''}
+          hash={location.hash ? queryString.parse(location.hash) : ''}
         />
       );
     }}
