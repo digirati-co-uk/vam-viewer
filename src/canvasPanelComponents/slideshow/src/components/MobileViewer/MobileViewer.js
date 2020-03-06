@@ -9,7 +9,7 @@ import {
 } from '@canvas-panel/core';
 import './MobileViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
-import CanvasNavigation from '../CanvasNavigation/CanvasNavigation';
+import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 
 const ExitFullscreenIcon = ({ className }) => (
   <svg
@@ -67,7 +67,7 @@ const ExitFullscreen = ({ bem, hidden, onClick }) => (
     onClick={onClick}
   >
     <ExitFullscreenIcon className={bem.element('exit-fullscreen-icon')} />
-    Exit slideshow
+    Exit
   </div>
 );
 
