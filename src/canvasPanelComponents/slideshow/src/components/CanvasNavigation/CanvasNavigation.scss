@@ -24,9 +24,20 @@
   }
 
   &__reset {
-    background-color: yellow;
+    color: #393b3f;
+    padding: 5px;
+    background: #eaeaea;
     position: absolute;
     pointer-events: all;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    border: none;
+    width: 32px;
+    height: 32px;
+    top: 62px;
+    right: 24px;
+    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.4));
 
     &--isFirstPage {
       opacity: 0;

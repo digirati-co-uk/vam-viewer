@@ -1,5 +1,6 @@
 .mobile-viewer {
   height: 100%;
+
   &__inner {
     height: 100%;
   }
@@ -8,9 +9,11 @@
     0% {
       opacity: 0;
     }
+
     50% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -28,10 +31,12 @@
     animation: fadein 0.6s;
     z-index: 12;
     max-width: calc(100vw - 90px);
+
     & * {
       line-height: 1.4;
       color: white;
     }
+
     &--hidden {
       opacity: 0;
       pointer-events: none;
@@ -39,16 +44,22 @@
   }
 
   &__canvas-navigation {
+    .canvas-navigation__reset {
+      right: unset;
+      left: 24px;
+    }
     .canvas-navigation__next,
     .canvas-navigation__previous {
       transition: opacity 0.2s;
       animation: fadein 0.6s;
+
       &--isFirstPage,
       &--isLastPage {
         opacity: 0;
         animation: none;
       }
     }
+
     &--hidden {
       .canvas-navigation__next,
       .canvas-navigation__previous {
@@ -62,6 +73,7 @@
     opacity: 1;
     transition: opacity 0.2s;
     animation: fadein 0.6s;
+
     &--hidden {
       opacity: 0;
       pointer-events: none;
@@ -93,6 +105,7 @@
 
   &__navigation {
     display: none;
+
     @media (pointer: fine) {
       display: block;
     }
@@ -130,6 +143,7 @@
       padding: 20px;
       line-height: 1.5em;
       box-sizing: border-box;
+
       &--hidden {
         bottom: -300px;
       }
@@ -139,6 +153,7 @@
         position: absolute;
         top: 15px;
         right: 15px;
+
         svg {
           fill: #000;
         }
