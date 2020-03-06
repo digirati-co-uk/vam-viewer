@@ -134,6 +134,7 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
           // @ts-ignore
           .element('previous')
           .modifiers({ isFirstPage: currentIndex === 0 })}
+        title="Previous slide"
         onClick={ev => {
           ev.preventDefault();
           previousRange();
@@ -155,6 +156,7 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
           // @ts-ignore
           .element('next')
           .modifiers({ isLastPage: currentIndex === size - 1 })}
+        title="Next slide"
         onClick={ev => {
           ev.preventDefault();
           nextRange();
