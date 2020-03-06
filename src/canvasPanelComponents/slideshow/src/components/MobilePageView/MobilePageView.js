@@ -112,6 +112,7 @@ class MobilePageView extends Component {
         previousRange,
         getNextRange,
         getPreviousRange,
+        goToRange,
       } = this.props;
 
       const size = manifest.getSequenceByIndex(0).getCanvases().length;
@@ -150,6 +151,7 @@ class MobilePageView extends Component {
             index={currentIndex}
             nextRange={nextRange}
             previousRange={previousRange}
+            goToRange={goToRange}
           />
         </PeekComponent>
       );

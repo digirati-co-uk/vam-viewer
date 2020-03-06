@@ -157,6 +157,7 @@ class MobileViewer extends Component {
       bem,
       nextRange,
       previousRange,
+      goToRange,
       canvasList,
       size,
       onZoomIn,
@@ -225,6 +226,7 @@ class MobileViewer extends Component {
                         nextRange={nextRange}
                         size={size}
                         currentIndex={index}
+                        goToRange={goToRange}
                       />
                     </div>
                   ) : null}

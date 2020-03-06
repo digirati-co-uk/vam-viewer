@@ -4,6 +4,7 @@ import { withBemClass } from '@canvas-panel/core';
 import withLocation from '../withLocation/withLocation';
 import queryString from 'query-string';
 
+import { ResetIcon } from '../Icons/Reset';
 import './CanvasNavigation.scss';
 
 interface CanvasNavigationProps {
@@ -115,6 +116,19 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   return (
     // @ts-ignore
     <div className={bem}>
+      <button
+        onClick={ev => {
+          ev.preventDefault();
+          goToRange(0);
+        }}
+        title="Reset slideshow"
+        className={bem
+          // @ts-ignore
+          .element('reset')
+          .modifiers({ isFirstPage: currentIndex === 0 })}
+      >
+        <ResetIcon />
+      </button>
       <button
         className={bem
           // @ts-ignore
