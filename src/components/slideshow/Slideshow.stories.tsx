@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 //@ts-ignore
 import { SlideShow } from '../../canvasPanelComponents/slideshow/src/index.js';
 export default { title: 'Slideshow | Slideshow', decorators: [withKnobs] };
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, color } from '@storybook/addon-knobs';
 
 export const SingleSlideShow: React.FC = () => {
   const slideShowEl = useRef('slideShowEl');
@@ -16,6 +16,7 @@ export const SingleSlideShow: React.FC = () => {
         )}
         addressable={boolean('Make URLs Addressable', true)}
         id={0}
+        backgroundColor={color('Background Colour', '#000000')}
       />
     </div>
   );
@@ -34,6 +35,7 @@ export const MultipleSlideShows: React.FC = () => {
         )}
         addressable={boolean('Make URLs Addressable', true)}
         id={0}
+        backgroundColor={color('Top Background Colour', '#000000')}
       />
       <SlideShow
         element={slideShowEl}
@@ -43,6 +45,7 @@ export const MultipleSlideShows: React.FC = () => {
         )}
         addressable={boolean('Make URLs Addressable', true)}
         id={1}
+        backgroundColor={color('Bottom Background Colour', '#000000')}
       />
     </div>
   );
