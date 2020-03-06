@@ -30,7 +30,7 @@ export const MultipleSlideShows: React.FC = () => {
         element={slideShowEl}
         manifestUri={text(
           'Top Manifest',
-          'https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json'
+          'https://iiif-collection.ch.digtest.co.uk/p3/testingmosaics-v4.json'
         )}
         addressable={boolean('Make URLs Addressable', true)}
         id={0}

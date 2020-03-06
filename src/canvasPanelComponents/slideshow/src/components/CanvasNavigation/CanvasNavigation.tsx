@@ -116,6 +116,18 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
     // @ts-ignore
     <div className={bem}>
       <button
+        onClick={ev => {
+          ev.preventDefault();
+          goToRange(0);
+        }}
+        className={bem
+          // @ts-ignore
+          .element('reset')
+          .modifiers({ isFirstPage: currentIndex === 0 })}
+      >
+        RESET
+      </button>
+      <button
         className={bem
           // @ts-ignore
           .element('previous')
