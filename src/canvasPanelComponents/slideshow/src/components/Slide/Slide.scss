@@ -42,13 +42,12 @@
   }
 
   &__required-statement {
-    background-color: black;
+    background-color: rgba(0, 0, 0, .5);
     color: white;
     font-size: 0.8em;
     pointer-events: visible;
     text-shadow: 1px 1px 1px #1d1e20;
     line-height: 1.4;
-    opacity: 0.5;
     text-align: center;
     padding: 0.8em;
 

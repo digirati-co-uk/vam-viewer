@@ -20,6 +20,7 @@
   }
 
   &__attribution {
+    background-color: rgba(0, 0, 0, .5);
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -31,6 +32,8 @@
     animation: fadein 0.6s;
     z-index: 12;
     max-width: calc(100vw - 90px);
+    text-align: center;
+    padding: 0.8em;
 
     & * {
       line-height: 1.4;
@@ -48,6 +51,7 @@
       right: unset;
       left: 24px;
     }
+
     .canvas-navigation__next,
     .canvas-navigation__previous {
       transition: opacity 0.2s;
@@ -61,6 +65,7 @@
     }
 
     &--hidden {
+
       .canvas-navigation__next,
       .canvas-navigation__previous {
         opacity: 0;
