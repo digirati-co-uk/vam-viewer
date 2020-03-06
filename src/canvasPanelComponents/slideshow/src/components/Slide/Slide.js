@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { withBemClass } from '@canvas-panel/core';
 import SwappableViewer from '../SwappableViewer/SwappableViewer';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
 import './Slide.scss';
 
 class Slide extends Component {
+  static propTypes = {
+    backgroundColor: PropTypes.string,
+  };
+
+  static defaultProps = {
+    backgroundColor: '#000000',
+  };
   render() {
     const {
       bem,
@@ -14,6 +23,7 @@ class Slide extends Component {
       region,
       renderPanel,
       fullscreenProps,
+      backgroundColor,
     } = this.props;
     return (
       <div
@@ -23,6 +33,7 @@ class Slide extends Component {
             return acc;
           }, {})
         )}
+        style={{ background: backgroundColor }}
       >
         <SwappableViewer
           fullscreenProps={fullscreenProps}

@@ -27,10 +27,12 @@ class SlideShow extends Component {
     mobileBreakpoint: PropTypes.number,
     addressable: PropTypes.bool,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    backgroundColor: PropTypes.string,
   };
 
   static defaultProps = {
     mobileBreakpoint: 767,
+    backgroundColor: '#000000',
   };
 
   componentDidMount() {
@@ -52,7 +54,13 @@ class SlideShow extends Component {
   };
 
   render() {
-    const { manifestUri, jsonLd, renderPanel, bem } = this.props;
+    const {
+      manifestUri,
+      jsonLd,
+      renderPanel,
+      bem,
+      backgroundColor,
+    } = this.props;
     return (
       <div
         className={bem.modifiers({
@@ -75,7 +83,11 @@ class SlideShow extends Component {
                     goToRange,
                   } = rangeProps;
                   return (
-                    <div className={bem.element('inner-frame')} ref={ref}>
+                    <div
+                      className={bem.element('inner-frame')}
+                      ref={ref}
+                      style={{ background: backgroundColor }}
+                    >
                       {this.qualifiesForMobile() ? (
                         <MobilePageView
                           manifest={manifest}
@@ -94,6 +106,7 @@ class SlideShow extends Component {
                               canvas={canvas}
                               region={region}
                               renderPanel={renderPanel}
+                              backgroundColor={backgroundColor}
                             />
                           </SimpleSlideTransition>
                           <CanvasNavigation
