@@ -111,7 +111,26 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
 
   useEffect(() => {
     goToSlide(getSlideByID());
+    document.addEventListener('keyup', handleKeyPress);
+    return () => {
+      document.removeEventListener('keyup', handleKeyPress);
+    };
   }, [currentIndex]);
+
+  const handleKeyPress = (event: any) => {
+    if (event.code === 'ArrowRight') {
+      const next = getSlideByID() + 1;
+      if (next && next >= 0 && next < canvasList.length) {
+        goToRange(next);
+      }
+    }
+    if (event.code === 'ArrowLeft') {
+      const previous = getSlideByID() - 1;
+      if (previous === 0 || (previous >= 0 && previous < canvasList.length)) {
+        goToRange(previous);
+      }
+    }
+  };
 
   return (
     // @ts-ignore
