@@ -18,6 +18,7 @@ interface CanvasNavigationProps {
   size: number;
   addressable: boolean;
   id: string | number;
+  parentInFocus: boolean;
 }
 
 const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
@@ -32,6 +33,7 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   // @ts-ignore
   size = canvasList ? canvasList.length : size,
   id,
+  parentInFocus = false,
 }) => {
   const goToSlide = (index: number | string) => {
     index = index + '';
@@ -115,9 +117,10 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
     return () => {
       document.removeEventListener('keyup', handleKeyPress);
     };
-  }, [currentIndex]);
+  }, [currentIndex, parentInFocus]);
 
   const handleKeyPress = (event: any) => {
+    if (!parentInFocus) return;
     if (event.code === 'ArrowRight') {
       const next = getSlideByID() + 1;
       if (next && next >= 0 && next < canvasList.length) {
