@@ -19,6 +19,7 @@ class SlideShow extends Component {
   state = {
     innerWidth: window.innerWidth,
     rangeProps: {},
+    inFocus: false,
   };
 
   static propTypes = {
@@ -66,6 +67,8 @@ class SlideShow extends Component {
         className={bem.modifiers({
           isMobile: Responsive.md.phone(),
         })}
+        onMouseOver={() => this.setState({ inFocus: true })}
+        onMouseLeave={() => this.setState({ inFocus: false })}
       >
         <Fullscreen>
           {({ ref, ...fullscreenProps }) => (
@@ -117,6 +120,7 @@ class SlideShow extends Component {
                             addressable={this.props.addressable}
                             goToRange={goToRange}
                             id={this.props.id}
+                            parentInFocus={this.state.inFocus}
                           />
                           <ProgressIndicator
                             currentCanvas={currentIndex}
