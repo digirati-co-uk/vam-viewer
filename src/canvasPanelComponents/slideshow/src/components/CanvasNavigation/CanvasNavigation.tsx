@@ -39,15 +39,16 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
     index = index + '';
     if (addressable) {
       const qParam = queryString.parse(window.location.hash);
+      console.log(qParam);
       if (
         qParam.id &&
         Array.isArray(qParam.id) &&
-        qParam.slide &&
-        Array.isArray(qParam.slide)
+        qParam.slideshow &&
+        Array.isArray(qParam.slideshow)
       ) {
         const indexOfQueryId = qParam.id.find(query => parseInt(query) === id);
         if (indexOfQueryId) {
-          qParam.slide[parseInt(indexOfQueryId)] = currentIndex + '';
+          qParam.slideshow[parseInt(indexOfQueryId)] = currentIndex + '';
           document.location.hash = queryString.stringify(qParam);
         }
       } else {
@@ -62,34 +63,36 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   };
 
   const buildId = (index: number | string) => {
-    return `id=${id}&slide=${index}`;
+    return `id=${id}&slideshow=${index}`;
   };
 
   const getSlideByID = () => {
     const qParam = queryString.parse(window.location.hash);
-    let slide: any;
+    let slideshow: any;
     if (
       qParam.id &&
       Array.isArray(qParam.id) &&
-      qParam.slide &&
-      Array.isArray(qParam.slide)
+      qParam.slideshow &&
+      Array.isArray(qParam.slideshow)
     ) {
       const indexOfQueryId = qParam.id.find(
         (query: string) => parseInt(query) === id
       );
-      if (indexOfQueryId) slide = qParam.slide[parseInt(indexOfQueryId)];
-      if (!slide || slide < 0 || slide >= canvasList.length) slide = '0';
+      if (indexOfQueryId)
+        slideshow = qParam.slideshow[parseInt(indexOfQueryId)];
+      if (!slideshow || slideshow < 0 || slideshow >= canvasList.length)
+        slideshow = '0';
     } else {
-      slide = qParam.slide;
+      slideshow = qParam.slideshow;
     }
-    if (!slide) slide = '0';
-    return parseInt(slide);
+    if (!slideshow) slideshow = '0';
+    return parseInt(slideshow);
   };
 
   useEffect(() => {
     if (addressable && hash) {
-      if (typeof hash.slide === 'string') {
-        let slideId = hash.slide;
+      if (typeof hash.slideshow === 'string') {
+        let slideId = hash.slideshow;
         if (slideId) {
           parseInt(slideId);
         }
@@ -122,13 +125,13 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   const handleKeyPress = (event: any) => {
     if (!parentInFocus) return;
     if (event.code === 'ArrowRight') {
-      const next = getSlideByID() + 1;
+      const next = getSlideByID() ? getSlideByID() + 1 : currentIndex + 1;
       if (next && next >= 0 && next < canvasList.length) {
         goToRange(next);
       }
     }
     if (event.code === 'ArrowLeft') {
-      const previous = getSlideByID() - 1;
+      const previous = getSlideByID() ? getSlideByID() - 1 : currentIndex - 1;
       if (previous === 0 || (previous >= 0 && previous < canvasList.length)) {
         goToRange(previous);
       }
