@@ -39,7 +39,6 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
     index = index + '';
     if (addressable) {
       const qParam = queryString.parse(window.location.hash);
-      console.log(qParam);
       if (
         qParam.id &&
         Array.isArray(qParam.id) &&
