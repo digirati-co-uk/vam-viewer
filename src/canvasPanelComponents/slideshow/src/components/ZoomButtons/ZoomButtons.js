@@ -13,6 +13,7 @@ class ZoomButtons extends Component {
             in: true,
             disabled: !onZoomIn,
           })}
+          title="Zoom in"
         >
           <svg
             viewBox="0 0 400 400"
@@ -39,6 +40,7 @@ class ZoomButtons extends Component {
             out: true,
             disabled: !onZoomOut,
           })}
+          title="Zoom out"
         >
           <svg
             viewBox="0 0 400 400"

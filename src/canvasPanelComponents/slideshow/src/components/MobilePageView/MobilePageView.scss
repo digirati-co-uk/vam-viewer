@@ -16,11 +16,13 @@
       line-height: 1.5;
     }
   }
+
   &__metadata {
     position: relative;
   }
 
   &__attribution {
+    background-color: rgba(0,0,0,.5);
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -28,6 +30,9 @@
     text-shadow: 1px 1px 1px #1d1e20;
     line-height: 1.4;
     color: white;
+    text-align: center;
+    padding: 0.8em;
+
     & * {
       line-height: 1.4;
       color: white;
