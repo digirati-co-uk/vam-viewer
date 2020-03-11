@@ -20,7 +20,6 @@ class MobileAnnotationView extends Component {
 
   goToAnnotation(index) {
     const { annotations } = this.props;
-
     if (index === 0) {
       this.props.viewport.resetView();
     } else {
