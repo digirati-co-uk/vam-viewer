@@ -192,7 +192,7 @@ class MobileViewer extends Component {
                 ) : (
                   <React.Fragment />
                 )}
-                {current ? (
+                {current && label ? (
                   <InfoButton
                     bem={bem}
                     onClick={onOpen}
@@ -254,7 +254,7 @@ class MobileViewer extends Component {
                 </FullPageViewport>
               </SingleTileSource>
             </div>
-            {current ? (
+            {current && label ? (
               <InfoPanel
                 bem={bem}
                 hidden={dragging === true || !isOpen}
