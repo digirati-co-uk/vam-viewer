@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// @ts-ignore
 import { AnnotationDetail, withBemClass } from '@canvas-panel/core';
 import AnnotationNavigation from '../AnnotationNavigation/AnnotationNavigation';
 
@@ -29,6 +30,13 @@ const MobileAnnotationView: React.FC<MobileAnnotationProps> = ({
   useEffect(() => {
     goToAnnotation(current);
   }, [disabled]);
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => onNext(),
+    onSwipedRight: () => onPrevious(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
 
   const goToAnnotation = (index: number) => {
     if (index === 0) {
@@ -89,7 +97,10 @@ const MobileAnnotationView: React.FC<MobileAnnotationProps> = ({
   const next = annotations[current] ? annotations[current].annotation : null;
 
   return (
-    <div className={bem.modifiers({ splash: current === 0, disabled })}>
+    <div
+      className={bem.modifiers({ splash: current === 0, disabled })}
+      {...handlers}
+    >
       {annotation ? renderAnnotation(annotation, next) : renderSplash()}
     </div>
   );
