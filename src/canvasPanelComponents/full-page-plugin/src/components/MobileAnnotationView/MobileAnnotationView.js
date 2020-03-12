@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AnnotationDetail, withBemClass } from '@canvas-panel/core';
 import AnnotationNavigation from '../AnnotationNavigation/AnnotationNavigation';
+
 import './MobileAnnotationView.scss';
 
 class MobileAnnotationView extends Component {
