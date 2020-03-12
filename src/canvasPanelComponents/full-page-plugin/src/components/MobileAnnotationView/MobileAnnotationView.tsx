@@ -56,7 +56,7 @@ const MobileAnnotationView: React.FC<MobileAnnotationProps> = ({
   };
 
   const onNext = () => {
-    if (current >= annotations.length) return null;
+    if (current >= annotations.length) return;
     goToAnnotation(current + 1);
   };
 
