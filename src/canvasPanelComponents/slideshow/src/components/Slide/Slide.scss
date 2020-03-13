@@ -87,6 +87,9 @@
         .slide__overlay-content {
           width: 40%;
           left: 0;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
         }
 
         .slide__viewport {
@@ -100,6 +103,9 @@
         .slide__overlay-content {
           width: 40%;
           left: 60%;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
         }
 
         .slide__viewport {
