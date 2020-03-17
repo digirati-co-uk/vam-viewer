@@ -3,7 +3,6 @@ import React, { useRef } from 'react';
 import { SlideShow } from '../../canvasPanelComponents/slideshow/src/index.js';
 export default { title: 'Slideshow | Slideshow', decorators: [withKnobs] };
 import { withKnobs, text, boolean, color } from '@storybook/addon-knobs';
-import { IFrameYouTube } from '../../canvasPanelComponents/slideshow/src/components/IFrameYouTube/IFrameYouTube';
 
 // crossorigin = 'anonymous';
 export const SingleSlideShow: React.FC = () => {
@@ -69,8 +68,4 @@ export const WithVideoExample: React.FC = () => {
       />
     </div>
   );
-};
-
-export const Video: React.FC = () => {
-  return <IFrameYouTube url={'https://www.youtube.com/embed/6qYEUlq7wLI'} />;
 };

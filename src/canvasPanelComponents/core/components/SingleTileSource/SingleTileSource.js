@@ -62,7 +62,6 @@ class SingleTileSource extends Component {
       });
       return;
     }
-    console.log('here');
     if (
       !SingleTileSource.cache[imageUri] &&
       this.state.tileSources.type !== 'video'
