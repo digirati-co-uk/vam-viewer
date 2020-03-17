@@ -3,11 +3,12 @@ import * as PropTypes from 'prop-types';
 
 import {
   FullPageViewport,
-  SingleTileSource,
   withBemClass,
   OpenSeadragonViewport,
   parseSelectorTarget,
 } from '@canvas-panel/core';
+
+import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
 
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';

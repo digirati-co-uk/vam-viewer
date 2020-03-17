@@ -3,7 +3,9 @@ import React, { useRef } from 'react';
 import { SlideShow } from '../../canvasPanelComponents/slideshow/src/index.js';
 export default { title: 'Slideshow | Slideshow', decorators: [withKnobs] };
 import { withKnobs, text, boolean, color } from '@storybook/addon-knobs';
+import { IFrameYouTube } from '../../canvasPanelComponents/slideshow/src/components/IFrameYouTube/IFrameYouTube';
 
+// crossorigin = 'anonymous';
 export const SingleSlideShow: React.FC = () => {
   const slideShowEl = useRef('slideShowEl');
   return (
@@ -49,4 +51,26 @@ export const MultipleSlideShows: React.FC = () => {
       />
     </div>
   );
+};
+
+export const WithVideoExample: React.FC = () => {
+  const slideShowEl = useRef('slideShowEl');
+  return (
+    <div id="slideShowEl" style={{ height: '100vh' }}>
+      <SlideShow
+        element={slideShowEl}
+        manifestUri={text(
+          'Manifest',
+          'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/balenciaga-example.json'
+        )}
+        addressable={boolean('Make URLs Addressable', true)}
+        id={0}
+        backgroundColor={color('Background Colour', '#000000')}
+      />
+    </div>
+  );
+};
+
+export const Video: React.FC = () => {
+  return <IFrameYouTube url={'https://www.youtube.com/embed/6qYEUlq7wLI'} />;
 };

@@ -62,6 +62,7 @@ class SlideShow extends Component {
       bem,
       backgroundColor,
     } = this.props;
+
     return (
       <div
         className={bem.modifiers({
