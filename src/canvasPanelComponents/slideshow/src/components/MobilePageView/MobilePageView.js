@@ -102,7 +102,7 @@ class MobilePageView extends Component {
   };
 
   render() {
-    const { isFullscreen, offset, down, open } = this.state;
+    const { isFullscreen, offset, down, open, video } = this.state;
     const { currentIndex, bem, manifest } = this.props;
 
     if (isFullscreen) {

@@ -5,7 +5,6 @@ import getDataUriFromCanvas from '../../utility/getDataUriFromCanvas';
 import functionOrMapChildren, {
   FunctionOrMapChildrenType,
 } from '../../utility/functionOrMapChildren';
-import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube';
 
 // const Props = {
 //   preLoad: any => any,
@@ -45,10 +44,13 @@ class SingleTileSource extends Component {
       return null;
     }
     if (imageUri.includes('youtube')) {
-      this.setState({
-        imageUri,
-        tileSources: [{ type: 'video', url: imageUri }],
-      });
+      this.setState(
+        {
+          imageUri,
+          tileSources: [{ type: 'video', url: imageUri }],
+        },
+        this.props.notifyVideo(true, imageUri)
+      );
       return;
     } else if (!imageUri.endsWith('/info.json')) {
       this.setState({
@@ -107,32 +109,28 @@ class SingleTileSource extends Component {
   render() {
     const { children, fallbackWidth, canvas, preLoad, ...props } = this.props;
     const { imageUri, tileSources } = this.state;
-    if (tileSources[0] && tileSources[0].type === 'video') {
-      return <IFrameYouTube url={imageUri} />;
-    } else {
-      if (tileSources === null) {
-        return 'loading tile source';
-      }
-
-      // Render children if they exist.
-      if (children) {
-        const childrenRender = functionOrMapChildren(children, {
-          canvas,
-          imageUri,
-          tileSources,
-          ...props,
-        });
-        if (childrenRender) {
-          return childrenRender;
-        }
-      }
-
-      if (preLoad) {
-        return preLoad(this.props);
-      }
-
-      return this.renderFallback();
+    if (tileSources === null) {
+      return 'loading tile source';
     }
+
+    // Render children if they exist.
+    if (children) {
+      const childrenRender = functionOrMapChildren(children, {
+        canvas,
+        imageUri,
+        tileSources,
+        ...props,
+      });
+      if (childrenRender) {
+        return childrenRender;
+      }
+    }
+
+    if (preLoad) {
+      return preLoad(this.props);
+    }
+
+    return this.renderFallback();
   }
 }
 
