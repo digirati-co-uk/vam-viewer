@@ -77,10 +77,6 @@ const InfoButton = ({ bem, onClick, hidden }) => (
   </div>
 );
 
-const Navigation = ({ bem, children }) => (
-  <div className={bem.element('navigation')}>{children}</div>
-);
-
 const InfoPanel = ({ bem, hidden, onClose, children, label }) => (
   <div
     className={bem.element('info-panel').modifiers({
