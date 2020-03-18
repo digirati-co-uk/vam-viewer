@@ -13,8 +13,8 @@ interface IFrameYouTubeProps {
 
 export const IFrameYouTube: React.FC<IFrameYouTubeProps> = ({
   url,
-  onDragStart,
-  onDragStop,
+  onDragStart = () => {},
+  onDragStop = () => {},
 }) => {
   const handlers = useSwipeable({
     onSwiping: e => handleSwipe(e),
