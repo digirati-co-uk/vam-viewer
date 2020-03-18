@@ -87,7 +87,7 @@
 
   &__previous {
     left: -40px;
-    border-radius: 0 50% 50% 0;
+    border-radius: 50% 50% 50% 50%;
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.4));
     text-align: right;
 
@@ -107,7 +107,7 @@
 
   &__next {
     right: -40px;
-    border-radius: 50% 0 0 50%;
+    border-radius: 50% 50% 50% 50%;
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.4));
     text-align: left;
 
