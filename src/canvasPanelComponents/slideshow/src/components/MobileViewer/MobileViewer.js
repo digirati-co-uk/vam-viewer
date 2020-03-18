@@ -201,36 +201,21 @@ class MobileViewer extends Component {
                 ) : (
                   <React.Fragment />
                 )}
-                <Navigation bem={bem}>
-                  {current ? (
-                    <div
-                      className={bem
-                        .element('zoom-controls')
-                        .modifiers({ hidden: !current || dragging })}
-                    >
-                      <ZoomButtons
-                        right
-                        onZoomIn={onZoomIn}
-                        onZoomOut={onZoomOut}
-                      />
-                    </div>
-                  ) : null}
-                  {current ? (
-                    <div
-                      className={bem
-                        .element('canvas-navigation')
-                        .modifiers({ hidden: !current || dragging })}
-                    >
-                      <CanvasNavigation
-                        previousRange={previousRange}
-                        nextRange={nextRange}
-                        size={size}
-                        currentIndex={index}
-                        goToRange={goToRange}
-                      />
-                    </div>
-                  ) : null}
-                </Navigation>
+
+                <div
+                  className={bem
+                    .element('canvas-navigation')
+                    .modifiers({ hidden: !current || dragging })}
+                >
+                  <CanvasNavigation
+                    previousRange={previousRange}
+                    nextRange={nextRange}
+                    size={size}
+                    currentIndex={index}
+                    goToRange={goToRange}
+                  />
+                </div>
+
                 <FullPageViewport
                   setRef={this.props.setViewport}
                   position="absolute"
