@@ -94,9 +94,10 @@ class SlideShow extends Component {
                       {this.qualifiesForMobile() ? (
                         <MobilePageView
                           manifest={manifest}
-                          previousRange={previousRange}
-                          nextRange={nextRange}
+                          addressable={this.props.addressable}
                           fullscreenProps={fullscreenProps}
+                          id={this.props.id}
+                          parentInFocus={this.state.inFocus}
                           {...rangeProps}
                         />
                       ) : (

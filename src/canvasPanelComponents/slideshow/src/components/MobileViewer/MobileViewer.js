@@ -96,7 +96,7 @@ class MobileViewer extends Component {
     setViewport: () => null,
   };
 
-  state = { open: false, constrained: false, offset: 0 };
+  state = { open: false, constrained: false, offset: 0, inFocus: false };
 
   onConstrain = (viewer, x, y) => {
     const stateToUpdate = {};
@@ -169,7 +169,11 @@ class MobileViewer extends Component {
     return (
       <CanvasDetail key={canvas.id} canvas={canvas}>
         {({ label, body, attributionLabel, attribution }) => (
-          <div className={bem}>
+          <div
+            className={bem}
+            onMouseOver={() => this.setState({ inFocus: true })}
+            onMouseLeave={() => this.setState({ inFocus: false })}
+          >
             <div className={bem.element('inner')}>
               <SingleTileSource {...props}>
                 {current ? (
@@ -209,6 +213,9 @@ class MobileViewer extends Component {
                     size={size}
                     currentIndex={index}
                     goToRange={goToRange}
+                    id={this.props.id}
+                    parentInFocus={this.state.inFocus}
+                    addressable={this.props.addressable}
                   />
                 </div>
 
