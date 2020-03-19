@@ -112,6 +112,7 @@ class MobilePageView extends Component {
       getNextRange,
       getPreviousRange,
       goToRange,
+      canvasList,
     } = this.props;
 
     const size = manifest.getSequenceByIndex(0).getCanvases().length;
@@ -154,6 +155,7 @@ class MobilePageView extends Component {
           parentInFocus={this.props.parentInFocus}
           addressable={this.props.addressable}
           id={this.props.id}
+          canvasList={canvasList}
         />
       </PeekComponent>
     );
