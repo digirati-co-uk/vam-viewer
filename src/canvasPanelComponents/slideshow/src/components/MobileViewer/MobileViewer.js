@@ -216,6 +216,7 @@ class MobileViewer extends Component {
                     id={this.props.id}
                     parentInFocus={this.state.inFocus}
                     addressable={this.props.addressable}
+
                   />
                 </div>
 
