@@ -8,18 +8,25 @@ import {
   Responsive,
 } from '@canvas-panel/core';
 import MobilePageView from '../MobilePageView/MobilePageView';
+import MobileViewer from '../MobileViewer/MobileViewer';
+import TapDetector from '../TapDetector/TapDetector';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Slide from '../Slide/Slide';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
+import PeekComponent from '../PeekComponent/PeekComponent';
 
 import './SlideShow.scss';
 
 class SlideShow extends Component {
   state = {
+    isMobileFullScreen: false,
     innerWidth: window.innerWidth,
     rangeProps: {},
+    offset: 0,
     inFocus: false,
+    down: false,
+    open: false,
   };
 
   static propTypes = {
@@ -35,6 +42,8 @@ class SlideShow extends Component {
     mobileBreakpoint: 767,
     backgroundColor: '#000000',
   };
+
+  touchDetector = null;
 
   componentDidMount() {
     window.addEventListener('resize', this.setSize);
@@ -54,6 +63,48 @@ class SlideShow extends Component {
     return this.state.innerWidth <= this.props.mobileBreakpoint;
   };
 
+  nextRange = fromHOC => {
+    this.viewport.viewer.viewer.viewport.applyConstraints(true);
+    fromHOC();
+  };
+
+  previousRange = fromHOC => {
+    this.viewport.viewer.viewer.viewport.applyConstraints(true);
+    fromHOC();
+  };
+
+  onDragStart = () => {
+    this.setState({ down: true });
+  };
+
+  onDragStop = () => {
+    this.setState({ down: false, offset: 0 });
+  };
+
+  applyOffset = offset => {
+    this.setState({ offset });
+  };
+  onOpen = () => {
+    this.setState({ open: true });
+  };
+
+  onClose = () => {
+    this.setState({ open: false });
+  };
+
+  onExitFullscreen = () => {
+    this.setState({ isMobileFullScreen: false });
+  };
+
+  setViewport = viewport => {
+    if (this.touchDetector) {
+      this.touchDetector.unbind();
+    }
+    this.touchDetector = new TapDetector(viewport.viewer.viewer.canvas);
+    this.touchDetector.onTap(this.onTap);
+    this.viewport = viewport;
+  };
+
   render() {
     const {
       manifestUri,
@@ -62,6 +113,8 @@ class SlideShow extends Component {
       bem,
       backgroundColor,
     } = this.props;
+    const { offset, down, open } = this.state;
+
     return (
       <div
         className={bem.modifiers({
@@ -71,78 +124,132 @@ class SlideShow extends Component {
         onMouseLeave={() => this.setState({ inFocus: false })}
       >
         <Fullscreen>
-          {({ ref, ...fullscreenProps }) => (
-            <Manifest url={manifestUri} jsonLd={jsonLd}>
-              <RangeNavigationProvider>
-                {rangeProps => {
-                  const {
-                    manifest,
-                    canvas,
-                    canvasList,
-                    currentIndex,
-                    previousRange,
-                    nextRange,
-                    region,
-                    goToRange,
-                  } = rangeProps;
-                  return (
-                    <div
-                      className={bem.element('inner-frame')}
-                      ref={ref}
-                      style={{ background: backgroundColor }}
-                    >
-                      {this.qualifiesForMobile() ? (
-                        <MobilePageView
-                          manifest={manifest}
-                          manifestUri={this.props.manifestUri}
-                          addressable={this.props.addressable}
-                          fullscreenProps={fullscreenProps}
-                          id={this.props.id}
-                          canvas={canvas}
-                          region={region}
-                          renderPanel={renderPanel}
-                          backgroundColor={backgroundColor}
-                          parentInFocus={this.state.inFocus}
-                          canvasList={canvasList}
-                          currentIndex={currentIndex}
-                          addressable={this.props.addressable}
-                          {...rangeProps}
-                        />
-                      ) : (
-                        <React.Fragment>
-                          <SimpleSlideTransition id={currentIndex}>
-                            <Slide
-                              fullscreenProps={fullscreenProps}
-                              behaviors={canvas.__jsonld.behavior || []}
+          {({ ref, ...fullscreenProps }) => {
+            fullscreenProps = this.qualifiesForMobile()
+              ? {
+                  fullscreenEnabled: true,
+                  isFullscreen: this.state.isMobileFullScreen,
+                  exitFullscreen: () =>
+                    this.setState({ isMobileFullScreen: false }),
+                  goFullscreen: () =>
+                    this.setState({ isMobileFullScreen: true }),
+                  extra: 'hi',
+                }
+              : fullscreenProps;
+            return (
+              <Manifest url={manifestUri} jsonLd={jsonLd}>
+                <RangeNavigationProvider>
+                  {rangeProps => {
+                    console.log({ ...rangeProps });
+
+                    const {
+                      manifest,
+                      canvas,
+                      canvasList,
+                      currentIndex,
+                      previousRange,
+                      nextRange,
+                      region,
+                      goToRange,
+                      getPreviousRange,
+                      getNextRange,
+                    } = rangeProps;
+                    this.manifest = manifest;
+                    this.rangeProps = rangeProps;
+                    const size = manifest.getSequenceByIndex(0).getCanvases()
+                      .length;
+
+                    return (
+                      <div
+                        className={bem.element('inner-frame')}
+                        ref={ref}
+                        style={{ background: backgroundColor }}
+                      >
+                        {this.qualifiesForMobile() &&
+                        this.state.isMobileFullScreen ? (
+                          <PeekComponent
+                            down={down}
+                            customOffset={offset}
+                            onNext={nextRange}
+                            onPrevious={previousRange}
+                            size={size}
+                            renderLeft={() => (
+                              <MobileViewer
+                                manifest={manifest}
+                                canvas={getPreviousRange()}
+                              />
+                            )}
+                            renderRight={() => (
+                              <MobileViewer
+                                manifest={manifest}
+                                canvas={getNextRange()}
+                              />
+                            )}
+                            index={currentIndex}
+                          >
+                            <MobileViewer
+                              current
+                              setViewport={this.setViewport}
                               manifest={manifest}
                               canvas={canvas}
-                              region={region}
-                              renderPanel={renderPanel}
-                              backgroundColor={backgroundColor}
+                              onDragStart={this.onDragStart}
+                              onDragStop={this.onDragStop}
+                              applyOffset={this.applyOffset}
+                              canvasList={manifest
+                                .getSequenceByIndex(0)
+                                .getCanvases()}
+                              onOpen={this.onOpen}
+                              onClose={this.onClose}
+                              onExitFullscreen={this.onExitFullscreen}
+                              isOpen={open}
+                              size={size}
+                              index={currentIndex}
+                              nextRange={nextRange}
+                              previousRange={previousRange}
+                              goToRange={goToRange}
+                              parentInFocus={this.state.inFocus}
+                              addressable={this.props.addressable}
+                              id={this.props.id}
+                              canvasList={canvasList}
                             />
-                          </SimpleSlideTransition>
-                          <CanvasNavigation
-                            previousRange={previousRange}
-                            nextRange={nextRange}
-                            canvasList={canvasList}
-                            currentIndex={currentIndex}
-                            addressable={this.props.addressable}
-                            goToRange={goToRange}
-                            id={this.props.id}
-                            parentInFocus={this.state.inFocus}
-                          />
-                          <ProgressIndicator
-                            currentCanvas={currentIndex}
-                            totalCanvases={canvasList.length}
-                          />
-                        </React.Fragment>
-                      )}
-                    </div>
-                  );
-                }}
-              </RangeNavigationProvider>
-            </Manifest>
-          )}
+                          </PeekComponent>
+                        ) : (
+                          <React.Fragment>
+                            <SimpleSlideTransition id={currentIndex}>
+                              <Slide
+                                fullscreenProps={fullscreenProps}
+                                behaviors={canvas.__jsonld.behavior || []}
+                                manifest={manifest}
+                                canvas={canvas}
+                                region={region}
+                                renderPanel={renderPanel}
+                                backgroundColor={backgroundColor}
+                              />
+                            </SimpleSlideTransition>
+                            <CanvasNavigation
+                              previousRange={previousRange}
+                              nextRange={nextRange}
+                              canvasList={canvasList}
+                              currentIndex={currentIndex}
+                              addressable={this.props.addressable}
+                              goToRange={goToRange}
+                              id={this.props.id}
+                              parentInFocus={this.state.inFocus}
+                            />
+                            <ProgressIndicator
+                              currentCanvas={currentIndex}
+                              totalCanvases={canvasList.length}
+                            />
+                          </React.Fragment>
+                        )}
+                        )
+                      </div>
+                    );
+                  }}
+                </RangeNavigationProvider>
+              </Manifest>
+            );
+          }}
         </Fullscreen>
       </div>
     );

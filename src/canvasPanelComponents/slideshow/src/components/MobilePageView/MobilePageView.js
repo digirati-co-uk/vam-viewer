@@ -7,12 +7,10 @@ import {
   Responsive,
 } from '@canvas-panel/core';
 import Slide from '../Slide/Slide';
-import CanvasDetail from '../CanvasDetail/CanvasDetail';
 import './MobilePageView.scss';
 import TapDetector from '../TapDetector/TapDetector';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import MobileViewer from '../MobileViewer/MobileViewer';
-import FullscreenButton from '../FullscreenButton/FullscreenButton';
 import PeekComponent from '../PeekComponent/PeekComponent';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
@@ -84,7 +82,7 @@ class MobilePageView extends Component {
 
   onEnterFullscreen = canvasIndex => () => {
     this.props.goToRange(canvasIndex);
-    this.setState({ isFullscreen: true });
+    this.setState({ isMobileFullScreen: true });
   };
 
   zoomOut = () => {
@@ -245,51 +243,6 @@ class MobilePageView extends Component {
       </div>
     );
   }
-
-  // return (
-  //   <div className={bem}>
-  //     {manifest
-  //       .getSequenceByIndex(0)
-  //       .getCanvases()
-  //       .map((canvas, canvasIndex) => (
-  //         <CanvasDetail
-  //           key={canvas ? canvas.id : canvasIndex}
-  //           canvas={canvas}
-  //         >
-  //           {({ label, body, attributionLabel, attribution }) => (
-  //             <div
-  //               ref={canvasIndex === currentIndex ? this.setActiveRef : null}
-  //               className={bem.element('canvas')}
-  //             >
-  //               <Slide
-  //                 className={bem.element('canvas-image')}
-  //                 manifest={manifest}
-  //                 canvas={canvas}
-  //                 maxHeight={200}
-  //                 maxWidth={200}
-  //               >
-  //                 <FullscreenButton
-  //                   fullscreenEnabled={true}
-  //                   isFullscreen={isFullscreen}
-  //                   goFullscreen={this.onEnterFullscreen(canvasIndex)}
-  //                   exitFullscreen={this.onExitFullscreen}
-  //                 />
-  //                 <div className={bem.element('attribution')}>
-  //                   {attributionLabel} {attribution}
-  //                 </div>
-  //               </Slide>
-  //               <div className={bem.element('metadata')}>
-  //                 <div className={bem.element('detail')}>
-  //                   <h3 className={bem.element('detail-label')}>{label}</h3>
-  //                   <p className={bem.element('detail-body')}>{body}</p>
-  //                 </div>
-  //               </div>
-  //             </div>
-  //           )}
-  //         </CanvasDetail>
-  //       ))}
-  //   </div>
-  // );
 }
 
 export default withBemClass('slideshow')(MobilePageView);
