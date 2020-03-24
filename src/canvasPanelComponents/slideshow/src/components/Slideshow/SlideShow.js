@@ -91,14 +91,22 @@ class SlideShow extends Component {
                       ref={ref}
                       style={{ background: backgroundColor }}
                     >
-                      {/* {this.qualifiesForMobile() ? ( */}
-                      {true ? (
+                      {this.qualifiesForMobile() ? (
+                        // {true ? (
                         <MobilePageView
                           manifest={manifest}
+                          manifestUri={this.props.manifestUri}
                           addressable={this.props.addressable}
                           fullscreenProps={fullscreenProps}
                           id={this.props.id}
+                          canvas={canvas}
+                          region={region}
+                          renderPanel={renderPanel}
+                          backgroundColor={backgroundColor}
                           parentInFocus={this.state.inFocus}
+                          canvasList={canvasList}
+                          currentIndex={currentIndex}
+                          addressable={this.props.addressable}
                           {...rangeProps}
                         />
                       ) : (

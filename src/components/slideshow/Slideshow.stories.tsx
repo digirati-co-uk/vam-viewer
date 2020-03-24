@@ -14,7 +14,7 @@ export const SingleSlideShow: React.FC = () => {
           'Manifest',
           'https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json'
         )}
-        addressable={boolean('Make URLs Addressable', true)}
+        addressable={boolean('Make URLs Addressable', false)}
         id={0}
         backgroundColor={color('Background Colour', '#000000')}
       />
@@ -33,7 +33,7 @@ export const MultipleSlideShows: React.FC = () => {
           'Top Manifest',
           'https://iiif-collection.ch.digtest.co.uk/p3/testingmosaics-v4.json'
         )}
-        addressable={boolean('Make URLs Addressable', true)}
+        addressable={boolean('Make URLs Addressable', false)}
         id={0}
         backgroundColor={color('Top Background Colour', '#000000')}
       />
@@ -44,7 +44,7 @@ export const MultipleSlideShows: React.FC = () => {
           'Bottom Manifest',
           'https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json'
         )}
-        addressable={boolean('Make URLs Addressable', true)}
+        addressable={boolean('Make URLs Addressable', false)}
         id={1}
         backgroundColor={color('Bottom Background Colour', '#000000')}
       />

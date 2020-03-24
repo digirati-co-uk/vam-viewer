@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import { withBemClass, StaticImageViewport } from '@canvas-panel/core';
+import {
+  Manifest,
+  Fullscreen,
+  RangeNavigationProvider,
+  withBemClass,
+  Responsive,
+} from '@canvas-panel/core';
+import Slide from '../Slide/Slide';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
 import './MobilePageView.scss';
 import TapDetector from '../TapDetector/TapDetector';
+import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import MobileViewer from '../MobileViewer/MobileViewer';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
 import PeekComponent from '../PeekComponent/PeekComponent';
+import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
+import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
+
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 
 class MobilePageView extends Component {
@@ -161,52 +172,124 @@ class MobilePageView extends Component {
         </PeekComponent>
       );
     }
-
+    const { manifestUri, jsonLd, renderPanel, backgroundColor } = this.props;
+    const fullscreenProps = {
+      fullscreenEnabled: true,
+      isFullscreen: this.state.isFullscreen,
+      exitFullscreen: () => this.setState({ isFullscreen: false }),
+      goFullscreen: () => this.setState({ isFullscreen: true }),
+    };
     return (
-      <div className={bem}>
-        {manifest
-          .getSequenceByIndex(0)
-          .getCanvases()
-          .map((canvas, canvasIndex) => (
-            <CanvasDetail
-              key={canvas ? canvas.id : canvasIndex}
-              canvas={canvas}
-            >
-              {({ label, body, attributionLabel, attribution }) => (
-                <div
-                  ref={canvasIndex === currentIndex ? this.setActiveRef : null}
-                  className={bem.element('canvas')}
-                >
-                  <StaticImageViewport
-                    className={bem.element('canvas-image')}
-                    manifest={manifest}
-                    canvas={canvas}
-                    maxHeight={200}
-                    maxWidth={200}
-                  >
-                    <FullscreenButton
-                      fullscreenEnabled={true}
-                      isFullscreen={isFullscreen}
-                      goFullscreen={this.onEnterFullscreen(canvasIndex)}
-                      exitFullscreen={this.onExitFullscreen}
-                    />
-                    <div className={bem.element('attribution')}>
-                      {attributionLabel} {attribution}
+      <div
+        className={bem.modifiers({
+          isMobile: Responsive.md.phone(),
+        })}
+        onMouseOver={() => this.setState({ inFocus: true })}
+        onMouseLeave={() => this.setState({ inFocus: false })}
+      >
+        <Fullscreen>
+          {({ ref }) => (
+            <Manifest url={manifestUri} jsonLd={jsonLd}>
+              <RangeNavigationProvider>
+                {rangeProps => {
+                  const {
+                    manifest,
+                    canvas,
+                    canvasList,
+                    currentIndex,
+                    previousRange,
+                    nextRange,
+                    region,
+                    goToRange,
+                  } = rangeProps;
+                  return (
+                    <div
+                      className={bem.element('inner-frame')}
+                      ref={ref}
+                      style={{ background: backgroundColor }}
+                    >
+                      <React.Fragment>
+                        <SimpleSlideTransition id={currentIndex}>
+                          <Slide
+                            fullscreenProps={fullscreenProps}
+                            behaviors={canvas.__jsonld.behavior || []}
+                            manifest={manifest}
+                            canvas={canvas}
+                            region={region}
+                            renderPanel={renderPanel}
+                            backgroundColor={backgroundColor}
+                          />
+                        </SimpleSlideTransition>
+                        <CanvasNavigation
+                          previousRange={previousRange}
+                          nextRange={nextRange}
+                          canvasList={canvasList}
+                          currentIndex={currentIndex}
+                          addressable={this.props.addressable}
+                          goToRange={goToRange}
+                          id={this.props.id}
+                          parentInFocus={this.props.parentInFocus}
+                        />
+                        <ProgressIndicator
+                          currentCanvas={currentIndex}
+                          totalCanvases={canvasList.length}
+                        />
+                      </React.Fragment>
                     </div>
-                  </StaticImageViewport>
-                  <div className={bem.element('metadata')}>
-                    <div className={bem.element('detail')}>
-                      <h3 className={bem.element('detail-label')}>{label}</h3>
-                      <p className={bem.element('detail-body')}>{body}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </CanvasDetail>
-          ))}
+                  );
+                }}
+              </RangeNavigationProvider>
+            </Manifest>
+          )}
+        </Fullscreen>
       </div>
     );
   }
+
+  // return (
+  //   <div className={bem}>
+  //     {manifest
+  //       .getSequenceByIndex(0)
+  //       .getCanvases()
+  //       .map((canvas, canvasIndex) => (
+  //         <CanvasDetail
+  //           key={canvas ? canvas.id : canvasIndex}
+  //           canvas={canvas}
+  //         >
+  //           {({ label, body, attributionLabel, attribution }) => (
+  //             <div
+  //               ref={canvasIndex === currentIndex ? this.setActiveRef : null}
+  //               className={bem.element('canvas')}
+  //             >
+  //               <Slide
+  //                 className={bem.element('canvas-image')}
+  //                 manifest={manifest}
+  //                 canvas={canvas}
+  //                 maxHeight={200}
+  //                 maxWidth={200}
+  //               >
+  //                 <FullscreenButton
+  //                   fullscreenEnabled={true}
+  //                   isFullscreen={isFullscreen}
+  //                   goFullscreen={this.onEnterFullscreen(canvasIndex)}
+  //                   exitFullscreen={this.onExitFullscreen}
+  //                 />
+  //                 <div className={bem.element('attribution')}>
+  //                   {attributionLabel} {attribution}
+  //                 </div>
+  //               </Slide>
+  //               <div className={bem.element('metadata')}>
+  //                 <div className={bem.element('detail')}>
+  //                   <h3 className={bem.element('detail-label')}>{label}</h3>
+  //                   <p className={bem.element('detail-body')}>{body}</p>
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           )}
+  //         </CanvasDetail>
+  //       ))}
+  //   </div>
+  // );
 }
 
 export default withBemClass('mobile-page-view')(MobilePageView);
