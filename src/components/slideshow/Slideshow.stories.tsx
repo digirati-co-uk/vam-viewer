@@ -37,6 +37,7 @@ export const MultipleSlideShows: React.FC = () => {
         id={0}
         backgroundColor={color('Top Background Colour', '#000000')}
       />
+      <div style={{ height: '10px', backgroundColor: 'yellow' }} />
       <SlideShow
         element={slideShowEl}
         manifestUri={text(

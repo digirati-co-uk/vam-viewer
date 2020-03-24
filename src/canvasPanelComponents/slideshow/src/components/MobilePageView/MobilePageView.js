@@ -10,7 +10,7 @@ import ZoomButtons from '../ZoomButtons/ZoomButtons';
 
 class MobilePageView extends Component {
   state = {
-    isFullscreen: true,
+    isFullscreen: false,
     currentCanvas: null,
     offset: 0,
     down: false,
@@ -102,62 +102,109 @@ class MobilePageView extends Component {
   };
 
   render() {
-    const { offset, down, open } = this.state;
-    const { currentIndex, manifest } = this.props;
+    const { isFullscreen, offset, down, open } = this.state;
+    const { currentIndex, bem, manifest } = this.props;
 
-    const {
-      canvas,
-      nextRange,
-      previousRange,
-      getNextRange,
-      getPreviousRange,
-      goToRange,
-      canvasList,
-    } = this.props;
+    if (isFullscreen) {
+      const {
+        canvas,
+        nextRange,
+        previousRange,
+        getNextRange,
+        getPreviousRange,
+        goToRange,
+        canvasList,
+      } = this.props;
 
-    const size = manifest.getSequenceByIndex(0).getCanvases().length;
+      const size = manifest.getSequenceByIndex(0).getCanvases().length;
+
+      return (
+        <PeekComponent
+          down={down}
+          customOffset={offset}
+          onNext={this.nextRange}
+          onPrevious={this.previousRange}
+          size={size}
+          renderLeft={() => (
+            <MobileViewer manifest={manifest} canvas={getPreviousRange()} />
+          )}
+          renderRight={() => (
+            <MobileViewer manifest={manifest} canvas={getNextRange()} />
+          )}
+          index={currentIndex}
+        >
+          <MobileViewer
+            current
+            setViewport={this.setViewport}
+            manifest={manifest}
+            canvas={canvas}
+            onDragStart={this.onDragStart}
+            onDragStop={this.onDragStop}
+            applyOffset={this.applyOffset}
+            onZoomOut={this.zoomOut}
+            canvasList={manifest.getSequenceByIndex(0).getCanvases()}
+            onZoomIn={this.zoomIn}
+            onOpen={this.onOpen}
+            onClose={this.onClose}
+            onExitFullscreen={this.onExitFullscreen}
+            isOpen={open}
+            size={size}
+            index={currentIndex}
+            nextRange={nextRange}
+            previousRange={previousRange}
+            goToRange={goToRange}
+            parentInFocus={this.props.parentInFocus}
+            addressable={this.props.addressable}
+            id={this.props.id}
+            canvasList={canvasList}
+          />
+        </PeekComponent>
+      );
+    }
 
     return (
-      <PeekComponent
-        down={down}
-        customOffset={offset}
-        onNext={this.nextRange}
-        onPrevious={this.previousRange}
-        size={size}
-        renderLeft={() => (
-          <MobileViewer manifest={manifest} canvas={getPreviousRange()} />
-        )}
-        renderRight={() => (
-          <MobileViewer manifest={manifest} canvas={getNextRange()} />
-        )}
-        index={currentIndex}
-      >
-        <MobileViewer
-          current
-          setViewport={this.setViewport}
-          manifest={manifest}
-          canvas={canvas}
-          onDragStart={this.onDragStart}
-          onDragStop={this.onDragStop}
-          applyOffset={this.applyOffset}
-          onZoomOut={this.zoomOut}
-          canvasList={manifest.getSequenceByIndex(0).getCanvases()}
-          onZoomIn={this.zoomIn}
-          onOpen={this.onOpen}
-          onClose={this.onClose}
-          onExitFullscreen={this.onExitFullscreen}
-          isOpen={open}
-          size={size}
-          index={currentIndex}
-          nextRange={nextRange}
-          previousRange={previousRange}
-          goToRange={goToRange}
-          parentInFocus={this.props.parentInFocus}
-          addressable={this.props.addressable}
-          id={this.props.id}
-          canvasList={canvasList}
-        />
-      </PeekComponent>
+      <div className={bem}>
+        {manifest
+          .getSequenceByIndex(0)
+          .getCanvases()
+          .map((canvas, canvasIndex) => (
+            <CanvasDetail
+              key={canvas ? canvas.id : canvasIndex}
+              canvas={canvas}
+            >
+              {({ label, body, attributionLabel, attribution }) => (
+                <div
+                  ref={canvasIndex === currentIndex ? this.setActiveRef : null}
+                  className={bem.element('canvas')}
+                >
+                  <StaticImageViewport
+                    className={bem.element('canvas-image')}
+                    manifest={manifest}
+                    canvas={canvas}
+                    maxHeight={200}
+                    maxWidth={200}
+                  >
+                    <FullscreenButton
+                      fullscreenEnabled={true}
+                      isFullscreen={isFullscreen}
+                      goFullscreen={this.onEnterFullscreen(canvasIndex)}
+                      exitFullscreen={this.onExitFullscreen}
+                    />
+                    <div className={bem.element('attribution')}>
+                      {attributionLabel} {attribution}
+                    </div>
+                  </StaticImageViewport>
+                  <div className={bem.element('metadata')}>
+                    <div className={bem.element('detail')}>
+                      <h3 className={bem.element('detail-label')}>{label}</h3>
+                      <p className={bem.element('detail-body')}>{body}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </CanvasDetail>
+          ))}
+      </div>
     );
   }
 }
