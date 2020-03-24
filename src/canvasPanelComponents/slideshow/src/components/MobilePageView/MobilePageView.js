@@ -292,4 +292,4 @@ class MobilePageView extends Component {
   // );
 }
 
-export default withBemClass('mobile-page-view')(MobilePageView);
+export default withBemClass('slideshow')(MobilePageView);

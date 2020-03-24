@@ -92,7 +92,6 @@ class SlideShow extends Component {
                       style={{ background: backgroundColor }}
                     >
                       {this.qualifiesForMobile() ? (
-                        // {true ? (
                         <MobilePageView
                           manifest={manifest}
                           manifestUri={this.props.manifestUri}
