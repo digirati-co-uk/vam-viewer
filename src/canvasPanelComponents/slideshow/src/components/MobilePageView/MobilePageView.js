@@ -15,8 +15,6 @@ import PeekComponent from '../PeekComponent/PeekComponent';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 
-import ZoomButtons from '../ZoomButtons/ZoomButtons';
-
 class MobilePageView extends Component {
   state = {
     isFullscreen: false,

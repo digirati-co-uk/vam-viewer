@@ -133,15 +133,12 @@ class SlideShow extends Component {
                     this.setState({ isMobileFullScreen: false }),
                   goFullscreen: () =>
                     this.setState({ isMobileFullScreen: true }),
-                  extra: 'hi',
                 }
               : fullscreenProps;
             return (
               <Manifest url={manifestUri} jsonLd={jsonLd}>
                 <RangeNavigationProvider>
                   {rangeProps => {
-                    console.log({ ...rangeProps });
-
                     const {
                       manifest,
                       canvas,
@@ -170,8 +167,8 @@ class SlideShow extends Component {
                           <PeekComponent
                             down={down}
                             customOffset={offset}
-                            onNext={nextRange}
-                            onPrevious={previousRange}
+                            onNext={() => this.nextRange(nextRange)}
+                            onPrevious={() => this.previousRange(previousRange)}
                             size={size}
                             renderLeft={() => (
                               <MobileViewer
