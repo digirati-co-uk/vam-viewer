@@ -12,10 +12,6 @@
     &--isMobile {
       position: relative;
       overflow: scroll;
-
-      .slide__overlay-content {
-        background-color: yellow;
-      }
     }
   }
 }

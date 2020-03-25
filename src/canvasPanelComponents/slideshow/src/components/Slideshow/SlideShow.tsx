@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import {
   Manifest,
   Fullscreen,
@@ -46,20 +46,32 @@ const SlideShow: React.FC<SlideShowProps> = ({
   const [open, setOpen] = useState(false);
   const [offset, setOffset] = useState(0);
   const [inFocus, setInFocus] = useState(false);
-  let touchDetector: any | null = null;
+  const [view, setView] = useState();
+  let touchDetector = useRef();
   let viewport: any;
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    touchDetector = null;
-  }, [down]);
-
-  useEffect(() => {
-    if (touchDetector !== null) {
-      touchDetector.onTap(onTap);
+  useLayoutEffect(() => {
+    if (view) {
+      touchDetector.current = new TapDetector(view.viewer.viewer.canvas);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [touchDetector]);
+    return () => {
+      if (touchDetector.current) {
+        touchDetector.current.unbind();
+      }
+    };
+  });
+
+  // useEffect(() => {
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   touchDetector = null;
+  // }, [down]);
+
+  // useEffect(() => {
+  //   if (touchDetector !== null) {
+  //     touchDetector.onTap(onTap);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [touchDetector]);
 
   useEffect(() => {
     window.addEventListener('resize', () => setInnerWidth(window.innerWidth));
@@ -110,14 +122,6 @@ const SlideShow: React.FC<SlideShowProps> = ({
 
   const onTap = () => {
     setOpen(!open);
-  };
-
-  const setView = (view: any) => {
-    if (touchDetector && touchDetector !== null) {
-      touchDetector.unbind();
-    }
-    touchDetector = new TapDetector(view.viewer.viewer.canvas);
-    viewport = view;
   };
 
   return (
