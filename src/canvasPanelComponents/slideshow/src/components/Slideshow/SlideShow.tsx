@@ -16,6 +16,9 @@ import Slide from '../Slide/Slide';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 import PeekComponent from '../PeekComponent/PeekComponent';
 
+import { useSwipeable, Swipeable } from 'react-swipeable';
+// this is a hook to listen for swipes
+
 import './SlideShow.scss';
 
 interface SlideShowProps {
@@ -52,26 +55,16 @@ const SlideShow: React.FC<SlideShowProps> = ({
 
   useLayoutEffect(() => {
     if (view) {
+      //@ts-ignore
       touchDetector.current = new TapDetector(view.viewer.viewer.canvas);
     }
     return () => {
       if (touchDetector.current) {
+        //@ts-ignore
         touchDetector.current.unbind();
       }
     };
   });
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   touchDetector = null;
-  // }, [down]);
-
-  // useEffect(() => {
-  //   if (touchDetector !== null) {
-  //     touchDetector.onTap(onTap);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [touchDetector]);
 
   useEffect(() => {
     window.addEventListener('resize', () => setInnerWidth(window.innerWidth));
@@ -219,7 +212,15 @@ const SlideShow: React.FC<SlideShowProps> = ({
                           />
                         </PeekComponent>
                       ) : (
-                        <>
+                        <Swipeable
+                          className={bem
+                            .element('inner-frame')
+                            .modifiers({ isMobile: qualifiesForMobile })}
+                          onSwipedLeft={nextRange}
+                          onSwipedRight={previousRange}
+                          preventDefaultTouchmoveEvent={true}
+                          trackMouse={true}
+                        >
                           <SimpleSlideTransition id={currentIndex}>
                             <Slide
                               fullscreenProps={fullscreenProps}
@@ -245,7 +246,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                             currentCanvas={currentIndex}
                             totalCanvases={canvasList.length}
                           />
-                        </>
+                        </Swipeable>
                       )}
                     </div>
                   );
