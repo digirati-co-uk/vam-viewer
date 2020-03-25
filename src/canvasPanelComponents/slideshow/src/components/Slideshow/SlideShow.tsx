@@ -48,7 +48,6 @@ const SlideShow: React.FC<SlideShowProps> = ({
   const [inFocus, setInFocus] = useState(false);
   let touchDetector: any | null = null;
   let viewport: any;
-  const slideshowEl = useRef(null);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -163,7 +162,9 @@ const SlideShow: React.FC<SlideShowProps> = ({
 
                   return (
                     <div
-                      className={bem.element('inner-frame')}
+                      className={bem
+                        .element('inner-frame')
+                        .modifiers({ isMobile: qualifiesForMobile })}
                       ref={ref}
                       style={{ background: backgroundColor }}
                     >
