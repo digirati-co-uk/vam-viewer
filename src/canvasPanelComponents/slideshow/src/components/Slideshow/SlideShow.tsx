@@ -230,6 +230,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                               region={region}
                               renderPanel={renderPanel}
                               backgroundColor={backgroundColor}
+                              mobile={qualifiesForMobile}
                             />
                           </SimpleSlideTransition>
                           <CanvasNavigation

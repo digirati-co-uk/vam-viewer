@@ -9,6 +9,7 @@ import {
 } from '@canvas-panel/core';
 import './MobileViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
+import { InfoButton } from '../InfoButton/InfoButton.tsx';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 
 const ExitFullscreenIcon = ({ className }) => (
@@ -21,23 +22,6 @@ const ExitFullscreenIcon = ({ className }) => (
   >
     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#fff" />
     <path d="M0 0h24v24H0z" fill="none" />
-  </svg>
-);
-
-const InfoIcon = ({ onClick, className }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    className={className}
-    onClick={onClick}
-  >
-    <path d="M0 0h24v24H0z" fill="none" />
-    <path
-      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-      fill="#fff"
-    />
   </svg>
 );
 
@@ -71,13 +55,7 @@ const ExitFullscreen = ({ bem, hidden, onClick }) => (
   </div>
 );
 
-const InfoButton = ({ bem, onClick, hidden }) => (
-  <div className={bem.element('info').modifiers({ hidden })} onClick={onClick}>
-    <InfoIcon className={bem.element('info-icon')} />
-  </div>
-);
-
-const InfoPanel = ({ bem, hidden, onClose, children, label }) => (
+const InfoPanel = ({ bem, hidden, onClose, children, label, attribution }) => (
   <div
     className={bem.element('info-panel').modifiers({
       hidden,
@@ -85,6 +63,7 @@ const InfoPanel = ({ bem, hidden, onClose, children, label }) => (
     onClick={onClose}
   >
     <CloseIcon className={bem.element('info-panel-close')} />
+    <div className={bem.element('info-panel-attribution')}>{attribution}</div>
     <h2>{label}</h2>
     <p className={bem.element('info-panel-body')}>{children}</p>
   </div>
@@ -249,6 +228,7 @@ class MobileViewer extends Component {
                 hidden={dragging === true || !isOpen}
                 onClose={onClose}
                 label={label}
+                attribution={attribution}
               >
                 {body}
               </InfoPanel>

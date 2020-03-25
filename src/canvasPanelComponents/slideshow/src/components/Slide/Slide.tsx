@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // @ts-ignore
 import { withBemClass } from '@canvas-panel/core';
 import SwappableViewer from '../SwappableViewer/SwappableViewer';
@@ -14,6 +14,7 @@ interface SlideProps {
   renderPanel: (args: any) => void;
   fullscreenProps: any;
   backgroundColor: string;
+  mobile: boolean;
 }
 
 const Slide: React.FC<SlideProps> = ({
@@ -25,8 +26,8 @@ const Slide: React.FC<SlideProps> = ({
   renderPanel,
   fullscreenProps,
   backgroundColor = '#000000',
+  mobile = false,
 }) => {
-  const [blah] = useState('blah');
   return (
     <div
       className={bem.modifiers(
@@ -60,22 +61,30 @@ const Slide: React.FC<SlideProps> = ({
           {(
             // @ts-ignore
             { label, body, attributionLabel, attribution }
-          ) => (
-            <div className={bem.element('overlay')}>
-              <div className={bem.element('overlay-content')}>
-                {label ? (
-                  <h3 className={bem.element('title')}>{label}</h3>
-                ) : null}
-                {body ? <p className={bem.element('text')}>{body}</p> : null}
+          ) =>
+            mobile ? (
+              <div> blah</div>
+            ) : (
+              <div
+                className={bem
+                  .element('overlay')
+                  .modifiers({ isMobile: mobile })}
+              >
+                <div className={bem.element('overlay-content')}>
+                  {label ? (
+                    <h3 className={bem.element('title')}>{label}</h3>
+                  ) : null}
+                  {body ? <p className={bem.element('text')}>{body}</p> : null}
+                </div>
+                <div className={bem.element('overlay-floating')}>
+                  <p className={bem.element('required-statement')}>
+                    {attributionLabel}
+                    {attribution}
+                  </p>
+                </div>
               </div>
-              <div className={bem.element('overlay-floating')}>
-                <p className={bem.element('required-statement')}>
-                  {attributionLabel}
-                  {attribution}
-                </p>
-              </div>
-            </div>
-          )}
+            )
+          }
         </CanvasDetail>
       )}
     </div>
