@@ -41,17 +41,18 @@ const SlideShow: React.FC<SlideShowProps> = ({
 }) => {
   const [innerWidth, setInnerWidth] = useState(0);
   const [qualifiesForMobile, setQualifiesForMobile] = useState(false);
-  const [touchDetector, setTouchDetector] = useState<null | any>(null);
   const [isMobileFullScreen, setIsMobileFullScreen] = useState(false);
   const [down, setDown] = useState(false);
   const [open, setOpen] = useState(false);
   const [offset, setOffset] = useState(0);
   const [inFocus, setInFocus] = useState(false);
-  const [viewport, setViewPort] = useState<null | any>(null);
+  let touchDetector: any | null = null;
+  let viewport: any;
   const slideshowEl = useRef(null);
 
   useEffect(() => {
-    setTouchDetector(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    touchDetector = null;
   }, [down]);
 
   useEffect(() => {
@@ -61,25 +62,25 @@ const SlideShow: React.FC<SlideShowProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [touchDetector]);
 
-  // useEffect(() => {
-  //   window.addEventListener('resize', () => setInnerWidth(window.innerWidth));
-  //   return () =>
-  //     window.removeEventListener('resize', () =>
-  //       setInnerWidth(window.innerWidth)
-  //     );
-  // }, []);
+  useEffect(() => {
+    window.addEventListener('resize', () => setInnerWidth(window.innerWidth));
+    return () =>
+      window.removeEventListener('resize', () =>
+        setInnerWidth(window.innerWidth)
+      );
+  }, []);
 
   useEffect(() => {
     setQualifiesForMobile(window.innerWidth <= mobileBreakPoint);
-  }, []);
+  }, [innerWidth, mobileBreakPoint]);
 
   const nextInRange = (fromHOC: () => void) => {
-    viewport.viewer.viewer.viewport.applyConstraints(true);
+    if (viewport) viewport.viewer.viewer.viewport.applyConstraints(true);
     fromHOC();
   };
 
   const previousInRange = (fromHOC: () => void) => {
-    viewport.viewer.viewer.viewport.applyConstraints(true);
+    if (viewport) viewport.viewer.viewer.viewport.applyConstraints(true);
     fromHOC();
   };
 
@@ -116,8 +117,8 @@ const SlideShow: React.FC<SlideShowProps> = ({
     if (touchDetector && touchDetector !== null) {
       touchDetector.unbind();
     }
-    setTouchDetector(new TapDetector(view.viewer.viewer.canvas));
-    setViewPort(view);
+    touchDetector = new TapDetector(view.viewer.viewer.canvas);
+    viewport = view;
   };
 
   return (
@@ -189,7 +190,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                         >
                           <MobileViewer
                             current
-                            setViewport={(view: any) => setView(view)}
+                            setViewport={setView}
                             manifest={manifest}
                             canvas={canvas}
                             onDragStart={onDragStart}
