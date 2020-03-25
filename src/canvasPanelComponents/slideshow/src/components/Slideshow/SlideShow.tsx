@@ -11,13 +11,13 @@ import MobileViewer from '../MobileViewer/MobileViewer';
 import TapDetector from '../TapDetector/TapDetector';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
-import Slide from '../Slide/Slide';
+// @ts-ignore
+import Slide from '../Slide/Slide.tsx';
 // @ts-ignore
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 import PeekComponent from '../PeekComponent/PeekComponent';
 
-import { useSwipeable, Swipeable } from 'react-swipeable';
-// this is a hook to listen for swipes
+import { Swipeable } from 'react-swipeable';
 
 import './SlideShow.scss';
 

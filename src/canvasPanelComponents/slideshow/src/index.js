@@ -6,7 +6,7 @@ import MobileViewer from './components/MobileViewer/MobileViewer';
 import PeekComponent from './components/PeekComponent/PeekComponent';
 import ProgressIndicator from './components/ProgressIndicator/ProgressIndicator';
 import SimpleSlideTransition from './components/SimpleSlideTransition/SimpleSlideTransition';
-import Slide from './components/Slide/Slide';
+import Slide from './components/Slide/Slide.tsx';
 import SlideShow from './components/Slideshow/SlideShow.tsx';
 import SwappableViewer from './components/SwappableViewer/SwappableViewer';
 import TapDetector from './components/TapDetector/TapDetector';
