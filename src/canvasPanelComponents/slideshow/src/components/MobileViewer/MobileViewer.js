@@ -9,7 +9,8 @@ import {
 } from '@canvas-panel/core';
 import './MobileViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
-import { InfoButton } from '../InfoButton/InfoButton.tsx';
+import { InfoButton } from '../Icons/InfoButton.tsx';
+import { CloseIcon } from '../Icons/CloseIcon.tsx';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 
 const ExitFullscreenIcon = ({ className }) => (
@@ -21,20 +22,6 @@ const ExitFullscreenIcon = ({ className }) => (
     className={className}
   >
     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#fff" />
-    <path d="M0 0h24v24H0z" fill="none" />
-  </svg>
-);
-
-const CloseIcon = ({ onClick, className }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    className={className}
-    onClick={onClick}
-  >
-    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
     <path d="M0 0h24v24H0z" fill="none" />
   </svg>
 );

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore
 import { withBemClass } from '@canvas-panel/core';
 import SwappableViewer from '../SwappableViewer/SwappableViewer';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
+//@ts-ignore
+import { InfoButton } from '../Icons/InfoButton.tsx';
+import { CloseIcon } from '../Icons/CloseIcon.tsx';
 import './Slide.scss';
 
 interface SlideProps {
@@ -17,6 +20,28 @@ interface SlideProps {
   mobile: boolean;
 }
 
+interface InfoPanelProps {
+  children: any;
+  label: string;
+  attribution: string;
+  bem: any;
+  onClose: () => void;
+}
+const InfoPanel: React.FC<InfoPanelProps> = ({
+  children,
+  label,
+  attribution,
+  bem,
+  onClose,
+}) => (
+  <div className={bem.element('info-panel')} onClick={onClose}>
+    <CloseIcon className={bem.element('info-panel-close')} />
+    <div className={bem.element('info-panel-attribution')}>{attribution}</div>
+    <h2>{label}</h2>
+    <p className={bem.element('info-panel-body')}>{children}</p>
+  </div>
+);
+
 const Slide: React.FC<SlideProps> = ({
   bem,
   behaviors,
@@ -28,6 +53,18 @@ const Slide: React.FC<SlideProps> = ({
   backgroundColor = '#000000',
   mobile = false,
 }) => {
+  const [open, setOpen] = useState(false);
+
+  const renderInfoPanel = (label: any, attribution: any, body: any) => (
+    <InfoPanel
+      bem={bem}
+      onClose={() => setOpen(false)}
+      label={label}
+      attribution={attribution}
+    >
+      {body}
+    </InfoPanel>
+  );
   return (
     <div
       className={bem.modifiers(
@@ -63,7 +100,22 @@ const Slide: React.FC<SlideProps> = ({
             { label, body, attributionLabel, attribution }
           ) =>
             mobile ? (
-              <div> blah</div>
+              <>
+                {open ? (
+                  renderInfoPanel(label, attribution, body)
+                ) : (
+                  <>
+                    {/* Can be added back in if needed */}
+                    {/* <div className={bem.element('overlay-floating')}>
+                      <p className={bem.element('required-statement')}>
+                        {attributionLabel}
+                        {attribution}
+                      </p>
+                    </div> */}
+                  </>
+                )}
+                <InfoButton bem={bem} onClick={setOpen} />
+              </>
             ) : (
               <div
                 className={bem
