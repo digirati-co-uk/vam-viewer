@@ -5,6 +5,7 @@ import SwappableViewer from '../SwappableViewer/SwappableViewer';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
 //@ts-ignore
 import { InfoButton } from '../Icons/InfoButton.tsx';
+//@ts-ignore
 import { CloseIcon } from '../Icons/CloseIcon.tsx';
 import './Slide.scss';
 
