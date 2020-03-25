@@ -7,7 +7,6 @@ import {
   withBemClass,
   Responsive,
 } from '@canvas-panel/core';
-import MobilePageView from '../MobilePageView/MobilePageView';
 import MobileViewer from '../MobileViewer/MobileViewer';
 import TapDetector from '../TapDetector/TapDetector';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
