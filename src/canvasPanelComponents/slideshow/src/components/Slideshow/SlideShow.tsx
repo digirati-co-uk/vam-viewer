@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Manifest,
   Fullscreen,
@@ -13,7 +12,8 @@ import TapDetector from '../TapDetector/TapDetector';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Slide from '../Slide/Slide';
-import CanvasNavigation from '../CanvasNavigation/CanvasNavigation';
+// @ts-ignore
+import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 import PeekComponent from '../PeekComponent/PeekComponent';
 
 import './SlideShow.scss';
@@ -47,24 +47,31 @@ const SlideShow: React.FC<SlideShowProps> = ({
   const [open, setOpen] = useState(false);
   const [offset, setOffset] = useState(0);
   const [inFocus, setInFocus] = useState(false);
-  let viewport: any;
+  const [viewport, setViewPort] = useState<null | any>(null);
+  const slideshowEl = useRef(null);
 
   useEffect(() => {
     setTouchDetector(null);
-  }, [down, open]);
+  }, [down]);
 
   useEffect(() => {
-    window.addEventListener('resize', setSize);
-    return () => window.removeEventListener('resize', setSize);
+    if (touchDetector !== null) {
+      touchDetector.onTap(onTap);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [touchDetector]);
+
+  // useEffect(() => {
+  //   window.addEventListener('resize', () => setInnerWidth(window.innerWidth));
+  //   return () =>
+  //     window.removeEventListener('resize', () =>
+  //       setInnerWidth(window.innerWidth)
+  //     );
+  // }, []);
+
+  useEffect(() => {
+    setQualifiesForMobile(window.innerWidth <= mobileBreakPoint);
   }, []);
-
-  useEffect(() => {
-    setQualifiesForMobile(innerWidth <= mobileBreakPoint);
-  }, [innerWidth, mobileBreakPoint]);
-
-  const setSize = () => {
-    setInnerWidth(window.innerWidth);
-  };
 
   const nextInRange = (fromHOC: () => void) => {
     viewport.viewer.viewer.viewport.applyConstraints(true);
@@ -105,13 +112,12 @@ const SlideShow: React.FC<SlideShowProps> = ({
     setOpen(!open);
   };
 
-  const setViewport = (view: any) => {
+  const setView = (view: any) => {
     if (touchDetector && touchDetector !== null) {
       touchDetector.unbind();
     }
     setTouchDetector(new TapDetector(view.viewer.viewer.canvas));
-    touchDetector.onTap(onTap);
-    viewport = view;
+    setViewPort(view);
   };
 
   return (
@@ -138,7 +144,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
           return (
             <Manifest url={manifestUri} jsonLd={jsonLd}>
               <RangeNavigationProvider>
-                {(rangeProps: any) => {
+                {({ ...rangeProps }) => {
                   const {
                     manifest,
                     canvas,
@@ -183,7 +189,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                         >
                           <MobileViewer
                             current
-                            setViewport={setViewport}
+                            setViewport={(view: any) => setView(view)}
                             manifest={manifest}
                             canvas={canvas}
                             onDragStart={onDragStart}
@@ -207,7 +213,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                           />
                         </PeekComponent>
                       ) : (
-                        <React.Fragment>
+                        <>
                           <SimpleSlideTransition id={currentIndex}>
                             <Slide
                               fullscreenProps={fullscreenProps}
@@ -233,9 +239,8 @@ const SlideShow: React.FC<SlideShowProps> = ({
                             currentCanvas={currentIndex}
                             totalCanvases={canvasList.length}
                           />
-                        </React.Fragment>
+                        </>
                       )}
-                      )
                     </div>
                   );
                 }}
