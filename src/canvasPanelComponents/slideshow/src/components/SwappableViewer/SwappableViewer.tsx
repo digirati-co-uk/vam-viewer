@@ -61,8 +61,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   bem,
 }) => {
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
-  const [itemWidth, setItemWidth] = useState(0);
-  const [itemHeight, setItemHeight] = useState(0);
   const [isZoomedOut, setIsZoomedOut] = useState(true);
   let viewport: any;
 
@@ -76,10 +74,12 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
 
   useEffect(() => {
     if (region) {
+      // console.log(region);
       viewport.goToRect(region, 0, 0.0000001);
     } else {
       const _region = createRegionFromAnnotations(canvas);
       if (_region) {
+        // console.log(_region);
         setRegionFromAnnotations(_region);
       }
     }
@@ -88,8 +88,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
 
   const setViewport = (view: any) => {
     viewport = view;
-    if (viewport && region) {
-      viewport.goToRect(region, 0, 0);
+    if (viewport && (region || regionFromAnnotations)) {
+      viewport.goToRect(region || regionFromAnnotations, 0, 0);
     }
   };
 
@@ -144,7 +144,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
             useMaxDimensions={true}
             interactive={isInteractive}
             osdOptions={osdOptions}
-            initialBounds={region | regionFromAnnotations}
+            initialBounds={region || regionFromAnnotations}
           />
         </FullPageViewport>
       </SingleTileSource>
