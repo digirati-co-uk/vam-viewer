@@ -14,7 +14,7 @@ export const SingleSlideShow: React.FC = () => {
           'Manifest',
           'https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json'
         )}
-        addressable={boolean('Make URLs Addressable', true)}
+        addressable={boolean('Make URLs Addressable', false)}
         id={0}
         backgroundColor={color('Background Colour', '#000000')}
       />
@@ -37,6 +37,7 @@ export const MultipleSlideShows: React.FC = () => {
         id={0}
         backgroundColor={color('Top Background Colour', '#000000')}
       />
+      <div style={{ height: '10px', backgroundColor: 'yellow' }} />
       <SlideShow
         element={slideShowEl}
         manifestUri={text(
