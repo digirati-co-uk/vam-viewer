@@ -24,6 +24,7 @@ function getEmbeddedAnnotations(canvas) {
     if (next.type === 'Annotation') {
       list.push(next);
     }
+    console.log(list);
     return list;
   }, []);
 }
@@ -78,6 +79,7 @@ class SwappableViewer extends Component {
   };
 
   componentDidMount() {
+    const list = getEmbeddedAnnotations(this.props.canvas);
     if (this.props.region) {
       this.viewport.goToRect(this.props.region, 0, 0.0000001);
     } else {
@@ -139,7 +141,6 @@ class SwappableViewer extends Component {
       bem,
       fullscreenProps,
     } = this.props;
-
     return (
       <div
         className={bem

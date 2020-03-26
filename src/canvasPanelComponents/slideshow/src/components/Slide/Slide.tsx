@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 // @ts-ignore
 import { withBemClass } from '@canvas-panel/core';
-import SwappableViewer from '../SwappableViewer/SwappableViewer';
+// @ts-ignore
+import SwappableViewer from '../SwappableViewer/SwappableViewer.tsx';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
 //@ts-ignore
 import { InfoButton } from '../Icons/InfoButton.tsx';
