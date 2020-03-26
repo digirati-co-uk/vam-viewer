@@ -50,3 +50,22 @@ export const MultipleSlideShows: React.FC = () => {
     </div>
   );
 };
+
+export const SlideShowWithAnnotatedZoom: React.FC = () => {
+  const slideShowEl = useRef('slideShowEl');
+
+  return (
+    <div id="slideShowEl" style={{ height: '100vh' }}>
+      <SlideShow
+        element={slideShowEl}
+        manifestUri={text(
+          'Manifest',
+          'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/ocean-liners.json'
+        )}
+        addressable={boolean('Make URLs Addressable', true)}
+        id={1}
+        backgroundColor={color('Bottom Background Colour', '#000000')}
+      />
+    </div>
+  );
+};
