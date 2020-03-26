@@ -62,6 +62,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
 }) => {
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
   const [isZoomedOut, setIsZoomedOut] = useState(true);
+  const [annotations, setAnnotations] = useState([]);
   let viewport: any;
 
   const osdOptions = {
@@ -74,17 +75,19 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
 
   useEffect(() => {
     if (region) {
-      // console.log(region);
       viewport.goToRect(region, 0, 0.0000001);
     } else {
       const _region = createRegionFromAnnotations(canvas);
       if (_region) {
-        // console.log(_region);
         setRegionFromAnnotations(_region);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canvas, region]);
+
+  useEffect(() => {
+    setAnnotations(getEmbeddedAnnotations(canvas));
+  }, [canvas]);
 
   const setViewport = (view: any) => {
     viewport = view;
