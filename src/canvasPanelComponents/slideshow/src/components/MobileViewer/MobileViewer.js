@@ -5,10 +5,8 @@ import {
   SingleTileSource,
   OpenSeadragonViewport,
   FullPageViewport,
-  Responsive,
 } from '@canvas-panel/core';
 import './MobileViewer.scss';
-import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import { InfoButton } from '../Icons/InfoButton.tsx';
 import { CloseIcon } from '../Icons/CloseIcon.tsx';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
@@ -80,7 +78,6 @@ class MobileViewer extends Component {
   applyConstraints(viewer, immediately) {
     const bounds = viewer.viewport.getBoundsNoRotate();
     const constrainedBounds = viewer.viewport._applyBoundaryConstraints(bounds);
-
     constrainedBounds.x = bounds.x;
     if (bounds.y !== constrainedBounds.y) {
       viewer.viewport.fitBounds(constrainedBounds, immediately);
@@ -126,8 +123,7 @@ class MobileViewer extends Component {
       onZoomOut,
       ...props
     } = this.props;
-    const { canvas, index } = props;
-
+    const { canvas, index } = this.props;
     if (!canvas) {
       return <div />;
     }
@@ -167,24 +163,27 @@ class MobileViewer extends Component {
                 ) : (
                   <React.Fragment />
                 )}
-
-                <div
-                  className={bem
-                    .element('canvas-navigation')
-                    .modifiers({ hidden: !current || dragging })}
-                >
-                  <CanvasNavigation
-                    previousRange={previousRange}
-                    nextRange={nextRange}
-                    size={size}
-                    currentIndex={index}
-                    goToRange={goToRange}
-                    id={this.props.id}
-                    parentInFocus={this.state.inFocus}
-                    addressable={this.props.addressable}
-                    canvasList={canvasList}
-                  />
-                </div>
+                {current & !dragging ? (
+                  <div
+                    className={bem
+                      .element('canvas-navigation')
+                      .modifiers({ hidden: !current || dragging })}
+                  >
+                    <CanvasNavigation
+                      previousRange={previousRange}
+                      nextRange={nextRange}
+                      size={size}
+                      currentIndex={index}
+                      goToRange={goToRange}
+                      id={this.props.id}
+                      parentInFocus={this.state.inFocus}
+                      addressable={this.props.addressable}
+                      canvasList={canvasList}
+                    />
+                  </div>
+                ) : (
+                  <React.Fragment />
+                )}
 
                 <FullPageViewport
                   setRef={this.props.setViewport}

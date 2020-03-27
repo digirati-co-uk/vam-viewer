@@ -49,17 +49,16 @@ const SlideShow: React.FC<SlideShowProps> = ({
   const [open, setOpen] = useState(false);
   const [offset, setOffset] = useState(0);
   const [inFocus, setInFocus] = useState(false);
-  const [view, setView] = useState();
-  let touchDetector = useRef();
+  let touchDetector: any;
   let viewport: any;
 
   useLayoutEffect(() => {
-    if (view) {
+    if (viewport && touchDetector) {
       //@ts-ignore
-      touchDetector.current = new TapDetector(view.viewer.viewer.canvas);
+      touchDetector.current = new TapDetector(viewport.viewer.viewer.canvas);
     }
     return () => {
-      if (touchDetector.current) {
+      if (touchDetector && touchDetector.current) {
         //@ts-ignore
         touchDetector.current.unbind();
       }
@@ -79,13 +78,13 @@ const SlideShow: React.FC<SlideShowProps> = ({
   }, [innerWidth, mobileBreakPoint]);
 
   const nextInRange = (fromHOC: () => void) => {
-    if (viewport) viewport.viewer.viewer.viewport.applyConstraints(true);
     fromHOC();
+    if (viewport) viewport.viewer.viewer.viewport.applyConstraints(true);
   };
 
   const previousInRange = (fromHOC: () => void) => {
-    if (viewport) viewport.viewer.viewer.viewport.applyConstraints(true);
     fromHOC();
+    if (viewport) viewport.viewer.viewer.viewport.applyConstraints(true);
   };
 
   const onDragStart = () => {
@@ -115,6 +114,16 @@ const SlideShow: React.FC<SlideShowProps> = ({
 
   const onTap = () => {
     setOpen(!open);
+  };
+
+  const setViewport = (viewp: any) => {
+    //@ts-ignore
+    if (touchDetector) {
+      touchDetector.unbind();
+    }
+    touchDetector = new TapDetector(viewp.viewer.viewer.canvas);
+    touchDetector.onTap(onTap);
+    viewport = viewp;
   };
 
   return (
@@ -158,13 +167,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                     .length;
 
                   return (
-                    <div
-                      className={bem
-                        .element('inner-frame')
-                        .modifiers({ isMobile: qualifiesForMobile })}
-                      ref={ref}
-                      style={{ background: backgroundColor }}
-                    >
+                    <>
                       {qualifiesForMobile && isMobileFullScreen ? (
                         <PeekComponent
                           down={down}
@@ -176,19 +179,21 @@ const SlideShow: React.FC<SlideShowProps> = ({
                             <MobileViewer
                               manifest={manifest}
                               canvas={getPreviousRange()}
+                              index={currentIndex - 1}
                             />
                           )}
                           renderRight={() => (
                             <MobileViewer
                               manifest={manifest}
                               canvas={getNextRange()}
+                              index={currentIndex + 1}
                             />
                           )}
                           index={currentIndex}
                         >
                           <MobileViewer
                             current
-                            setViewport={setView}
+                            setViewport={setViewport}
                             manifest={manifest}
                             canvas={canvas}
                             onDragStart={onDragStart}
@@ -212,44 +217,52 @@ const SlideShow: React.FC<SlideShowProps> = ({
                           />
                         </PeekComponent>
                       ) : (
-                        <Swipeable
+                        <div
                           className={bem
                             .element('inner-frame')
                             .modifiers({ isMobile: qualifiesForMobile })}
-                          onSwipedLeft={nextRange}
-                          onSwipedRight={previousRange}
-                          preventDefaultTouchmoveEvent={true}
-                          trackMouse={true}
+                          ref={ref}
+                          style={{ background: backgroundColor }}
                         >
-                          <SimpleSlideTransition id={currentIndex}>
-                            <Slide
-                              fullscreenProps={fullscreenProps}
-                              behaviors={canvas.__jsonld.behavior || []}
-                              manifest={manifest}
-                              canvas={canvas}
-                              region={region}
-                              renderPanel={renderPanel}
-                              backgroundColor={backgroundColor}
-                              mobile={qualifiesForMobile}
+                          <Swipeable
+                            className={bem
+                              .element('inner-frame')
+                              .modifiers({ isMobile: qualifiesForMobile })}
+                            onSwipedLeft={nextRange}
+                            onSwipedRight={previousRange}
+                            preventDefaultTouchmoveEvent={true}
+                            trackMouse={true}
+                          >
+                            <SimpleSlideTransition id={currentIndex}>
+                              <Slide
+                                fullscreenProps={fullscreenProps}
+                                behaviors={canvas.__jsonld.behavior || []}
+                                manifest={manifest}
+                                canvas={canvas}
+                                region={region}
+                                renderPanel={renderPanel}
+                                backgroundColor={backgroundColor}
+                                mobile={qualifiesForMobile}
+                              />
+                            </SimpleSlideTransition>
+                            <CanvasNavigation
+                              previousRange={previousRange}
+                              nextRange={nextRange}
+                              canvasList={canvasList}
+                              currentIndex={currentIndex}
+                              addressable={addressable}
+                              goToRange={goToRange}
+                              id={id}
+                              parentInFocus={inFocus}
                             />
-                          </SimpleSlideTransition>
-                          <CanvasNavigation
-                            previousRange={previousRange}
-                            nextRange={nextRange}
-                            canvasList={canvasList}
-                            currentIndex={currentIndex}
-                            addressable={addressable}
-                            goToRange={goToRange}
-                            id={id}
-                            parentInFocus={inFocus}
-                          />
-                          <ProgressIndicator
-                            currentCanvas={currentIndex}
-                            totalCanvases={canvasList.length}
-                          />
-                        </Swipeable>
+                            <ProgressIndicator
+                              currentCanvas={currentIndex}
+                              totalCanvases={canvasList.length}
+                            />
+                          </Swipeable>
+                        </div>
                       )}
-                    </div>
+                    </>
                   );
                 }}
               </RangeNavigationProvider>
