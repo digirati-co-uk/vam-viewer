@@ -44,6 +44,9 @@
       cursor: initial;
     }
 
+    @media screen and (max-width: 768px) {
+      right: 12px;
+    }
   }
 
   &__previous,

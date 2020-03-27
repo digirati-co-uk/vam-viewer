@@ -131,11 +131,7 @@ class MobileViewer extends Component {
     return (
       <CanvasDetail key={canvas.id} canvas={canvas}>
         {({ label, body, attributionLabel, attribution }) => (
-          <div
-            className={bem}
-            onMouseOver={() => this.setState({ inFocus: true })}
-            onMouseLeave={() => this.setState({ inFocus: false })}
-          >
+          <div className={bem}>
             <div className={bem.element('inner')}>
               <SingleTileSource {...props}>
                 {current ? (
@@ -175,9 +171,6 @@ class MobileViewer extends Component {
                       size={size}
                       currentIndex={index}
                       goToRange={goToRange}
-                      id={this.props.id}
-                      parentInFocus={this.state.inFocus}
-                      addressable={this.props.addressable}
                       canvasList={canvasList}
                     />
                   </div>

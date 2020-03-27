@@ -16,8 +16,6 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Slide from '../Slide/Slide.tsx';
 // @ts-ignore
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
-import PeekComponent from '../PeekComponent/PeekComponent';
-
 import { Swipeable } from 'react-swipeable';
 
 import './SlideShow.scss';
@@ -46,25 +44,8 @@ const SlideShow: React.FC<SlideShowProps> = ({
   const [innerWidth, setInnerWidth] = useState(0);
   const [qualifiesForMobile, setQualifiesForMobile] = useState(false);
   const [isMobileFullScreen, setIsMobileFullScreen] = useState(false);
-  const [down, setDown] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [offset, setOffset] = useState(0);
-  const [inFocus, setInFocus] = useState(false);
-  let touchDetector: any;
-  let viewport: any;
 
-  useLayoutEffect(() => {
-    if (viewport && touchDetector) {
-      //@ts-ignore
-      touchDetector.current = new TapDetector(viewport.viewer.viewer.canvas);
-    }
-    return () => {
-      if (touchDetector && touchDetector.current) {
-        //@ts-ignore
-        touchDetector.current.unbind();
-      }
-    };
-  });
+  const [inFocus, setInFocus] = useState(false);
 
   useEffect(() => {
     window.addEventListener('resize', () => setInnerWidth(window.innerWidth));
@@ -77,55 +58,6 @@ const SlideShow: React.FC<SlideShowProps> = ({
   useEffect(() => {
     setQualifiesForMobile(window.innerWidth <= mobileBreakPoint);
   }, [innerWidth, mobileBreakPoint]);
-
-  const nextInRange = (fromHOC: () => void) => {
-    fromHOC();
-    if (viewport) viewport.viewer.viewer.viewport.applyConstraints(true);
-  };
-
-  const previousInRange = (fromHOC: () => void) => {
-    fromHOC();
-    if (viewport) viewport.viewer.viewer.viewport.applyConstraints(true);
-  };
-
-  const onDragStart = () => {
-    setDown(true);
-  };
-
-  const onDragStop = () => {
-    setDown(false);
-    setOffset(0);
-  };
-
-  const applyOffset = (offsetValue: number) => {
-    setOffset(offsetValue);
-  };
-
-  const onOpen = () => {
-    setOpen(true);
-  };
-
-  const onClose = () => {
-    setOpen(false);
-  };
-
-  const onExitFullscreen = () => {
-    setIsMobileFullScreen(false);
-  };
-
-  const onTap = () => {
-    setOpen(!open);
-  };
-
-  const setViewport = (viewp: any) => {
-    //@ts-ignore
-    if (touchDetector) {
-      touchDetector.unbind();
-    }
-    touchDetector = new TapDetector(viewp.viewer.viewer.canvas);
-    touchDetector.onTap(onTap);
-    viewport = viewp;
-  };
 
   return (
     <div
@@ -161,16 +93,14 @@ const SlideShow: React.FC<SlideShowProps> = ({
                     nextRange,
                     region,
                     goToRange,
-                    // getPreviousRange,
-                    // getNextRange,
                   } = rangeProps;
-                  const size = manifest.getSequenceByIndex(0).getCanvases()
-                    .length;
 
                   return (
                     <>
                       {qualifiesForMobile && isMobileFullScreen ? (
                         <MobilePageView
+                          addressable={addressable}
+                          id={id}
                           manifest={manifest}
                           previousRange={previousRange}
                           nextRange={nextRange}
