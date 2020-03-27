@@ -78,7 +78,7 @@ const Slide: React.FC<SlideProps> = ({
     >
       <SwappableViewer
         fullscreenProps={fullscreenProps}
-        isInteractive={fullscreenProps.isFullscreen}
+        isInteractive={fullscreenProps.isFullscreen || !mobile}
         manifest={manifest}
         canvas={canvas}
         region={region}

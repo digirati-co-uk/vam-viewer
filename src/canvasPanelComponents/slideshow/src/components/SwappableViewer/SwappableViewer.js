@@ -139,7 +139,6 @@ class SwappableViewer extends Component {
       bem,
       fullscreenProps,
     } = this.props;
-
     return (
       <div
         className={bem
@@ -149,15 +148,19 @@ class SwappableViewer extends Component {
       >
         <SingleTileSource manifest={manifest} canvas={canvas}>
           <FullscreenButton {...fullscreenProps} />
-          <ZoomButtons
-            onZoomOut={this.isZoomedOut() ? null : this.zoomOut}
-            onZoomIn={this.isZoomedIn() ? null : this.zoomIn}
-          />
+          {isInteractive ? (
+            <ZoomButtons
+              onZoomOut={this.isZoomedOut() ? null : this.zoomOut}
+              onZoomIn={this.isZoomedIn() ? null : this.zoomIn}
+            />
+          ) : (
+            <></>
+          )}
           <FullPageViewport
             onUpdateViewport={this.updateViewport}
             setRef={this.setViewport}
             position="absolute"
-            interactive={isInteractive || !isZoomedOut}
+            interactive={isInteractive}
           >
             <OpenSeadragonViewport
               useMaxDimensions={true}
