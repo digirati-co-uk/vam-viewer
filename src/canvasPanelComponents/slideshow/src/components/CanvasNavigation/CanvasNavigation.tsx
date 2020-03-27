@@ -114,7 +114,6 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   }, []);
 
   useEffect(() => {
-    console.log(currentIndex);
     goToSlide(getSlideByID());
     document.addEventListener('keyup', handleKeyPress);
     return () => {
