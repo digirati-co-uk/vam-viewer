@@ -8,7 +8,7 @@ import ProgressIndicator from './components/ProgressIndicator/ProgressIndicator'
 import SimpleSlideTransition from './components/SimpleSlideTransition/SimpleSlideTransition';
 import Slide from './components/Slide/Slide';
 import SlideShow from './components/Slideshow/SlideShow';
-import SwappableViewer from './components/SwappableViewer/SwappableViewer';
+import SwappableViewer from './components/SwappableViewer/SwappableViewer.tsx';
 import TapDetector from './components/TapDetector/TapDetector';
 import ZoomButtons from './components/ZoomButtons/ZoomButtons';
 

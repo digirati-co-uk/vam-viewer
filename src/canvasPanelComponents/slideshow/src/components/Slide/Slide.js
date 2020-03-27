@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withBemClass } from '@canvas-panel/core';
-import SwappableViewer from '../SwappableViewer/SwappableViewer';
+import SwappableViewer from '../SwappableViewer/SwappableViewer.tsx';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
 import './Slide.scss';
 

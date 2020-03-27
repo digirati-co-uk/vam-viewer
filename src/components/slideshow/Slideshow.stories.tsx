@@ -50,3 +50,22 @@ export const MultipleSlideShows: React.FC = () => {
     </div>
   );
 };
+
+export const EmbeddedPins: React.FC = () => {
+  const slideShowEl = useRef('slideShowEl');
+
+  return (
+    <div id="slideShowEl" style={{ height: '100vh' }}>
+      <SlideShow
+        element={slideShowEl}
+        manifestUri={text(
+          'Top Manifest',
+          'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/ocean-liners.json'
+        )}
+        addressable={boolean('Make URLs Addressable', true)}
+        id={0}
+        backgroundColor={color('Top Background Colour', '#000000')}
+      />
+    </div>
+  );
+};
