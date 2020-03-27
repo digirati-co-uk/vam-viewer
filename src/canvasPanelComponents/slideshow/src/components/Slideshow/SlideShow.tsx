@@ -7,7 +7,8 @@ import {
   Responsive,
   // @ts-ignore
 } from '@canvas-panel/core';
-import MobileViewer from '../MobileViewer/MobileViewer';
+// import MobileViewer from '../MobileViewer/MobileViewer';
+import MobilePageView from '../MobilePageView/MobilePageView';
 import TapDetector from '../TapDetector/TapDetector';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
@@ -160,8 +161,8 @@ const SlideShow: React.FC<SlideShowProps> = ({
                     nextRange,
                     region,
                     goToRange,
-                    getPreviousRange,
-                    getNextRange,
+                    // getPreviousRange,
+                    // getNextRange,
                   } = rangeProps;
                   const size = manifest.getSequenceByIndex(0).getCanvases()
                     .length;
@@ -169,53 +170,14 @@ const SlideShow: React.FC<SlideShowProps> = ({
                   return (
                     <>
                       {qualifiesForMobile && isMobileFullScreen ? (
-                        <PeekComponent
-                          down={down}
-                          customOffset={offset}
-                          onNext={() => nextInRange(nextRange)}
-                          onPrevious={() => previousInRange(previousRange)}
-                          size={size}
-                          renderLeft={() => (
-                            <MobileViewer
-                              manifest={manifest}
-                              canvas={getPreviousRange()}
-                              index={currentIndex - 1}
-                            />
-                          )}
-                          renderRight={() => (
-                            <MobileViewer
-                              manifest={manifest}
-                              canvas={getNextRange()}
-                              index={currentIndex + 1}
-                            />
-                          )}
-                          index={currentIndex}
-                        >
-                          <MobileViewer
-                            current
-                            setViewport={setViewport}
-                            manifest={manifest}
-                            canvas={canvas}
-                            onDragStart={onDragStart}
-                            onDragStop={onDragStop}
-                            applyOffset={applyOffset}
-                            canvasList={manifest
-                              .getSequenceByIndex(0)
-                              .getCanvases()}
-                            onOpen={onOpen}
-                            onClose={onClose}
-                            onExitFullscreen={onExitFullscreen}
-                            isOpen={open}
-                            size={size}
-                            index={currentIndex}
-                            nextRange={nextRange}
-                            previousRange={previousRange}
-                            goToRange={goToRange}
-                            parentInFocus={inFocus}
-                            addressable={addressable}
-                            id={id}
-                          />
-                        </PeekComponent>
+                        <MobilePageView
+                          manifest={manifest}
+                          previousRange={previousRange}
+                          nextRange={nextRange}
+                          fullscreenProps={fullscreenProps}
+                          exitFullscreen={setIsMobileFullScreen}
+                          {...rangeProps}
+                        />
                       ) : (
                         <div
                           className={bem

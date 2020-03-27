@@ -163,7 +163,7 @@ class MobileViewer extends Component {
                 ) : (
                   <React.Fragment />
                 )}
-                {current & !dragging ? (
+                {current && !dragging && !isOpen ? (
                   <div
                     className={bem
                       .element('canvas-navigation')
