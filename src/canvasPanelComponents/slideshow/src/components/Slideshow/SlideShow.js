@@ -106,6 +106,7 @@ class SlideShow extends Component {
                               fullscreenProps={fullscreenProps}
                               behaviors={canvas.__jsonld.behavior || []}
                               manifest={manifest}
+                              manifestUri={manifestUri}
                               canvas={canvas}
                               region={region}
                               renderPanel={renderPanel}

@@ -51,6 +51,7 @@ interface SwappableViewerProps {
   };
   region: any;
   bem: any;
+  manifestUri: string;
 }
 
 const SwappableViewer: React.FC<SwappableViewerProps> = ({
@@ -60,6 +61,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   fullscreenProps,
   region,
   bem,
+  manifestUri,
 }) => {
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
   const [isZoomedOut, setIsZoomedOut] = useState(true);
@@ -125,6 +127,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     }
     setIsZoomedOut(isZoomOut);
   };
+  console.log(annotations.length > 0);
 
   return (
     <div
@@ -132,30 +135,38 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
         .element('viewport')
         .modifiers({ interactive: isInteractive || !isZoomedOut })}
     >
-      <SingleTileSource manifest={manifest} canvas={canvas}>
-        <FullscreenButton {...fullscreenProps} />
-        <ZoomButtons
-          onZoomOut={determineIsZoomedOut() ? null : zoomOut}
-          onZoomIn={isZoomedIn() ? null : zoomIn}
+      {annotations.length > 0 ? (
+        <PatchworkPlugin
+          manifest={manifestUri}
+          cssClassMap={{
+            annotation: 'annotation-pin',
+          }}
+          cssClassPrefix="patchwork-"
+          height={1000}
+          width={1000}
         />
-        <FullPageViewport
-          onUpdateViewport={updateViewport}
-          setRef={setViewport}
-          position="absolute"
-          interactive={isInteractive || !isZoomedOut}
-        >
-          {annotations.length > 0 ? (
-            <PatchworkPlugin />
-          ) : (
+      ) : (
+        <SingleTileSource manifest={manifest} canvas={canvas}>
+          <FullscreenButton {...fullscreenProps} />
+          <ZoomButtons
+            onZoomOut={determineIsZoomedOut() ? null : zoomOut}
+            onZoomIn={isZoomedIn() ? null : zoomIn}
+          />
+          <FullPageViewport
+            onUpdateViewport={updateViewport}
+            setRef={setViewport}
+            position="absolute"
+            interactive={isInteractive || !isZoomedOut}
+          >
             <OpenSeadragonViewport
               useMaxDimensions={true}
               interactive={isInteractive}
               osdOptions={osdOptions}
               initialBounds={region || regionFromAnnotations}
             />
-          )}
-        </FullPageViewport>
-      </SingleTileSource>
+          </FullPageViewport>
+        </SingleTileSource>
+      )}
     </div>
   );
 };

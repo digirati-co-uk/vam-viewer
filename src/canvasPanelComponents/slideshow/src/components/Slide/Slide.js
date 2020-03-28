@@ -24,6 +24,7 @@ class Slide extends Component {
       renderPanel,
       fullscreenProps,
       backgroundColor,
+      manifestUri,
     } = this.props;
     return (
       <div
@@ -41,6 +42,7 @@ class Slide extends Component {
           manifest={manifest}
           canvas={canvas}
           region={region}
+          manifestUri={manifestUri}
         />
         {renderPanel ? (
           renderPanel(this.props)
