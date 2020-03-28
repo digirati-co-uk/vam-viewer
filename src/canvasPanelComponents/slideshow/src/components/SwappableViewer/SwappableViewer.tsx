@@ -89,7 +89,10 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   }, [canvas, region]);
 
   useEffect(() => {
-    setAnnotations(getEmbeddedAnnotations(canvas));
+    const describers = getEmbeddedAnnotations(canvas).filter(
+      (object: any) => object.motivation === 'describing'
+    );
+    setAnnotations(describers);
   }, [canvas]);
 
   const setViewport = (view: any) => {
@@ -98,6 +101,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
       viewport.goToRect(region || regionFromAnnotations, 0, 0);
     }
   };
+
+  console.log(annotations);
 
   const isZoomedIn = () => {
     if (viewport) {
@@ -127,7 +132,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     }
     setIsZoomedOut(isZoomOut);
   };
-  console.log(annotations.length > 0);
 
   return (
     <div
@@ -142,8 +146,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
             annotation: 'annotation-pin',
           }}
           cssClassPrefix="patchwork-"
-          height={1000}
-          width={1000}
+          // height={1000}
+          // width={1000}
         />
       ) : (
         <SingleTileSource manifest={manifest} canvas={canvas}>
