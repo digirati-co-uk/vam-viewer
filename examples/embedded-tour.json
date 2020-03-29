@@ -288,7 +288,7 @@
     },
     {
       "id": "https://iiif.vam.ac.uk/collections/O1023003/manifest.json",
-      "type": "Manifest",
+      "type": "Canvas",
       "viewingDirection": "left-to-right",
       "behavior": ["individuals"],
       "items": [
