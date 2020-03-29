@@ -1,0 +1,471 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/anno.jsonld",
+    "http://iiif.io/api/presentation/3/context.json"
+  ],
+  "type": "Manifest",
+  "label": {
+    "en": ["Balenciaga Example"]
+  },
+  "items": [
+    {
+      "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/fa664c65-2f92-dd36-1194-8a61922cf818",
+      "type": "Canvas",
+      "behavior": ["info-position-left", "layout-split"],
+      "label": {
+        "en": ["Balenciaga: Master Craftsman"]
+      },
+      "summary": {
+        "en": [
+          "Known as ‘The Master’ of haute couture, Cristóbal Balenciaga (1895–1972) was one of the most revered and influential fashion designers of the 20th century. His clothes were characterised by their sculptural quality, deft manipulation of textiles and dramatic use of colour and texture."
+        ]
+      },
+      "width": 4472,
+      "height": 6742,
+      "requiredStatement": {
+        "label": {
+          "en": [""]
+        },
+        "value": {
+          "en": [
+            "<a href=\"#\" title=\"Evening dress\">Evening dress</a> (1960 - 1962)<br/><a href=\"#\" >by Cristóbal Balenciaga</a><br/>The Victoria and Albert Museum"
+          ]
+        }
+      },
+      "items": [
+        {
+          "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/9fe6f13c-7a97-76c5-da20-64faff551907",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/0787609f-1f0d-aea0-1173-4a56b466cf80",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://dlc.services/iiif-img/5/3/0144b453-e7c8-4dc7-ad3d-2da1dddffaea/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "width": 4472,
+                "height": 6742,
+                "service": [
+                  {
+                    "id": "https://dlc.services/iiif-img/5/3/0144b453-e7c8-4dc7-ad3d-2da1dddffaea",
+                    "type": "ImageService2",
+                    "profile": "level1"
+                  }
+                ]
+              },
+              "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/fa664c65-2f92-dd36-1194-8a61922cf818"
+            }
+          ]
+        }
+      ],
+      "annotations": [
+        {
+          "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/18e56cd7-dd21-75e1-9147-80b1f961dab8",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/99e96c6a-deda-6c0f-1485-12a6749205b4",
+              "type": "Annotation",
+              "motivation": "layout-viewport-focus",
+              "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/fa664c65-2f92-dd36-1194-8a61922cf818#xywh=610,1077,1638,1600"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/d7b87665-55e0-ce21-9ad0-a7c67e99d730",
+      "type": "Canvas",
+      "width": 4080,
+      "height": 5440,
+      "requiredStatement": {
+        "label": {
+          "en": [""]
+        },
+        "value": {
+          "en": [
+            "<a href=\"#\" title=\"Hitchcock Directing\">Hitchcock Directing</a> (1951)<br/><a href=\"#\" >by Gjon Mili</a><br/>LIFE Photo Collection"
+          ]
+        }
+      },
+      "items": [
+        {
+          "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/98886fd0-7e72-8a0c-73ac-cb0e64f95b78",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/5a2edf63-624b-c3dc-ae2d-9d9c8043f344",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://dlc.services/iiif-img/5/3/faac9c3e-4e3a-4cf0-bcaa-492381b0330e/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "width": 4080,
+                "height": 5440,
+                "service": [
+                  {
+                    "id": "https://dlc.services/iiif-img/5/3/faac9c3e-4e3a-4cf0-bcaa-492381b0330e",
+                    "type": "ImageService2",
+                    "profile": "level1"
+                  }
+                ]
+              },
+              "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/d7b87665-55e0-ce21-9ad0-a7c67e99d730"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/0a31ce4f-5c86-0a8b-bfa7-5adb75bbf495",
+      "type": "Canvas",
+      "behavior": ["info-position-left", "layout-split"],
+      "label": {
+        "en": ["Spanish colours"]
+      },
+      "summary": {
+        "en": [
+          "Balenciaga was a Spaniard. Many of his most iconic designs show an affinity for Spanish heritage and costume – from the 'chaquetillas' worn by bullfighters to the traditional flamenco dress. A writer from Woman's Journal stated, 'Inspirations from Spain! Balenciaga is young, Spanish and new to Paris. His beautiful clothes have the warm, colourful drama of his country.'"
+        ]
+      },
+      "width": 4559,
+      "height": 2565,
+      "requiredStatement": {
+        "label": {
+          "en": [""]
+        },
+        "value": {
+          "en": [
+            "<a href=\"#\" title=\"Gazar evening dress, Cristóbal Balenciaga\">Gazar evening dress, Cristóbal Balenciaga</a> (1962)<br/><a href=\"#\" >by Cristóbal Balenciaga</a><br/>The Victoria and Albert Museum"
+          ]
+        }
+      },
+      "items": [
+        {
+          "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/9b937098-d4b7-5759-3b1d-3b51984b69e2",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/b5deccad-da9a-a58f-cbaa-57896153c5f2",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://dlc.services/iiif-img/5/3/a139697e-878c-4971-92f0-efcac57917fc/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "width": 4559,
+                "height": 2565,
+                "service": [
+                  {
+                    "id": "https://dlc.services/iiif-img/5/3/a139697e-878c-4971-92f0-efcac57917fc",
+                    "type": "ImageService2",
+                    "profile": "level1"
+                  }
+                ]
+              },
+              "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/0a31ce4f-5c86-0a8b-bfa7-5adb75bbf495"
+            }
+          ]
+        }
+      ],
+      "annotations": [
+        {
+          "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/e381cf86-3cef-520a-0226-5ae794c5ba1a",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/fcf91dad-567b-f996-b2d2-08ea8a7c63f9",
+              "type": "Annotation",
+              "motivation": "layout-viewport-focus",
+              "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/0a31ce4f-5c86-0a8b-bfa7-5adb75bbf495#xywh=150,150,1345,2275"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/280c247f-3032-856b-ede9-c27a8f78b3f4",
+      "type": "Canvas",
+      "behavior": ["info-position-left", "layout-overlay"],
+      "summary": {
+        "en": [
+          "Balenciaga studied books on regional Spanish costume. This evening gown of silk organza with embroidery echoes traditional Valencian dress'"
+        ]
+      },
+      "width": 4763,
+      "height": 2685,
+      "requiredStatement": {
+        "label": {
+          "en": [""]
+        },
+        "value": {
+          "en": [
+            "<a href=\"#\" title=\"Evening dress, embroidered silk organza\">Evening dress, embroidered silk organza</a> (1960)<br/><a href=\"#\" >by Cristóbal Balenciaga</a><br/>The Victoria and Albert Museum"
+          ]
+        }
+      },
+      "items": [
+        {
+          "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/baf3d47a-7801-fda4-2b90-b616fd71d893",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/338d2fed-9061-8d2e-969a-914bd6cf0f2c",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://dlc.services/iiif-img/5/3/e0597bd3-2271-4102-bb19-cb4ad68ed34f/full/full/0/default.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "width": 4763,
+                "height": 2685,
+                "service": [
+                  {
+                    "id": "https://dlc.services/iiif-img/5/3/e0597bd3-2271-4102-bb19-cb4ad68ed34f",
+                    "type": "ImageService2",
+                    "profile": "level1"
+                  }
+                ]
+              },
+              "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/280c247f-3032-856b-ede9-c27a8f78b3f4"
+            }
+          ]
+        }
+      ],
+      "annotations": [
+        {
+          "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/9355e70d-59d8-2bca-f8d8-49ff28cdf6f8",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/16a4dd18-8a68-5fc1-7119-9e41732082ea",
+              "type": "Annotation",
+              "motivation": "layout-viewport-focus",
+              "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/280c247f-3032-856b-ede9-c27a8f78b3f4#xywh=1319,59,1371,2021"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": {
+        "en": ["Video Example"]
+      },
+      "height": 1000,
+      "width": 1000,
+      "type": "Canvas",
+      "items": [
+        {
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "type": "Annotation",
+              "body": {
+                "type": "Video",
+                "id": "https://youtube.com/embed/6qYEUlq7wLI",
+                "width": 320,
+                "height": 176,
+                "duration": 10.026667
+              },
+              "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/7e826db7-3ceb-b23d-b458-716f6e18bb78#xywh=24,70,960,735",
+              "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/f8bd579c-6755-e350-fbe5-a177d54ffc22",
+              "motivation": "painting",
+              "label": {
+                "en": ["Learning from 'The Master': Balenciaga Revealed"]
+              },
+              "summary": {
+                "en": ["An example of video on canvas"]
+              }
+            }
+          ],
+          "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/597faf99-86ea-59e5-c790-9c3be0feefd4"
+        }
+      ],
+      "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/7e826db7-3ceb-b23d-b458-716f6e18bb78"
+    },
+    {
+      "items": [
+        {
+          "items": [
+            {
+              "body": {
+                "service": [
+                  {
+                    "profile": "level1",
+                    "type": "ImageService2",
+                    "id": "https://framemark.vam.ac.uk/collections/2013GU2911"
+                  }
+                ],
+                "format": "image/jpeg",
+                "height": 6000,
+                "width": 3788,
+                "type": "Image",
+                "id": "https://framemark.vam.ac.uk/collections/2013GU2911/full/full/0/default.jpg"
+              },
+              "motivation": "painting",
+              "type": "Annotation",
+              "target": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 3788,
+      "height": 6000,
+      "type": "Canvas",
+      "id": "https://framemark.vam.ac…/full/full/0/default.jpg",
+      "annotations": [
+        {
+          "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a1",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">First-class lounge</h2><div class=\"annotatedzoom-annotation-detail__content\"><img class=\"annotatedzoom-annotation-detail__image\" src=\"https://media.vam.ac.uk/feature/annotatedzoom/O1023003/Aquitania-lounge-drawing-room-cropped.jpg\" width=300 height=250/><p>First-class public rooms were located in the centre of the ship – the most stable and comfortable areas on board. The <i>Aquitania</i>'s opulent interiors were inspired by classical architecture &ndash; spot the Ionic columns in the lounge. Architect Arthur Davis recommended the use of plaster and papier-mâché for ceilings, domes, and other decorative moulding, but advised against using marble and brickwork, as these would make the ship top-heavy.</p><p class=\"annotatedzoom-annotation-detail__credit\">Photograph from <em>The New Art of Going Abroad</em>, 1929, US. National Art Library: 38041986015030. © Victoria and Albert Museum, London</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=1800,2000,500,500",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a2",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">Garden lounge</h2><div class=\"annotatedzoom-annotation-detail__content\"><img class=\"annotatedzoom-annotation-detail__image\" src=\"https://media.vam.ac.uk/feature/annotatedzoom/O1023003/2017KE6202-Aquitania-Garden-Lounge-cropped.jpg\" width=300 height=250/><p>“As cool, as restful, as any terrace overlooking a rose-garden.” (<i>The New Art of Going Abroad</i>, 1929). Overlooking the sea and decorated with palms, the garden lounge was a fashionable place to have tea and was sometimes used for dancing.</p><p class=\"annotatedzoom-annotation-detail__credit\">Photograph from <em>The New Art of Going Abroad</em>, 1929, US. National Art Library: 38041986015030. © Victoria and Albert Museum, London</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=3000,2100,100,200",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a3",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">First-class restaurant</h2><div class=\"annotatedzoom-annotation-detail__content\"><img class=\"annotatedzoom-annotation-detail__image\" src=\"https://media.vam.ac.uk/feature/annotatedzoom/O1023003/2017KE6204-Aquitania-restaurant-cropped.jpg\" width=300 height=250/><p>Dining on ocean liners was a radically different experience depending on the class of travel. In first class, the <i>Aquitania</i>’s Louis XVI-style dining room offered seating in small isolated groups, echoing elegant restaurants on land. The ship’s architect, Arthur Davis, explained that a “cheerful room with comfortable surroundings” was a necessary distraction from “the often very unpleasant conditions” at sea. </p><p class=\"annotatedzoom-annotation-detail__credit\">Photograph from <em>The New Art of Going Abroad</em>, 1929, US. National Art Library: 38041986015030. © Victoria and Albert Museum, London</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=2000,2800,400,400",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a4",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">First-class state room</h2><div class=\"annotatedzoom-annotation-detail__content\"><img class=\"annotatedzoom-annotation-detail__image\" src=\"https://media.vam.ac.uk/feature/annotatedzoom/O1023003/2017KE6205-state-rooms-on-B-deck-+-D-deck-cropped.jpg\" width=300 height=250/><p>The <i>Aquitania</i>’s first-class cabins were designed by architect Arthur Davis, whose firm, Mewès and Davis Architects, had decorated the famously opulent Ritz hotels in Paris and London. The cabins were “as spacious as a bedroom at the Ritz or the Barclay. The walls are panelled in grey silk. The carpets are vibrant blue and yellow, as are also the striped silk chair coverings. Note the bath – just off-stage, and the electric heater”. (<i>The New Art of Going Abroad</i>, 1929).</p><p class=\"annotatedzoom-annotation-detail__credit\">Photograph from <em>The New Art of Going Abroad</em>, 1929, US. National Art Library: 38041986015030. © Victoria and Albert Museum, London</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=1400,2500,100,200",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a5",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">Third-class dining saloon</h2><div class=\"annotatedzoom-annotation-detail__content\"><p>While extravagant dishes and refined delicacies were served in first class, third-class meals were less sophisticated. A third-class lunch on a Cunard ship in the 1920s could include rice soup, boiled haddock or braised beef with cabbage, boiled potatoes, bread and ‘cabin biscuits’, followed by bread and butter pudding. To save space, passengers sat at long communal tables on chairs bolted to the floor, in case of bad weather.</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=2450,3800,100,200",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a6",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">Third-class four berth room</h2><div class=\"annotatedzoom-annotation-detail__content\"><p>Liners were strictly organised spaces which reflected social hierarchies. Although people travelling in third class could account for 60% of the total number of passengers, they were segregated into a relatively small space in the lower decks of the ship, close to the noisy engine room. These four-berth rooms had none of the luxurious furnishings or fabrics found in first class, but they were an improvement on the communal sleeping quarters provided for steerage-class passengers on earlier liners.</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=800,3500,100,200",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a7",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">Boiler room</h2><div class=\"annotatedzoom-annotation-detail__content\"><p>In 1919 the <i>Aquitania</i> was refitted and converted from coal-burning to oil-burning engines, which meant fewer crew were required to labour in the engine room.</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=2500,4500,500,800",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a8",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">Stores</h2><div class=\"annotatedzoom-annotation-detail__content\"><p>Ocean liners required huge quantities of food, enough for all crew and passengers – the equivalent to feeding a floating city. Cunard catered for varied tastes. Provisions for one trip included 500 sheep kidneys, 400 ox tails, 800 tongues and large quantities of frogs’ legs, as well as geese, turkey, duck, game and “75 heads of cattle and calfs”.</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=3000,4000,100,200",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a9",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">Baggage</h2><div class=\"annotatedzoom-annotation-detail__content\"><p>Passengers travelling for weeks or months would bring a huge number of trunks, most of which were kept in the baggage store deep in the hull of the ship. Cabins could only accommodate smaller trunks. Louis Vuitton designed the ‘steamer trunk’ specifically to fit under a first-class cabin bed. The baggage store was opened daily so that maids or stewards could collect personal items that were needed during the voyage.</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=2100,4000,100,200",
+                "type": "Canvas"
+              }
+            },
+            {
+              "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1/a10",
+              "type": "Annotation",
+              "motivation": "describing",
+              "body": {
+                "type": "TextualBody",
+                "value": "<h2 class=\"annotatedzoom-annotation-detail__label\">Second-class dining saloon</h2><div class=\"annotatedzoom-annotation-detail__content\"><p>The second-class spaces, like first class, were decorated in a neo-classical style. “The second-class accommodation on the vessel, though not so sumptuous as the first-class, is still very elaborate and comfortable”, explained the architect. “The dining-room, no less than 104 ft in length and extending across the whole width of the ship, is decorated with paintings adapted from panels by Pergolesi”– the 18th-century decorative artist. (Arthur Davis, <i>The Architectural Review</i>, April 1914)</p></div>",
+                "format": "text/html"
+              },
+              "target": {
+                "id": "https://iiif.vam.ac.uk/collections/O1023003/canvas/c0#xywh=1500,3250,100,200",
+                "type": "Canvas"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/manifest"
+}

@@ -147,6 +147,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           cssClassMap={{
             annotation: 'annotation-pin',
           }}
+          canvas={canvas}
           cssClassPrefix="patchwork-"
           fitContainer={true}
         />
