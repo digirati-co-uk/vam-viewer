@@ -92,6 +92,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     const describers = getEmbeddedAnnotations(canvas).filter(
       (object: any) => object.motivation === 'describing'
     );
+    console.log(canvas);
+    console.log(getEmbeddedAnnotations(canvas));
     setAnnotations(describers);
   }, [canvas]);
 
@@ -146,8 +148,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
             annotation: 'annotation-pin',
           }}
           cssClassPrefix="patchwork-"
-          // height={1000}
-          // width={1000}
+          fitContainer={true}
         />
       ) : (
         <SingleTileSource manifest={manifest} canvas={canvas}>
