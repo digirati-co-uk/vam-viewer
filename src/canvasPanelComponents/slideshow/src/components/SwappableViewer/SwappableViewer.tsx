@@ -72,6 +72,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   const [annotations, setAnnotations] = useState([]);
   const [video, setVideo] = useState(false);
   const [videoUri, setVideoUri] = useState('');
+  const [embeddedTour, setEmbeddedTour] = useState(false);
   let viewport: any;
 
   const osdOptions = {
@@ -99,6 +100,12 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
       (object: any) => object.motivation === 'describing'
     );
     setAnnotations(describers);
+    setEmbeddedTour(
+      canvas &&
+        canvas.__jsonld &&
+        canvas.__jsonld.behavior &&
+        canvas.__jsonld.behavior.includes('embedded-tour')
+    );
   }, [canvas]);
 
   const setViewport = (view: any) => {
@@ -142,7 +149,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
         .element('viewport')
         .modifiers({ interactive: isInteractive || !isZoomedOut })}
     >
-      {annotations.length > 0 ? (
+      {embeddedTour ? (
         <>
           <FullscreenButton {...fullscreenProps} />
           <PatchworkPlugin

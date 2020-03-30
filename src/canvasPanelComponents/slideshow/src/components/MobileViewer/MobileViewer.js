@@ -87,6 +87,7 @@ class MobileViewer extends Component {
     annotations: [],
     manifestUri: '',
     hideNav: false,
+    embeddedTour: false,
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -96,7 +97,12 @@ class MobileViewer extends Component {
         anno => anno.motivation === 'describing'
       );
     }
-    return { ...state, annotations: annotations };
+    const tour =
+      props.canvas &&
+      props.canvas.__jsonld &&
+      props.canvas.__jsonld.behavior &&
+      props.canvas.__jsonld.behavior.includes('embedded-tour');
+    return { ...state, annotations: annotations, embeddedTour: tour };
   }
 
   onConstrain = (viewer, x, y) => {
@@ -172,7 +178,7 @@ class MobileViewer extends Component {
         {({ label, body, attributionLabel, attribution }) => (
           <div className={bem}>
             <div className={bem.element('inner')}>
-              {this.state.annotations.length > 0 ? (
+              {this.state.embeddedTour ? (
                 <>
                   <PatchworkPlugin
                     setRef={this.props.setViewport}
