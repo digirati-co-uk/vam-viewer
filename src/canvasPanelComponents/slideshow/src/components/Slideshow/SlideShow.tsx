@@ -106,6 +106,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                           fullscreenProps={fullscreenProps}
                           exitFullscreen={setIsMobileFullScreen}
                           canvas={canvas}
+                          manifestUri={manifestUri}
                           {...rangeProps}
                         />
                       ) : (

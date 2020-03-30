@@ -136,7 +136,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     }
     setIsZoomedOut(isZoomOut);
   };
-
   return (
     <div
       className={bem
@@ -144,16 +143,20 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
         .modifiers({ interactive: isInteractive || !isZoomedOut })}
     >
       {annotations.length > 0 ? (
-        <PatchworkPlugin
-          manifest={manifestUri}
-          cssClassMap={{
-            annotation: 'annotation-pin',
-          }}
-          canvas={canvas.index}
-          cssClassPrefix="patchwork-"
-          fitContainer={true}
-          fullScreenProps={fullscreenProps}
-        />
+        <>
+          <FullscreenButton {...fullscreenProps} />
+          <PatchworkPlugin
+            manifest={manifestUri}
+            cssClassMap={{
+              annotation: 'annotation-pin',
+            }}
+            canvas={canvas.index}
+            cssClassPrefix="patchwork-"
+            fitContainer={true}
+            allowFullScreen={false}
+            hideSlideShowNav={() => {}}
+          />
+        </>
       ) : (
         <SingleTileSource
           manifest={manifest}

@@ -85,15 +85,18 @@ class MobileViewer extends Component {
     video: false,
     videoUri: '',
     annotations: [],
+    manifestUri: '',
+    hideNav: false,
   };
 
   static getDerivedStateFromProps(props, state) {
+    let annotations;
     if (props.canvas) {
-      const annotations = getEmbeddedAnnotations(props.canvas).filter(
+      annotations = getEmbeddedAnnotations(props.canvas).filter(
         anno => anno.motivation === 'describing'
       );
-      return { ...state, annotations: annotations };
     }
+    return { ...state, annotations: annotations };
   }
 
   onConstrain = (viewer, x, y) => {
@@ -155,102 +158,149 @@ class MobileViewer extends Component {
       size,
       onZoomIn,
       onZoomOut,
+      manifestUri,
+      manifest,
       ...props
     } = this.props;
+
     const { canvas, index } = this.props;
     if (!canvas) {
       return <div />;
     }
-
     return (
       <CanvasDetail key={canvas.id} canvas={canvas}>
         {({ label, body, attributionLabel, attribution }) => (
           <div className={bem}>
             <div className={bem.element('inner')}>
-              <SingleTileSource
-                {...props}
-                notifyVideo={(bool, videoUri) =>
-                  this.setState({ video: bool, videoUri: videoUri })
-                }
-              >
-                {current ? (
-                  <Attribution bem={bem} hidden={!current || dragging}>
-                    {attributionLabel} {attribution}
-                  </Attribution>
-                ) : (
-                  <React.Fragment />
-                )}
-                {current ? (
-                  <ExitFullscreen
-                    bem={bem}
-                    onClick={onExitFullscreen}
-                    hidden={!current || dragging}
-                  />
-                ) : (
-                  <React.Fragment />
-                )}
-                {current && label ? (
-                  <InfoButton
-                    bem={bem}
-                    onClick={onOpen}
-                    hidden={!current || dragging}
-                  />
-                ) : (
-                  <React.Fragment />
-                )}
-                {current && !dragging && !isOpen ? (
-                  <div
-                    className={bem
-                      .element('canvas-navigation')
-                      .modifiers({ hidden: !current || dragging })}
-                  >
-                    <CanvasNavigation
-                      previousRange={previousRange}
-                      nextRange={nextRange}
-                      size={size}
-                      currentIndex={index}
-                      goToRange={goToRange}
-                      canvasList={canvasList}
-                    />
-                  </div>
-                ) : (
-                  <React.Fragment />
-                )}
-                {!(this.state.video && this.state.videoUri) ? (
-                  <FullPageViewport
-                    setRef={this.props.setViewport}
-                    position="absolute"
-                    interactive={true}
-                    style={{ height: '100%' }}
-                    osdOptions={{
-                      visibilityRatio: 1,
-                      constrainDuringPan: false,
-                      showNavigator: false,
-                      animationTime: 0.3,
+              {this.state.annotations.length > 0 ? (
+                <>
+                  <PatchworkPlugin
+                    manifest={manifestUri}
+                    cssClassMap={{
+                      annotation: 'annotation-pin',
                     }}
-                    onConstrain={this.onConstrain}
-                  >
-                    <OpenSeadragonViewport
-                      useMaxDimensions={true}
-                      interactive={true}
-                      onDragStart={this.onDragStart}
-                      onDragStop={this.onDragStop}
-                      osdOptions={this.osdOptions}
-                    />
-                  </FullPageViewport>
-                ) : (
-                  <></>
-                )}
-                {this.state.video && this.state.videoUri ? (
-                  <IFrameYouTube
+                    canvas={5}
+                    cssClassPrefix="patchwork-"
+                    fitContainer={true}
+                    allowFullScreen={false}
                     onDragStart={this.onDragStart}
                     onDragStop={this.onDragStop}
-                    url={this.state.videoUri}
+                    hideSlideShowNav={bool => this.setState({ hideNav: bool })}
                   />
-                ) : (
-                  <></>
-                )}
-              </SingleTileSource>
+                  {current ? (
+                    <ExitFullscreen
+                      bem={bem}
+                      onClick={onExitFullscreen}
+                      hidden={!current || dragging}
+                    />
+                  ) : (
+                    <React.Fragment />
+                  )}
+                  {current && !dragging && !isOpen && !this.state.hideNav ? (
+                    <div
+                      className={bem
+                        .element('canvas-navigation')
+                        .modifiers({ hidden: !current || dragging })}
+                    >
+                      <CanvasNavigation
+                        previousRange={previousRange}
+                        nextRange={nextRange}
+                        size={size}
+                        currentIndex={index}
+                        goToRange={goToRange}
+                        canvasList={canvasList}
+                      />
+                    </div>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </>
+              ) : (
+                <SingleTileSource
+                  {...props}
+                  notifyVideo={(bool, videoUri) =>
+                    this.setState({ video: bool, videoUri: videoUri })
+                  }
+                >
+                  {current ? (
+                    <Attribution bem={bem} hidden={!current || dragging}>
+                      {attributionLabel} {attribution}
+                    </Attribution>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                  {current ? (
+                    <ExitFullscreen
+                      bem={bem}
+                      onClick={onExitFullscreen}
+                      hidden={!current || dragging}
+                    />
+                  ) : (
+                    <React.Fragment />
+                  )}
+                  {current && label ? (
+                    <InfoButton
+                      bem={bem}
+                      onClick={onOpen}
+                      hidden={!current || dragging}
+                    />
+                  ) : (
+                    <React.Fragment />
+                  )}
+                  {current && !dragging && !isOpen ? (
+                    <div
+                      className={bem
+                        .element('canvas-navigation')
+                        .modifiers({ hidden: !current || dragging })}
+                    >
+                      <CanvasNavigation
+                        previousRange={previousRange}
+                        nextRange={nextRange}
+                        size={size}
+                        currentIndex={index}
+                        goToRange={goToRange}
+                        canvasList={canvasList}
+                      />
+                    </div>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                  {!(this.state.video && this.state.videoUri) ? (
+                    <FullPageViewport
+                      setRef={this.props.setViewport}
+                      position="absolute"
+                      interactive={true}
+                      style={{ height: '100%' }}
+                      osdOptions={{
+                        visibilityRatio: 1,
+                        constrainDuringPan: false,
+                        showNavigator: false,
+                        animationTime: 0.3,
+                      }}
+                      onConstrain={this.onConstrain}
+                    >
+                      <OpenSeadragonViewport
+                        useMaxDimensions={true}
+                        interactive={true}
+                        onDragStart={this.onDragStart}
+                        onDragStop={this.onDragStop}
+                        osdOptions={this.osdOptions}
+                      />
+                    </FullPageViewport>
+                  ) : (
+                    <></>
+                  )}
+                  {this.state.video && this.state.videoUri ? (
+                    <IFrameYouTube
+                      onDragStart={this.onDragStart}
+                      onDragStop={this.onDragStop}
+                      url={this.state.videoUri}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </SingleTileSource>
+              )}
             </div>
             {current && label ? (
               <InfoPanel

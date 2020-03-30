@@ -9,6 +9,10 @@
   left: 0;
   animation: fadein 0.6s;
 
+  &--hidden {
+    display: none;
+  }
+
   @keyframes fadein {
     0% {
       opacity: 0;
