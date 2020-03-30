@@ -58,6 +58,7 @@ class MobilePageView extends Component {
       canvasList,
       currentIndex,
       manifest,
+      manifestUri,
     } = this.props;
 
     const size = manifest.getSequenceByIndex(0).getCanvases().length;
@@ -70,10 +71,18 @@ class MobilePageView extends Component {
         onPrevious={this.previousRange}
         size={size}
         renderLeft={() => (
-          <MobileViewer manifest={manifest} canvas={getPreviousRange()} />
+          <MobileViewer
+            manifest={manifest}
+            canvas={getPreviousRange()}
+            manifestUri={manifestUri}
+          />
         )}
         renderRight={() => (
-          <MobileViewer manifest={manifest} canvas={getNextRange()} />
+          <MobileViewer
+            manifest={manifest}
+            canvas={getNextRange()}
+            manifestUri={manifestUri}
+          />
         )}
         index={currentIndex}
       >
@@ -81,7 +90,7 @@ class MobilePageView extends Component {
           current
           setViewport={this.setViewport}
           manifest={manifest}
-          canvas={canvas}
+          canvas={this.props.canvas}
           onDragStart={() => this.setState({ down: true })}
           onDragStop={() => this.setState({ down: false })}
           applyOffset={val => this.setState({ offset: val })}
@@ -100,6 +109,7 @@ class MobilePageView extends Component {
           addressable={this.props.addressable}
           id={this.props.id}
           canvasList={canvasList}
+          manifestUri={manifestUri}
         />
       </PeekComponent>
     );

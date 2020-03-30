@@ -9,7 +9,6 @@ import {
 } from '@canvas-panel/core';
 // import MobileViewer from '../MobileViewer/MobileViewer';
 import MobilePageView from '../MobilePageView/MobilePageView';
-import TapDetector from '../TapDetector/TapDetector';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 // @ts-ignore
@@ -106,6 +105,8 @@ const SlideShow: React.FC<SlideShowProps> = ({
                           nextRange={nextRange}
                           fullscreenProps={fullscreenProps}
                           exitFullscreen={setIsMobileFullScreen}
+                          canvas={canvas}
+                          manifestUri={manifestUri}
                           {...rangeProps}
                         />
                       ) : (
@@ -135,6 +136,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                                 renderPanel={renderPanel}
                                 backgroundColor={backgroundColor}
                                 mobile={qualifiesForMobile}
+                                manifestUri={manifestUri}
                               />
                             </SimpleSlideTransition>
                             <CanvasNavigation

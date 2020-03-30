@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {
   Manifest,
-  CanvasProvider,
   Viewport,
   SingleTileSource,
+  CanvasProvider,
   OpenSeadragonViewer,
   OpenSeadragonViewport,
   AnnotationDetail,
@@ -39,6 +39,7 @@ const defaultConfiguration = {
   closeText: '×',
   relativeContainer: true,
   clickToClose: true,
+  hideSlideShowNav: () => {},
 };
 
 const AdaptiveViewport = ({
@@ -96,8 +97,8 @@ class PatchworkPlugin extends Component {
   static propTypes = {};
 
   setViewport = viewport => (this.viewport = viewport);
-
   onClickAnnotation = (annotation, bounds) => {
+    this.props.hideSlideShowNav(true);
     const { clickToClose } = this.props;
     this.dispatch('onClickAnnotation', { annotation, bounds });
 
@@ -148,6 +149,8 @@ class PatchworkPlugin extends Component {
   };
 
   onClose = () => {
+    this.props.hideSlideShowNav(false);
+
     this.dispatch('onClose', { annotation: this.state.annotation });
     this.setState({ annotation: null });
     this.viewport.resetView(this.getAnimationSpeed('onClose'));
@@ -199,18 +202,13 @@ class PatchworkPlugin extends Component {
       fitContainer,
       mobileBreakpoint,
     } = this.props;
+
     const height =
       window.innerWidth < mobileBreakpoint ? mobileHeight : desktopHeight;
 
     const state = this.state;
-
     return (
-      <div
-        ref={this.setRef}
-        style={{
-          position: relativeContainer ? 'relative' : null,
-        }}
-      >
+      <div ref={this.setRef} style={{ color: 'unset' }}>
         <Fullscreen>
           {({ isFullscreen, fullscreenEnabled, toggleFullscreen, ref }) => (
             <div
@@ -228,11 +226,6 @@ class PatchworkPlugin extends Component {
                     <AdaptiveViewport
                       isFullscreen={fullscreenEnabled ? isFullscreen : false}
                       fullViewport={fitContainer}
-                      maxWidth={
-                        isFullscreen || state.isMobileFullscreen
-                          ? window.innerWidth
-                          : width
-                      }
                       maxHeight={
                         isFullscreen || state.isMobileFullscreen
                           ? window.innerHeight
@@ -272,20 +265,25 @@ class PatchworkPlugin extends Component {
                           toggleFullscreen={this.toggleMobileFullscreen}
                         />
                       ) : null}
-                      <FullScreenToggle
-                        data-static
-                        isFullscreen={
-                          fullscreenEnabled
-                            ? isFullscreen
-                            : state.isMobileFullscreen
-                        }
-                        toggleFullscreen={
-                          fullscreenEnabled
-                            ? toggleFullscreen
-                            : this.toggleMobileFullscreen
-                        }
-                        mobileBreakpoint={mobileBreakpoint}
-                      />
+                      {this.props.allowFullScreen ? (
+                        <FullScreenToggle
+                          data-static
+                          isFullscreen={
+                            fullscreenEnabled
+                              ? isFullscreen
+                              : state.isMobileFullscreen
+                          }
+                          toggleFullscreen={
+                            fullscreenEnabled
+                              ? toggleFullscreen
+                              : this.toggleMobileFullscreen
+                          }
+                          mobileBreakpoint={mobileBreakpoint}
+                        />
+                      ) : (
+                        <></>
+                      )}
+
                       {state.annotation ? (
                         <AnnotationDetail
                           data-static
