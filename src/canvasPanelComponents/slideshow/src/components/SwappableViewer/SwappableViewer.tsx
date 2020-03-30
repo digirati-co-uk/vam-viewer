@@ -143,11 +143,12 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     >
       {annotations.length > 0 ? (
         <PatchworkPlugin
-          manifest={manifestUri}
+          manifest={manifest}
+          jsonLdManifest={canvas.__jsonld}
           cssClassMap={{
             annotation: 'annotation-pin',
           }}
-          canvas={canvas}
+          canvas={0}
           cssClassPrefix="patchwork-"
           fitContainer={true}
         />

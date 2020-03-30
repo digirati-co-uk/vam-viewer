@@ -203,7 +203,7 @@ class PatchworkPlugin extends Component {
       window.innerWidth < mobileBreakpoint ? mobileHeight : desktopHeight;
 
     const state = this.state;
-
+    debugger;
     return (
       <div
         ref={this.setRef}
