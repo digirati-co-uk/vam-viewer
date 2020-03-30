@@ -194,8 +194,6 @@ class MobileViewer extends Component {
                   <FullPageViewport
                     setRef={this.props.setViewport}
                     position="absolute"
-                    setRef={this.props.setViewport}
-                    position="absolute"
                     interactive={true}
                     style={{ height: '100%' }}
                     osdOptions={{
@@ -209,14 +207,9 @@ class MobileViewer extends Component {
                     <OpenSeadragonViewport
                       useMaxDimensions={true}
                       interactive={true}
-                      style={{ height: '100%' }}
-                      osdOptions={{
-                        visibilityRatio: 1,
-                        constrainDuringPan: false,
-                        showNavigator: false,
-                        animationTime: 0.3,
-                      }}
-                      onConstrain={this.onConstrain}
+                      onDragStart={this.onDragStart}
+                      onDragStop={this.onDragStop}
+                      osdOptions={this.osdOptions}
                     />
                   </FullPageViewport>
                 ) : (
