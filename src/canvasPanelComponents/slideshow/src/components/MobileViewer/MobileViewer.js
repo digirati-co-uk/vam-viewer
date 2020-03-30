@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
 import {
   withBemClass,
-  SingleTileSource,
   OpenSeadragonViewport,
   FullPageViewport,
 } from '@canvas-panel/core';
+import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
 import './MobileViewer.scss';
 import { InfoButton } from '../Icons/InfoButton.tsx';
 import { CloseIcon } from '../Icons/CloseIcon.tsx';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
+import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
 
 const ExitFullscreenIcon = ({ className }) => (
   <svg
@@ -60,7 +61,14 @@ class MobileViewer extends Component {
     setViewport: () => null,
   };
 
-  state = { open: false, constrained: false, offset: 0, inFocus: false };
+  state = {
+    open: false,
+    constrained: false,
+    offset: 0,
+    inFocus: false,
+    video: false,
+    videoUri: '',
+  };
 
   onConstrain = (viewer, x, y) => {
     const stateToUpdate = {};
@@ -133,7 +141,12 @@ class MobileViewer extends Component {
         {({ label, body, attributionLabel, attribution }) => (
           <div className={bem}>
             <div className={bem.element('inner')}>
-              <SingleTileSource {...props}>
+              <SingleTileSource
+                {...props}
+                notifyVideo={(bool, videoUri) =>
+                  this.setState({ video: bool, videoUri: videoUri })
+                }
+              >
                 {current ? (
                   <Attribution bem={bem} hidden={!current || dragging}>
                     {attributionLabel} {attribution}
@@ -177,28 +190,40 @@ class MobileViewer extends Component {
                 ) : (
                   <React.Fragment />
                 )}
-
-                <FullPageViewport
-                  setRef={this.props.setViewport}
-                  position="absolute"
-                  interactive={true}
-                  style={{ height: '100%' }}
-                  osdOptions={{
-                    visibilityRatio: 1,
-                    constrainDuringPan: false,
-                    showNavigator: false,
-                    animationTime: 0.3,
-                  }}
-                  onConstrain={this.onConstrain}
-                >
-                  <OpenSeadragonViewport
-                    useMaxDimensions={true}
+                {!(this.state.video && this.state.videoUri) ? (
+                  <FullPageViewport
+                    setRef={this.props.setViewport}
+                    position="absolute"
                     interactive={true}
+                    style={{ height: '100%' }}
+                    osdOptions={{
+                      visibilityRatio: 1,
+                      constrainDuringPan: false,
+                      showNavigator: false,
+                      animationTime: 0.3,
+                    }}
+                    onConstrain={this.onConstrain}
+                  >
+                    <OpenSeadragonViewport
+                      useMaxDimensions={true}
+                      interactive={true}
+                      onDragStart={this.onDragStart}
+                      onDragStop={this.onDragStop}
+                      osdOptions={this.osdOptions}
+                    />
+                  </FullPageViewport>
+                ) : (
+                  <></>
+                )}
+                {this.state.video && this.state.videoUri ? (
+                  <IFrameYouTube
                     onDragStart={this.onDragStart}
                     onDragStop={this.onDragStop}
-                    osdOptions={this.osdOptions}
+                    url={this.state.videoUri}
                   />
-                </FullPageViewport>
+                ) : (
+                  <></>
+                )}
               </SingleTileSource>
             </div>
             {current && label ? (

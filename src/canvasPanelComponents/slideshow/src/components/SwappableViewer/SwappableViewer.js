@@ -3,15 +3,17 @@ import * as PropTypes from 'prop-types';
 
 import {
   FullPageViewport,
-  SingleTileSource,
   withBemClass,
   OpenSeadragonViewport,
   parseSelectorTarget,
 } from '@canvas-panel/core';
 
+import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
+
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
+import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
 
 function getEmbeddedAnnotations(canvas) {
   return (canvas.__jsonld.annotations || []).reduce((list, next) => {
@@ -44,6 +46,8 @@ class SwappableViewer extends Component {
     isInteractive: false,
     itemWidth: 0,
     itemHeight: 0,
+    video: false,
+    videoUri: '',
   };
 
   osdOptions = {
@@ -146,7 +150,13 @@ class SwappableViewer extends Component {
           .modifiers({ interactive: isInteractive || !isZoomedOut })}
         onWheel={this.onWheel}
       >
-        <SingleTileSource manifest={manifest} canvas={canvas}>
+        <SingleTileSource
+          manifest={manifest}
+          canvas={canvas}
+          notifyVideo={(bool, videoUri) =>
+            this.setState({ video: bool, videoUri: videoUri })
+          }
+        >
           <FullscreenButton {...fullscreenProps} />
           {isInteractive ? (
             <ZoomButtons
@@ -156,19 +166,28 @@ class SwappableViewer extends Component {
           ) : (
             <></>
           )}
-          <FullPageViewport
-            onUpdateViewport={this.updateViewport}
-            setRef={this.setViewport}
-            position="absolute"
-            interactive={isInteractive}
-          >
-            <OpenSeadragonViewport
-              useMaxDimensions={true}
-              interactive={isInteractive}
-              osdOptions={this.osdOptions}
-              initialBounds={region}
+
+          {this.state.video && this.state.videoUri ? (
+            <IFrameYouTube
+              onDragStart={this.onDragStart}
+              onDragStop={this.onDragStop}
+              url={this.state.videoUri}
             />
-          </FullPageViewport>
+          ) : (
+            <FullPageViewport
+              onUpdateViewport={this.updateViewport}
+              setRef={this.setViewport}
+              position="absolute"
+              interactive={isInteractive || !isZoomedOut}
+            >
+              <OpenSeadragonViewport
+                useMaxDimensions={true}
+                interactive={isInteractive}
+                osdOptions={this.osdOptions}
+                initialBounds={region}
+              />
+            </FullPageViewport>
+          )}
         </SingleTileSource>
       </div>
     );

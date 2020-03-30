@@ -290,7 +290,7 @@
               "type": "Annotation",
               "body": {
                 "type": "Video",
-                "id": "https://youtube.com/embed/6qYEUlq7wLI",
+                "id": "http://youtube.com/embed/6qYEUlq7wLI",
                 "width": 320,
                 "height": 176,
                 "duration": 10.026667

@@ -47,7 +47,7 @@ class MobilePageView extends Component {
   };
 
   render() {
-    const { offset, down, open } = this.state;
+    const { offset, down, open, video } = this.state;
     const {
       canvas,
       nextRange,
