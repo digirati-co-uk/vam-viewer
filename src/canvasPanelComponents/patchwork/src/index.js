@@ -15,8 +15,6 @@ import {
   withBemClass,
 } from '@canvas-panel/core';
 
-// import { CanvasProvider } from '../../manifesto/Canvas/CanvasProvider.tsx';
-
 const defaultConfiguration = {
   cssClassPrefix: '',
   manifest: null,
@@ -41,6 +39,7 @@ const defaultConfiguration = {
   closeText: '×',
   relativeContainer: true,
   clickToClose: true,
+  fullScreenProps: {},
 };
 
 const AdaptiveViewport = ({
@@ -282,6 +281,7 @@ class PatchworkPlugin extends Component {
                             ? isFullscreen
                             : state.isMobileFullscreen
                         }
+                        {...this.props.fullscreenProps}
                         toggleFullscreen={
                           fullscreenEnabled
                             ? toggleFullscreen

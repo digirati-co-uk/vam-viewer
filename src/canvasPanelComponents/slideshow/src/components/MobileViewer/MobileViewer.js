@@ -11,6 +11,7 @@ import { InfoButton } from '../Icons/InfoButton.tsx';
 import { CloseIcon } from '../Icons/CloseIcon.tsx';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
+import { PatchworkPlugin } from '../../../../patchwork/src/index';
 
 const ExitFullscreenIcon = ({ className }) => (
   <svg
@@ -55,6 +56,21 @@ const InfoPanel = ({ bem, hidden, onClose, children, label, attribution }) => (
   </div>
 );
 
+function getEmbeddedAnnotations(canvas) {
+  return (canvas.__jsonld.annotations || []).reduce((list, next) => {
+    if (next.type === 'AnnotationPage') {
+      return (next.items || []).reduce((innerList, annotation) => {
+        innerList.push(annotation);
+        return innerList;
+      }, list);
+    }
+    if (next.type === 'Annotation') {
+      list.push(next);
+    }
+    return list;
+  }, []);
+}
+
 class MobileViewer extends Component {
   static defaultProps = {
     applyOffset: () => null,
@@ -68,7 +84,17 @@ class MobileViewer extends Component {
     inFocus: false,
     video: false,
     videoUri: '',
+    annotations: [],
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.canvas) {
+      const annotations = getEmbeddedAnnotations(props.canvas).filter(
+        anno => anno.motivation === 'describing'
+      );
+      return { ...state, annotations: annotations };
+    }
+  }
 
   onConstrain = (viewer, x, y) => {
     const stateToUpdate = {};

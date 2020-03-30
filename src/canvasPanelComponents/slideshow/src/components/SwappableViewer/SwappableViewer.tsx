@@ -42,6 +42,7 @@ function createRegionFromAnnotations(canvas: any) {
     );
   }
 }
+
 interface SwappableViewerProps {
   canvas: any;
   manifest: any;
@@ -97,8 +98,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     const describers = getEmbeddedAnnotations(canvas).filter(
       (object: any) => object.motivation === 'describing'
     );
-    console.log(canvas);
-    console.log(getEmbeddedAnnotations(canvas));
     setAnnotations(describers);
   }, [canvas]);
 
@@ -137,6 +136,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     }
     setIsZoomedOut(isZoomOut);
   };
+
   return (
     <div
       className={bem
@@ -149,9 +149,10 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           cssClassMap={{
             annotation: 'annotation-pin',
           }}
-          canvas={5}
+          canvas={canvas.index}
           cssClassPrefix="patchwork-"
           fitContainer={true}
+          fullScreenProps={fullscreenProps}
         />
       ) : (
         <SingleTileSource

@@ -59,6 +59,7 @@ class MobilePageView extends Component {
       currentIndex,
       manifest,
     } = this.props;
+    console.log(this.props);
 
     const size = manifest.getSequenceByIndex(0).getCanvases().length;
 
@@ -81,7 +82,7 @@ class MobilePageView extends Component {
           current
           setViewport={this.setViewport}
           manifest={manifest}
-          canvas={canvas}
+          canvas={this.props.canvas}
           onDragStart={() => this.setState({ down: true })}
           onDragStop={() => this.setState({ down: false })}
           applyOffset={val => this.setState({ offset: val })}
