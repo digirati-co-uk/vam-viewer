@@ -41,7 +41,7 @@ class PeekComponent extends Component {
       bem,
     } = this.props;
     const x = customOffset;
-    const shouldAnimate = down !== false;
+    const shouldAnimate = down === false;
     return (
       <div className={bem}>
         <div className={bem.element('inner')}>
