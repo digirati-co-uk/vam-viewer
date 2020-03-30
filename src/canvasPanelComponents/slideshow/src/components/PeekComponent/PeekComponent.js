@@ -12,7 +12,7 @@ class PeekComponent extends Component {
     onPrevious: () => null,
   };
 
-  state = { down: false, revert: false, lastOffset: 0, isTransitioning: false };
+  // state = { revert: false, lastOffset: 0, isTransitioning: false };
 
   componentWillReceiveProps(nextProps, nextContext) {
     if (this.props.down && nextProps.down === false) {
@@ -42,7 +42,6 @@ class PeekComponent extends Component {
     } = this.props;
     const x = customOffset;
     const shouldAnimate = down === false;
-
     return (
       <div className={bem}>
         <div className={bem.element('inner')}>

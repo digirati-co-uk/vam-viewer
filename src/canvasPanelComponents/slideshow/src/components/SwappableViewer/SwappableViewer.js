@@ -47,7 +47,7 @@ class SwappableViewer extends Component {
     itemWidth: 0,
     itemHeight: 0,
     video: false,
-    videoUriL: '',
+    videoUri: '',
   };
 
   osdOptions = {
@@ -143,7 +143,6 @@ class SwappableViewer extends Component {
       bem,
       fullscreenProps,
     } = this.props;
-
     return (
       <div
         className={bem
@@ -159,11 +158,22 @@ class SwappableViewer extends Component {
           }
         >
           <FullscreenButton {...fullscreenProps} />
-          <ZoomButtons
-            onZoomOut={this.isZoomedOut() ? null : this.zoomOut}
-            onZoomIn={this.isZoomedIn() ? null : this.zoomIn}
-          />
-          {!(this.state.video && this.state.videoUri) ? (
+          {isInteractive ? (
+            <ZoomButtons
+              onZoomOut={this.isZoomedOut() ? null : this.zoomOut}
+              onZoomIn={this.isZoomedIn() ? null : this.zoomIn}
+            />
+          ) : (
+            <></>
+          )}
+
+          {this.state.video && this.state.videoUri ? (
+            <IFrameYouTube
+              onDragStart={this.onDragStart}
+              onDragStop={this.onDragStop}
+              url={this.state.videoUri}
+            />
+          ) : (
             <FullPageViewport
               onUpdateViewport={this.updateViewport}
               setRef={this.setViewport}
@@ -177,17 +187,6 @@ class SwappableViewer extends Component {
                 initialBounds={region}
               />
             </FullPageViewport>
-          ) : (
-            <></>
-          )}
-          {this.state.video && this.state.videoUri ? (
-            <IFrameYouTube
-              onDragStart={this.onDragStart}
-              onDragStop={this.onDragStop}
-              url={this.state.videoUri}
-            />
-          ) : (
-            <></>
           )}
         </SingleTileSource>
       </div>

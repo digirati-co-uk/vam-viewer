@@ -8,7 +8,7 @@ import { withKnobs, text, boolean, color } from '@storybook/addon-knobs';
 export const SingleSlideShow: React.FC = () => {
   const slideShowEl = useRef('slideShowEl');
   return (
-    <div id="slideShowEl" style={{ height: '100vh' }}>
+    <div id="slideShowEl" style={{ height: '75vh' }}>
       <SlideShow
         element={slideShowEl}
         manifestUri={text(
@@ -27,7 +27,7 @@ export const MultipleSlideShows: React.FC = () => {
   const slideShowEl = useRef('slideShowEl');
 
   return (
-    <div id="slideShowEl" style={{ height: '50vh' }}>
+    <div id="slideShowEl" style={{ height: '75vh' }}>
       <SlideShow
         element={slideShowEl}
         manifestUri={text(
