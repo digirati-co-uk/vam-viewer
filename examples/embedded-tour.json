@@ -287,12 +287,13 @@
       "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/7e826db7-3ceb-b23d-b458-716f6e18bb78"
     },
     {
-      "label": {
+      "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/ab4b043b-e621-4f67-6f0b-f2c0c2d2851e",
+      "type": "Canvas",
+      "summary": {
         "en": ["Embedded Annotations"]
       },
       "height": 1000,
       "width": 1000,
-      "type": "Canvas",
       "items": [
         {
           "type": "AnnotationPage",
@@ -313,7 +314,7 @@
                 "id": "https://framemark.vam.ac.uk/collections/2013GU2911/full/full/0/default.jpg"
               },
               "motivation": "painting",
-              "type": "Annotation",
+              "type": "Image",
               "target": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/ab4b043b-e621-4f67-6f0b-f2c0c2d2851e",
               "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/annotation/8644835b-c7f7-65fb-93d8-f4cea6e1577e"
             }
@@ -321,7 +322,6 @@
           "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/list/f5464fab-9bc6-3404-5a93-cf55e0464446"
         }
       ],
-      "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/ab4b043b-e621-4f67-6f0b-f2c0c2d2851e",
       "annotations": [
         {
           "id": "https://iiif.vam.ac.uk/collections/O1023003/annopage/p1",
