@@ -109,8 +109,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     }
   };
 
-  console.log(annotations);
-
   const isZoomedIn = () => {
     if (viewport) {
       return viewport.getMaxZoom() <= viewport.getZoom();
@@ -147,12 +145,11 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     >
       {annotations.length > 0 ? (
         <PatchworkPlugin
-          manifest={manifest}
-          jsonLdManifest={canvas.__jsonld}
+          manifest={manifestUri}
           cssClassMap={{
             annotation: 'annotation-pin',
           }}
-          canvas={0}
+          canvas={5}
           cssClassPrefix="patchwork-"
           fitContainer={true}
         />

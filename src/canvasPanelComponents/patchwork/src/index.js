@@ -4,6 +4,7 @@ import {
   Manifest,
   Viewport,
   SingleTileSource,
+  CanvasProvider,
   OpenSeadragonViewer,
   OpenSeadragonViewport,
   AnnotationDetail,
@@ -14,7 +15,7 @@ import {
   withBemClass,
 } from '@canvas-panel/core';
 
-import CanvasProvider from '../../manifesto/Canvas/CanvasProvider';
+// import { CanvasProvider } from '../../manifesto/Canvas/CanvasProvider.tsx';
 
 const defaultConfiguration = {
   cssClassPrefix: '',

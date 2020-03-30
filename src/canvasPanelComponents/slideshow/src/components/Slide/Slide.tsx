@@ -20,6 +20,7 @@ interface SlideProps {
   fullscreenProps: any;
   backgroundColor: string;
   mobile: boolean;
+  manifestUri: string;
 }
 
 interface InfoPanelProps {
@@ -54,6 +55,7 @@ const Slide: React.FC<SlideProps> = ({
   fullscreenProps,
   backgroundColor = '#000000',
   mobile = false,
+  manifestUri,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -83,6 +85,7 @@ const Slide: React.FC<SlideProps> = ({
         manifest={manifest}
         canvas={canvas}
         region={region}
+        manifestUri={manifestUri}
       />
       {renderPanel ? (
         renderPanel({
