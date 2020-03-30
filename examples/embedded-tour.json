@@ -289,6 +289,7 @@
     {
       "id": "http://digirati.com/iiif/v3/d1162fbf-0a08-3d33-a768-b889f744b34d/canvas/ab4b043b-e621-4f67-6f0b-f2c0c2d2851e",
       "type": "Canvas",
+      "behavior": ["embedded-tour"],
       "summary": {
         "en": ["Embedded Annotations"]
       },
