@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {
   Manifest,
-  CanvasProvider,
   Viewport,
   SingleTileSource,
   OpenSeadragonViewer,
@@ -14,6 +13,8 @@ import {
   Bem,
   withBemClass,
 } from '@canvas-panel/core';
+
+import CanvasProvider from '../../manifesto/Canvas/CanvasProvider';
 
 const defaultConfiguration = {
   cssClassPrefix: '',
@@ -199,11 +200,12 @@ class PatchworkPlugin extends Component {
       fitContainer,
       mobileBreakpoint,
     } = this.props;
+
+    console.log(this.props);
     const height =
       window.innerWidth < mobileBreakpoint ? mobileHeight : desktopHeight;
 
     const state = this.state;
-    debugger;
     return (
       <div
         ref={this.setRef}
