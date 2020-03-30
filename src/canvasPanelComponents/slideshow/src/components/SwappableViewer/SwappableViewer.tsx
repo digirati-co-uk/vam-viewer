@@ -143,6 +143,9 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     }
     setIsZoomedOut(isZoomOut);
   };
+
+  const isVideo = !!(video && videoUri);
+
   return (
     <div
       className={bem
@@ -173,8 +176,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
             setVideoUri(uri);
           }}
         >
-          <FullscreenButton {...fullscreenProps} />
-          {isInteractive ? (
+          {!isVideo ? <FullscreenButton {...fullscreenProps} /> : <></>}
+          {!isVideo && isInteractive ? (
             <ZoomButtons
               onZoomOut={determineIsZoomedOut() ? null : zoomOut}
               onZoomIn={isZoomedIn() ? null : zoomIn}
@@ -182,7 +185,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           ) : (
             <></>
           )}
-          {video && videoUri ? (
+          {isVideo ? (
             <IFrameYouTube url={videoUri} />
           ) : (
             <FullPageViewport
