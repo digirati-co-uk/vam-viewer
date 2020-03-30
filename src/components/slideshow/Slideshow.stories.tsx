@@ -4,10 +4,11 @@ import { SlideShow } from '../../canvasPanelComponents/slideshow/src/index.js';
 export default { title: 'Slideshow | Slideshow', decorators: [withKnobs] };
 import { withKnobs, text, boolean, color } from '@storybook/addon-knobs';
 
+// crossorigin = 'anonymous';
 export const SingleSlideShow: React.FC = () => {
   const slideShowEl = useRef('slideShowEl');
   return (
-    <div id="slideShowEl" style={{ height: '100vh' }}>
+    <div id="slideShowEl" style={{ height: '75vh' }}>
       <SlideShow
         element={slideShowEl}
         manifestUri={text(
@@ -26,7 +27,7 @@ export const MultipleSlideShows: React.FC = () => {
   const slideShowEl = useRef('slideShowEl');
 
   return (
-    <div id="slideShowEl" style={{ height: '50vh' }}>
+    <div id="slideShowEl" style={{ height: '75vh' }}>
       <SlideShow
         element={slideShowEl}
         manifestUri={text(
@@ -84,6 +85,24 @@ export const EmbeddedPinsInNormal: React.FC = () => {
         addressable={boolean('Make URLs Addressable', true)}
         id={0}
         backgroundColor={color('Top Background Colour', '#000000')}
+      />
+    </div>
+  );
+};
+
+export const WithVideoExample: React.FC = () => {
+  const slideShowEl = useRef('slideShowEl');
+  return (
+    <div id="slideShowEl" style={{ height: '100vh' }}>
+      <SlideShow
+        element={slideShowEl}
+        manifestUri={text(
+          'Manifest',
+          'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/balenciaga-example.json'
+        )}
+        addressable={boolean('Make URLs Addressable', true)}
+        id={0}
+        backgroundColor={color('Background Colour', '#000000')}
       />
     </div>
   );

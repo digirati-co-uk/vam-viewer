@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
 import {
   withBemClass,
-  SingleTileSource,
   OpenSeadragonViewport,
   FullPageViewport,
-  Responsive,
 } from '@canvas-panel/core';
+import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
 import './MobileViewer.scss';
-import ZoomButtons from '../ZoomButtons/ZoomButtons';
+import { InfoButton } from '../Icons/InfoButton.tsx';
+import { CloseIcon } from '../Icons/CloseIcon.tsx';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
+import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
 
 const ExitFullscreenIcon = ({ className }) => (
   <svg
@@ -20,37 +21,6 @@ const ExitFullscreenIcon = ({ className }) => (
     className={className}
   >
     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#fff" />
-    <path d="M0 0h24v24H0z" fill="none" />
-  </svg>
-);
-
-const InfoIcon = ({ onClick, className }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    className={className}
-    onClick={onClick}
-  >
-    <path d="M0 0h24v24H0z" fill="none" />
-    <path
-      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-      fill="#fff"
-    />
-  </svg>
-);
-
-const CloseIcon = ({ onClick, className }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    className={className}
-    onClick={onClick}
-  >
-    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
     <path d="M0 0h24v24H0z" fill="none" />
   </svg>
 );
@@ -71,17 +41,7 @@ const ExitFullscreen = ({ bem, hidden, onClick }) => (
   </div>
 );
 
-const InfoButton = ({ bem, onClick, hidden }) => (
-  <div className={bem.element('info').modifiers({ hidden })} onClick={onClick}>
-    <InfoIcon className={bem.element('info-icon')} />
-  </div>
-);
-
-const Navigation = ({ bem, children }) => (
-  <div className={bem.element('navigation')}>{children}</div>
-);
-
-const InfoPanel = ({ bem, hidden, onClose, children, label }) => (
+const InfoPanel = ({ bem, hidden, onClose, children, label, attribution }) => (
   <div
     className={bem.element('info-panel').modifiers({
       hidden,
@@ -89,6 +49,7 @@ const InfoPanel = ({ bem, hidden, onClose, children, label }) => (
     onClick={onClose}
   >
     <CloseIcon className={bem.element('info-panel-close')} />
+    <div className={bem.element('info-panel-attribution')}>{attribution}</div>
     <h2>{label}</h2>
     <p className={bem.element('info-panel-body')}>{children}</p>
   </div>
@@ -100,7 +61,14 @@ class MobileViewer extends Component {
     setViewport: () => null,
   };
 
-  state = { open: false, constrained: false, offset: 0 };
+  state = {
+    open: false,
+    constrained: false,
+    offset: 0,
+    inFocus: false,
+    video: false,
+    videoUri: '',
+  };
 
   onConstrain = (viewer, x, y) => {
     const stateToUpdate = {};
@@ -118,7 +86,6 @@ class MobileViewer extends Component {
   applyConstraints(viewer, immediately) {
     const bounds = viewer.viewport.getBoundsNoRotate();
     const constrainedBounds = viewer.viewport._applyBoundaryConstraints(bounds);
-
     constrainedBounds.x = bounds.x;
     if (bounds.y !== constrainedBounds.y) {
       viewer.viewport.fitBounds(constrainedBounds, immediately);
@@ -164,8 +131,7 @@ class MobileViewer extends Component {
       onZoomOut,
       ...props
     } = this.props;
-    const { canvas, index } = props;
-
+    const { canvas, index } = this.props;
     if (!canvas) {
       return <div />;
     }
@@ -175,7 +141,12 @@ class MobileViewer extends Component {
         {({ label, body, attributionLabel, attribution }) => (
           <div className={bem}>
             <div className={bem.element('inner')}>
-              <SingleTileSource {...props}>
+              <SingleTileSource
+                {...props}
+                notifyVideo={(bool, videoUri) =>
+                  this.setState({ video: bool, videoUri: videoUri })
+                }
+              >
                 {current ? (
                   <Attribution bem={bem} hidden={!current || dragging}>
                     {attributionLabel} {attribution}
@@ -201,42 +172,58 @@ class MobileViewer extends Component {
                 ) : (
                   <React.Fragment />
                 )}
-
-                <div
-                  className={bem
-                    .element('canvas-navigation')
-                    .modifiers({ hidden: !current || dragging })}
-                >
-                  <CanvasNavigation
-                    previousRange={previousRange}
-                    nextRange={nextRange}
-                    size={size}
-                    currentIndex={index}
-                    goToRange={goToRange}
-                  />
-                </div>
-
-                <FullPageViewport
-                  setRef={this.props.setViewport}
-                  position="absolute"
-                  interactive={true}
-                  style={{ height: '100%' }}
-                  osdOptions={{
-                    visibilityRatio: 1,
-                    constrainDuringPan: false,
-                    showNavigator: false,
-                    animationTime: 0.3,
-                  }}
-                  onConstrain={this.onConstrain}
-                >
-                  <OpenSeadragonViewport
-                    useMaxDimensions={true}
+                {current && !dragging && !isOpen ? (
+                  <div
+                    className={bem
+                      .element('canvas-navigation')
+                      .modifiers({ hidden: !current || dragging })}
+                  >
+                    <CanvasNavigation
+                      previousRange={previousRange}
+                      nextRange={nextRange}
+                      size={size}
+                      currentIndex={index}
+                      goToRange={goToRange}
+                      canvasList={canvasList}
+                    />
+                  </div>
+                ) : (
+                  <React.Fragment />
+                )}
+                {!(this.state.video && this.state.videoUri) ? (
+                  <FullPageViewport
+                    setRef={this.props.setViewport}
+                    position="absolute"
                     interactive={true}
+                    style={{ height: '100%' }}
+                    osdOptions={{
+                      visibilityRatio: 1,
+                      constrainDuringPan: false,
+                      showNavigator: false,
+                      animationTime: 0.3,
+                    }}
+                    onConstrain={this.onConstrain}
+                  >
+                    <OpenSeadragonViewport
+                      useMaxDimensions={true}
+                      interactive={true}
+                      onDragStart={this.onDragStart}
+                      onDragStop={this.onDragStop}
+                      osdOptions={this.osdOptions}
+                    />
+                  </FullPageViewport>
+                ) : (
+                  <></>
+                )}
+                {this.state.video && this.state.videoUri ? (
+                  <IFrameYouTube
                     onDragStart={this.onDragStart}
                     onDragStop={this.onDragStop}
-                    osdOptions={this.osdOptions}
+                    url={this.state.videoUri}
                   />
-                </FullPageViewport>
+                ) : (
+                  <></>
+                )}
               </SingleTileSource>
             </div>
             {current && label ? (
@@ -245,6 +232,7 @@ class MobileViewer extends Component {
                 hidden={dragging === true || !isOpen}
                 onClose={onClose}
                 label={label}
+                attribution={attribution}
               >
                 {body}
               </InfoPanel>

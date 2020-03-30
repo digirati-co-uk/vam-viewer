@@ -1,7 +1,15 @@
 .mobile-page-view {
+  display: flex;
+  overflow-y: scroll;
+  scroll-snap-points-x: repeat(320px);
+  scroll-snap-destination: 0 0;
+  scroll-snap-type: x mandatory;
+  scroll-snap-type: mandatory;
+
   &__canvas {
-    position: relative;
+    scroll-snap-align: start;
     background: #fff;
+    min-width: 100vw;
   }
 
   &__detail {

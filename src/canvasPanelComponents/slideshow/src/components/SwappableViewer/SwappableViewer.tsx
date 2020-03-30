@@ -13,6 +13,8 @@ import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
 import { PatchworkPlugin } from '../../../../patchwork/src/index';
+//@ts-ignore
+import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
 
 function getEmbeddedAnnotations(canvas: any) {
   return (canvas.__jsonld.annotations || []).reduce((list: any, next: any) => {
@@ -66,6 +68,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
   const [isZoomedOut, setIsZoomedOut] = useState(true);
   const [annotations, setAnnotations] = useState([]);
+  const [video, setVideo] = useState(false);
+  const [videoUri, setVideoUri] = useState('');
   let viewport: any;
 
   const osdOptions = {
@@ -153,25 +157,40 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           fitContainer={true}
         />
       ) : (
-        <SingleTileSource manifest={manifest} canvas={canvas}>
+        <SingleTileSource
+          manifest={manifest}
+          canvas={canvas}
+          notifyVideo={(bool: boolean, uri: string) => {
+            setVideoUri(uri);
+            setVideo(bool);
+          }}
+        >
           <FullscreenButton {...fullscreenProps} />
-          <ZoomButtons
-            onZoomOut={determineIsZoomedOut() ? null : zoomOut}
-            onZoomIn={isZoomedIn() ? null : zoomIn}
-          />
-          <FullPageViewport
-            onUpdateViewport={updateViewport}
-            setRef={setViewport}
-            position="absolute"
-            interactive={isInteractive || !isZoomedOut}
-          >
-            <OpenSeadragonViewport
-              useMaxDimensions={true}
-              interactive={isInteractive}
-              osdOptions={osdOptions}
-              initialBounds={region || regionFromAnnotations}
+          {isInteractive ? (
+            <ZoomButtons
+              onZoomOut={determineIsZoomedOut() ? null : zoomOut}
+              onZoomIn={isZoomedIn() ? null : zoomIn}
             />
-          </FullPageViewport>
+          ) : (
+            <></>
+          )}
+          {video && videoUri ? (
+            <IFrameYouTube url={videoUri} />
+          ) : (
+            <FullPageViewport
+              onUpdateViewport={updateViewport}
+              setRef={setViewport}
+              position="absolute"
+              interactive={isInteractive || !isZoomedOut}
+            >
+              <OpenSeadragonViewport
+                useMaxDimensions={true}
+                interactive={isInteractive}
+                osdOptions={osdOptions}
+                initialBounds={region || regionFromAnnotations}
+              />
+            </FullPageViewport>
+          )}
         </SingleTileSource>
       )}
     </div>

@@ -148,6 +148,7 @@
       padding: 20px;
       line-height: 1.5em;
       box-sizing: border-box;
+      overflow-y: scroll;
 
       &--hidden {
         bottom: -300px;
@@ -169,5 +170,11 @@
         max-height: 215px;
       }
     }
+  }
+
+  &__info-panel-attribution {
+    font-size: 12px;
+    width: 100%;
+    line-height: initial;
   }
 }
