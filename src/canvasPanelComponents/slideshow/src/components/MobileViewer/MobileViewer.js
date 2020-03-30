@@ -175,6 +175,7 @@ class MobileViewer extends Component {
               {this.state.annotations.length > 0 ? (
                 <>
                   <PatchworkPlugin
+                    setRef={this.props.setViewport}
                     manifest={manifestUri}
                     cssClassMap={{
                       annotation: 'annotation-pin',
@@ -183,9 +184,9 @@ class MobileViewer extends Component {
                     cssClassPrefix="patchwork-"
                     fitContainer={true}
                     allowFullScreen={false}
+                    hideSlideShowNav={bool => this.setState({ hideNav: bool })}
                     onDragStart={this.onDragStart}
                     onDragStop={this.onDragStop}
-                    hideSlideShowNav={bool => this.setState({ hideNav: bool })}
                   />
                   {current ? (
                     <ExitFullscreen
@@ -292,9 +293,11 @@ class MobileViewer extends Component {
                   )}
                   {this.state.video && this.state.videoUri ? (
                     <IFrameYouTube
+                      setRef={this.props.setViewport}
                       onDragStart={this.onDragStart}
                       onDragStop={this.onDragStop}
                       url={this.state.videoUri}
+                      onConstrain={this.onConstrain}
                     />
                   ) : (
                     <></>
