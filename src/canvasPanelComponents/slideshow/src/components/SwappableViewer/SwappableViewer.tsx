@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 import {
   FullPageViewport,
-  SingleTileSource,
   withBemClass,
   OpenSeadragonViewport,
   parseSelectorTarget,
   // @ts-ignore
 } from '@canvas-panel/core';
+
+import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
 
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
@@ -138,7 +139,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     }
     setIsZoomedOut(isZoomOut);
   };
-
   return (
     <div
       className={bem
@@ -161,8 +161,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           manifest={manifest}
           canvas={canvas}
           notifyVideo={(bool: boolean, uri: string) => {
-            setVideoUri(uri);
             setVideo(bool);
+            setVideoUri(uri);
           }}
         >
           <FullscreenButton {...fullscreenProps} />
