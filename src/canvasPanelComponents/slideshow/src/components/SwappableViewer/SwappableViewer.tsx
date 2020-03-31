@@ -12,7 +12,7 @@ import {
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
-import { PatchworkPlugin } from '../../../../patchwork/src/index';
+import { PatchworkPlugin } from '../../../../../viewers/patch-work-plugin/src/index';
 //@ts-ignore
 import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
 
