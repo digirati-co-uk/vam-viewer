@@ -7,14 +7,19 @@
   border-radius: 3px;
   padding: 15px;
   font-size: 14px;
-  max-height: 320px;
-  overflow-y: auto;
-  overflow-x: scroll;
   color: #000;
   z-index: 99999999;
   .annotatedzoom-annotation-detail__image {
-    max-width: 320px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
   }
+}
+
+.patchwork-annotation-detail__content {
+  max-height: 380px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .patchwork-annotation-detail__label {
@@ -128,6 +133,9 @@
   border: none;
   cursor: pointer;
   line-height: 30px;
+  &:focus {
+    outline: none;
+  }
 }
 
 @media (max-width: 479px) {

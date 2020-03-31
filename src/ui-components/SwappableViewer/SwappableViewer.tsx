@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
-
 import {
   FullPageViewport,
   withBemClass,
   OpenSeadragonViewport,
   parseSelectorTarget,
   SingleTileSource,
-  // @ts-ignore
 } from 'canvas-panel-beta/lib/legacy';
-
-
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
-import { PatchworkPlugin } from '../../viewers/patch-work-plugin/src/index';
-//@ts-ignore
 import { YoutubeVideoSource } from '../YoutubeVideoSource/YoutubeVideoSource';
+import { PatchworkEmbed } from '../../example-stories/PatchworkEmbed/PatchworkEmbed';
 
 function getEmbeddedAnnotations(canvas: any) {
   return (canvas.__jsonld.annotations || []).reduce((list: any, next: any) => {
@@ -67,6 +62,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   region,
   bem,
   manifestUri,
+  ...props
 }) => {
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
   const [isZoomedOut, setIsZoomedOut] = useState(true);
@@ -136,7 +132,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   };
 
   const updateViewport = (isZoomOut: any) => {
-    if (isZoomedOut === false && isZoomOut) {
+    if (isZoomedOut === false && isZoomedOut) {
       viewport.resetView();
     }
     setIsZoomedOut(isZoomedOut);
@@ -151,22 +147,16 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
       {embeddedTour ? (
         <>
           <FullscreenButton {...fullscreenProps} />
-          <PatchworkPlugin
-            manifest={manifestUri}
-            cssClassMap={{
-              annotation: 'annotation-pin',
-            }}
-            canvas={canvas.index}
-            cssClassPrefix="patchwork-"
-            fitContainer={true}
-            allowFullScreen={false}
-            hideSlideShowNav={() => {}}
-          />
+          <PatchworkEmbed canvas={canvas} fitContainer={true} {...props} />
         </>
       ) : (
         <>
           <YoutubeVideoSource />
-          <SingleTileSource manifest={manifest} canvas={canvas}>
+          <SingleTileSource
+            // @ts-ignore
+            manifest={manifest}
+            canvas={canvas}
+          >
             <FullscreenButton {...fullscreenProps} />
             {isInteractive ? (
               <ZoomButtons

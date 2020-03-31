@@ -93,7 +93,6 @@ const SlideShow: React.FC<SlideShowProps> = ({
                     region,
                     goToRange,
                   } = rangeProps;
-
                   return (
                     <>
                       {qualifiesForMobile && isMobileFullScreen ? (
