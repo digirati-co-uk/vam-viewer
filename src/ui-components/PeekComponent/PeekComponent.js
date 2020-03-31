@@ -38,18 +38,22 @@ class PeekComponent extends Component {
       renderLeft,
       renderRight,
       children,
+      isFullScreen,
       bem,
     } = this.props;
     const x = customOffset;
     const shouldAnimate = down === false;
     return (
-      <div className={bem}>
+      <div className={bem.modifiers({ isFullScreen })}>
         <div className={bem.element('inner')}>
           <FlipMove
             typeName={null}
             enterAnimation="none"
             leaveAnimation="none"
             duration={300}
+            onFinish={(_, e) => {
+              e.parentElement.parentElement.scrollTo({ left: 0, behavior: 'smooth' })
+            }}
           >
             <div
               key={index - 1}

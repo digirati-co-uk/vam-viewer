@@ -97,6 +97,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                     <>
                       {qualifiesForMobile && isMobileFullScreen ? (
                         <MobilePageView
+                          isMobileFullScreen={isMobileFullScreen}
                           addressable={addressable}
                           id={id}
                           manifest={manifest}
@@ -125,7 +126,8 @@ const SlideShow: React.FC<SlideShowProps> = ({
                             onSwipedDown={() => {}}
                             onSwipedUp={() => {}}
                             preventDefaultTouchmoveEvent={true}
-                            trackMouse={true}
+                            trackMouse={false}
+                            trackTouch={false}
                           >
                             <SimpleSlideTransition id={currentIndex}>
                               <Slide
@@ -140,6 +142,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                                 backgroundColor={backgroundColor}
                                 mobile={qualifiesForMobile}
                                 manifestUri={manifestUri}
+
                               />
                             </SimpleSlideTransition>
                             <CanvasNavigation

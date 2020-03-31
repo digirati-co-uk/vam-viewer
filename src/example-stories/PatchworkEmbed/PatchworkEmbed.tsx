@@ -76,6 +76,9 @@ export const PatchworkEmbed: React.FC<{
   annotationMargin?: number;
   animationSpeedMap?: any;
   animationSpeed?: number;
+  onConstrain?: any;
+  onDragStart?: any;
+  onDragStop?: any;
 }> = ({
   canvas,
   mobileHeight = defaultConfig.mobileHeight,
@@ -91,6 +94,9 @@ export const PatchworkEmbed: React.FC<{
   annotationMargin = defaultConfig.annotationMargin,
   animationSpeedMap = defaultConfig.animationSpeedMap,
   animationSpeed = defaultConfig.animationSpeed,
+  onConstrain,
+  onDragStart,
+  onDragStop,
   ...props
 }) => {
   const viewport = useRef<any>();
@@ -145,18 +151,24 @@ export const PatchworkEmbed: React.FC<{
           maxHeight={
             isFullscreen || isMobileFullscreen ? window.innerHeight : height
           }
-          setRef={(ref: any) => (viewport.current = ref)}
+          setRef={(ref: any) => {
+            viewport.current = ref;
+          }}
+          onConstrain={onConstrain}
+
         >
           <SingleTileSource
             // @ts-ignore
             viewportController={true}
           >
-            <OpenSeadragonViewport>
+            <OpenSeadragonViewport
+              onDragStart={onDragStart}
+              onDragStop={onDragStop}>
               <OpenSeadragonViewer
                 useMaxDimensions={true}
                 osdOptions={{
                   visibilityRatio: 1,
-                  constrainDuringPan: true,
+                  constrainDuringPan: false,
                   showNavigator: false,
                   immediateRender: false,
                   ...osdOptions,

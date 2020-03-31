@@ -24,12 +24,16 @@ class MobilePageView extends Component {
   }
 
   nextRange = () => {
-    this.viewport.viewer.viewer.viewport.applyConstraints(true);
+    if (this.viewport) {
+      this.viewport.viewer.viewer.viewport.applyConstraints(true);
+    }
     this.props.nextRange();
   };
 
   previousRange = () => {
-    this.viewport.viewer.viewer.viewport.applyConstraints(true);
+    if (this.viewport) {
+      this.viewport.viewer.viewer.viewport.applyConstraints(true);
+    }
     this.props.previousRange();
   };
 
@@ -59,6 +63,7 @@ class MobilePageView extends Component {
       currentIndex,
       manifest,
       manifestUri,
+      isFullScreen,
     } = this.props;
 
     const size = manifest.getSequenceByIndex(0).getCanvases().length;
@@ -88,6 +93,7 @@ class MobilePageView extends Component {
       >
         <MobileViewer
           current
+          isFullScreen={isFullScreen}
           setViewport={this.setViewport}
           manifest={manifest}
           canvas={this.props.canvas}

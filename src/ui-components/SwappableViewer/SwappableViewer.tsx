@@ -75,6 +75,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     constrainDuringPan: true,
     showNavigator: false,
     immediateRender: false,
+    animationTime: .5,
+    blendTime: .3,
     preload: true,
   };
 
@@ -136,50 +138,52 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   };
 
   return (
-    <div
-      className={bem
-        .element('viewport')
-        .modifiers({ interactive: isInteractive || !isZoomedOut })}
-    >
-      {embeddedTour ? (
-        <>
-          <FullscreenButton {...fullscreenProps} />
-          <PatchworkEmbed canvas={canvas} fitContainer={true} {...props} />
-        </>
-      ) : (
-        <>
-          <YoutubeVideoSource />
-          <SingleTileSource
-            // @ts-ignore
-            manifest={manifest}
-            canvas={canvas}
-          >
+    <>
+      <FullscreenButton {...fullscreenProps} />
+      <div
+        className={bem
+          .element('viewport')
+          .modifiers({ interactive: isInteractive || !isZoomedOut })}
+      >
+        {embeddedTour ? (
+          <>
             <FullscreenButton {...fullscreenProps} />
-            {isInteractive ? (
-              <ZoomButtons
-                onZoomOut={isZoomedOut ? null : zoomOut}
-                onZoomIn={isZoomedIn ? null : zoomIn}
-              />
-            ) : (
-              <></>
-            )}
-            <FullPageViewport
-              onUpdateViewport={updateViewport}
-              setRef={setViewport}
-              position="absolute"
-              interactive={isInteractive || !isZoomedOut}
+            <PatchworkEmbed canvas={canvas} fitContainer={true} {...props} />
+          </>
+        ) : (
+          <>
+            <YoutubeVideoSource />
+            <SingleTileSource
+              // @ts-ignore
+              manifest={manifest}
+              canvas={canvas}
             >
-              <OpenSeadragonViewport
-                useMaxDimensions={true}
-                interactive={isInteractive}
-                osdOptions={osdOptions}
-                initialBounds={region || regionFromAnnotations}
-              />
-            </FullPageViewport>
-          </SingleTileSource>
-        </>
-      )}
-    </div>
+              {isInteractive ? (
+                <ZoomButtons
+                  onZoomOut={isZoomedOut ? null : zoomOut}
+                  onZoomIn={isZoomedIn ? null : zoomIn}
+                />
+              ) : (
+                <></>
+              )}
+              <FullPageViewport
+                onUpdateViewport={updateViewport}
+                setRef={setViewport}
+                position="absolute"
+                interactive={isInteractive || !isZoomedOut}
+              >
+                <OpenSeadragonViewport
+                  useMaxDimensions={true}
+                  interactive={isInteractive}
+                  osdOptions={osdOptions}
+                  initialBounds={region || regionFromAnnotations}
+                />
+              </FullPageViewport>
+            </SingleTileSource>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
