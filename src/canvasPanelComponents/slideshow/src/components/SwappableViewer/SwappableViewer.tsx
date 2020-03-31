@@ -5,6 +5,7 @@ import {
   withBemClass,
   OpenSeadragonViewport,
   parseSelectorTarget,
+  Bem,
 } from 'canvas-panel-beta/lib/legacy';
 
 import { SingleTileSource } from 'canvas-panel-beta/lib/legacy';
@@ -14,6 +15,7 @@ import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
 import { PatchworkPlugin } from '../../../../patchwork/src/index';
 import { YoutubeVideoSource } from '../../../../../components/YoutubeVideoSource';
+import { PatchworkEmbed } from '../../../../../components/PatchworkEmbed/PatchworkEmbed';
 
 function getEmbeddedAnnotations(canvas: any) {
   return (canvas.__jsonld.annotations || []).reduce((list: any, next: any) => {
@@ -65,6 +67,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   region,
   bem,
   manifestUri,
+  ...props
 }) => {
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
   const [isZoomedOut, setIsZoomedOut] = useState(true);
@@ -133,7 +136,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   };
 
   const updateViewport = (isZoomOut: any) => {
-    if (isZoomOut === false && isZoomOut) {
+    if (isZoomedOut === false && isZoomedOut) {
       viewport.resetView();
     }
     setIsZoomedOut(isZoomOut);
@@ -148,17 +151,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
       {embeddedTour ? (
         <>
           <FullscreenButton {...fullscreenProps} />
-          <PatchworkPlugin
-            manifest={manifestUri}
-            cssClassMap={{
-              annotation: 'annotation-pin',
-            }}
-            canvas={canvas.index}
-            cssClassPrefix="patchwork-"
-            fitContainer={true}
-            allowFullScreen={false}
-            hideSlideShowNav={() => {}}
-          />
+          <PatchworkEmbed canvas={canvas} fitContainer={true} {...props} />
         </>
       ) : (
         <>
