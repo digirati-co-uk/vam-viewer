@@ -92,11 +92,15 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   }, [canvas, region]);
 
   useEffect(() => {
+    const describers = getEmbeddedAnnotations(canvas).filter(
+      (object: any) => object.motivation === 'describing'
+    );
     setEmbeddedTour(
-      canvas &&
+      (canvas &&
         canvas.__jsonld &&
         canvas.__jsonld.behavior &&
-        canvas.__jsonld.behavior.includes('embedded-tour')
+        canvas.__jsonld.behavior.includes('embedded-tour')) ||
+        describers.length > 1
     );
   }, [canvas]);
 
