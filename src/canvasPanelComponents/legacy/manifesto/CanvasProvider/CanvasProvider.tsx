@@ -9,7 +9,7 @@ import {
 import { useManifest } from '../../../manifesto/Manifest/ManifestProvider';
 import functionOrMapChildren, {
   RenderComponent,
-} from '../../../../utility/function-or-map-children';
+} from '../../../utility/function-or-map-children';
 
 type LegacyCanvasActions =
   | { type: CanvasProviderStaticMembers['NEXT_CANVAS'] }

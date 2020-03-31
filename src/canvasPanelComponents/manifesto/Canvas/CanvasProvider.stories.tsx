@@ -1,6 +1,6 @@
 import React from 'react';
 // @ts-ignore
-import { CanvasNavigation, LocaleString } from 'canvas-panel-beta/lib/legacy';
+import { CanvasNavigation, LocaleString } from '@canvas-panel/core';
 import { ManifestProvider, useManifest } from '../Manifest/ManifestProvider';
 import { CanvasProvider, useCanvas } from './CanvasProvider';
 
@@ -22,16 +22,16 @@ const MinimumViableViewerInner = () => {
       <ul>
         <li>
           <CanvasNavigation
-          // dispatch={(action: any) => {
-          //   switch (action.type) {
-          //     case 'NEXT_CANVAS':
-          //       nextCanvas();
-          //       break;
-          //     case 'PREV_CANVAS':
-          //       prevCanvas();
-          //       break;
-          //   }
-          // }}
+            dispatch={(action: any) => {
+              switch (action.type) {
+                case 'NEXT_CANVAS':
+                  nextCanvas();
+                  break;
+                case 'PREV_CANVAS':
+                  prevCanvas();
+                  break;
+              }
+            }}
           />
         </li>
         <li>

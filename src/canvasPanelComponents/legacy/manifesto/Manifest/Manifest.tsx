@@ -8,7 +8,7 @@ import {
 import functionOrMapChildren, {
   MapChildrenType,
   RenderComponent,
-} from '../../../../utility/function-or-map-children';
+} from '../../../utility/function-or-map-children';
 
 const ManifestInner: React.FC<{
   children: MapChildrenType<{ manifest: ManifestoManifest }>;
