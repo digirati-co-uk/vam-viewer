@@ -5,10 +5,10 @@ import { useSwipeable } from 'react-swipeable';
 
 interface IFrameYouTubeProps {
   url: string;
-  onNext: () => void;
-  onPrevious: () => void;
-  onDragStart: () => void;
-  onDragStop: () => void;
+  onNext?: () => void;
+  onPrevious?: () => void;
+  onDragStart?: () => void;
+  onDragStop?: () => void;
 }
 
 export const IFrameYouTube: React.FC<IFrameYouTubeProps> = ({
@@ -25,9 +25,6 @@ export const IFrameYouTube: React.FC<IFrameYouTubeProps> = ({
     if (event.first === true) {
       onDragStart();
     }
-    // } else {
-    //   onDragStop();
-    // }
   };
   return (
     <div

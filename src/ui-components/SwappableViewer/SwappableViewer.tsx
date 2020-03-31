@@ -14,7 +14,7 @@ import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
 import { PatchworkPlugin } from '../../viewers/patch-work-plugin/src/index';
 //@ts-ignore
-import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
+import { YoutubeVideoSource } from '../YoutubeVideoSource/YoutubeVideoSource';
 
 function getEmbeddedAnnotations(canvas: any) {
   return (canvas.__jsonld.annotations || []).reduce((list: any, next: any) => {
@@ -40,18 +40,6 @@ function createRegionFromAnnotations(canvas: any) {
       viewportFocuses[0].target || viewportFocuses[0].on
     );
   }
-}
-
-function checkIfYouTubeVideo(canvas: any) {
-  let isVideo = false;
-  let url = '';
-  (canvas.__jsonld.items || []).map((item: any) => {
-    (item.items || []).filter((sub: any) => {
-      isVideo = sub.body.id.includes('youtube');
-      if (isVideo) url = sub.body.id;
-    });
-  });
-  return { url, isVideo };
 }
 
 interface SwappableViewerProps {
@@ -80,9 +68,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
 }) => {
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
   const [isZoomedOut, setIsZoomedOut] = useState(true);
-  const [annotations, setAnnotations] = useState([]);
-  const [video, setVideo] = useState(false);
-  const [videoUri, setVideoUri] = useState('');
   const [embeddedTour, setEmbeddedTour] = useState(false);
   let viewport: any;
 
@@ -107,20 +92,11 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   }, [canvas, region]);
 
   useEffect(() => {
-    const vid = checkIfYouTubeVideo(canvas);
-    setVideo(vid.isVideo);
-    setVideoUri(vid.url);
-    const describers = getEmbeddedAnnotations(canvas).filter(
-      (object: any) => object.motivation === 'describing'
-    );
-
-    setAnnotations(describers);
     setEmbeddedTour(
-      (canvas &&
+      canvas &&
         canvas.__jsonld &&
         canvas.__jsonld.behavior &&
-        canvas.__jsonld.behavior.includes('embedded-tour')) ||
-        describers.length > 1
+        canvas.__jsonld.behavior.includes('embedded-tour')
     );
   }, [canvas]);
 
@@ -160,8 +136,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     setIsZoomedOut(isZoomedOut);
   };
 
-  const isVideo = !!(video && videoUri);
-
   return (
     <div
       className={bem
@@ -184,19 +158,18 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           />
         </>
       ) : (
-        <SingleTileSource canvas={canvas}>
-          {!isVideo ? <FullscreenButton {...fullscreenProps} /> : <></>}
-          {!isVideo && isInteractive ? (
-            <ZoomButtons
-              onZoomOut={determineIsZoomedOut() ? null : zoomOut}
-              onZoomIn={isZoomedIn() ? null : zoomIn}
-            />
-          ) : (
-            <></>
-          )}
-          {isVideo ? (
-            <IFrameYouTube url={videoUri} />
-          ) : (
+        <>
+          <YoutubeVideoSource />
+          <SingleTileSource canvas={canvas}>
+            <FullscreenButton {...fullscreenProps} />
+            {isInteractive ? (
+              <ZoomButtons
+                onZoomOut={determineIsZoomedOut() ? null : zoomOut}
+                onZoomIn={isZoomedIn() ? null : zoomIn}
+              />
+            ) : (
+              <></>
+            )}
             <FullPageViewport
               onUpdateViewport={updateViewport}
               setRef={setViewport}
@@ -210,8 +183,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
                 initialBounds={region || regionFromAnnotations}
               />
             </FullPageViewport>
-          )}
-        </SingleTileSource>
+          </SingleTileSource>
+        </>
       )}
     </div>
   );
