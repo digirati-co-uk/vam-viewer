@@ -14,7 +14,7 @@ import Container from '../Container/Container';
 import TitlePanel from '../TitlePanel/TitlePanel';
 import AnnotationListView from '../AnnotationListView/AnnotationListView';
 import ExploreButton from '../ExploreButton/ExploreButton';
-import getCurrentScrollY from '../../utils/getCurrentScrollY';
+import getCurrentScrollY from '../../utility/getCurrentScrollY';
 import './Viewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import MobileAnnotationView from '../MobileAnnotationView/MobileAnnotationView.tsx';

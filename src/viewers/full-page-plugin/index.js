@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FullPageViewer from './components/Viewer/Viewer';
-import PopOutViewer from './components/PopOutViewer/PopOutViewer';
+import FullPageViewer from '../../ui-components/Viewer/Viewer';
+import PopOutViewer from '../../ui-components/PopOutViewer/PopOutViewer';
 
 const defaultConfiguration = {};
 

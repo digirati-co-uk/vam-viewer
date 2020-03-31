@@ -1,5 +1,5 @@
 import React from 'react';
-import { PopOutViewer } from '../../canvasPanelComponents/full-page-plugin/src/index';
+import { PopOutViewer } from '../../viewers/full-page-plugin';
 export default { title: 'Guided Tour| GuidedTour' };
 
 export const GuidedTour: React.FC = () => {

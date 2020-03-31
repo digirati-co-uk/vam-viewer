@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { functionOrMapChildren, withBemClass } from 'canvas-panel-beta/lib/legacy';
+import {
+  functionOrMapChildren,
+  withBemClass,
+} from 'canvas-panel-beta/lib/legacy';
 import './Container.scss';
-import getCurrentScrollY from '../../utils/getCurrentScrollY';
+import getCurrentScrollY from '../../utility/getCurrentScrollY';
 
 class Container extends Component {
   lastScrollY = -1;
