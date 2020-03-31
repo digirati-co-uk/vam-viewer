@@ -138,10 +138,10 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   };
 
   const updateViewport = (isZoomOut: any) => {
-    if (isZoomedOut === false && isZoomOut) {
+    if (isZoomOut === false && isZoomOut) {
       viewport.resetView();
     }
-    setIsZoomedOut(isZoomedOut);
+    setIsZoomedOut(isZoomOut);
   };
 
   const isVideo = !!(video && videoUri);
