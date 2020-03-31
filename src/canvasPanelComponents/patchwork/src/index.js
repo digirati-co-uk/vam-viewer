@@ -181,7 +181,6 @@ class PatchworkPlugin extends Component {
     if (isFullscreen || isMobileFullscreen) {
       classNames.push('fullscreen-active');
     }
-
     return classNames;
   }
 
@@ -207,6 +206,8 @@ class PatchworkPlugin extends Component {
       window.innerWidth < mobileBreakpoint ? mobileHeight : desktopHeight;
 
     const state = this.state;
+
+    console.log(cssClassMap);
     return (
       <div ref={this.setRef} style={{ color: 'unset' }}>
         <Fullscreen>

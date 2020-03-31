@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { PatchworkPlugin } from '../../canvasPanelComponents/patchwork/src/index';
 import './_pins.scss';
-export default { title: 'Pins Example| Pins' };
+export default { title: 'Pins Example | Pins' };
 
 export const PinsStory: React.FC = () => {
   const pinsEl = useRef('patchwork');

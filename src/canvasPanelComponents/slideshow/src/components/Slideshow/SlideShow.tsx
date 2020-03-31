@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Manifest,
   Fullscreen,
@@ -7,7 +7,6 @@ import {
   Responsive,
   // @ts-ignore
 } from 'canvas-panel-beta/lib/legacy';
-// import MobileViewer from '../MobileViewer/MobileViewer';
 import MobilePageView from '../MobilePageView/MobilePageView';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';

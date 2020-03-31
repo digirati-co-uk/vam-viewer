@@ -107,19 +107,27 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   }, [canvas, region]);
 
   useEffect(() => {
-    const video = checkIfYouTubeVideo(canvas);
-    setVideo(video.isVideo);
-    setVideoUri(video.url);
+    const vid = checkIfYouTubeVideo(canvas);
+    setVideo(vid.isVideo);
+    setVideoUri(vid.url);
     const describers = getEmbeddedAnnotations(canvas).filter(
       (object: any) => object.motivation === 'describing'
     );
 
     setAnnotations(describers);
-    setEmbeddedTour(
-      canvas &&
+    console.log(
+      (canvas &&
         canvas.__jsonld &&
         canvas.__jsonld.behavior &&
-        canvas.__jsonld.behavior.includes('embedded-tour')
+        canvas.__jsonld.behavior.includes('embedded-tour')) ||
+        describers.length > 1
+    );
+    setEmbeddedTour(
+      (canvas &&
+        canvas.__jsonld &&
+        canvas.__jsonld.behavior &&
+        canvas.__jsonld.behavior.includes('embedded-tour')) ||
+        describers.length > 1
     );
   }, [canvas]);
 
