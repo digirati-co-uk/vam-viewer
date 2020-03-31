@@ -131,9 +131,6 @@ export const PatchworkEmbed: React.FC<{
     viewport.current.resetView(getAnimationSpeed('onClose'));
   };
 
-  console.log('patch work', canvas ? canvas.index : null);
-  console.log(canvas ? canvas.id : null);
-
   return (
     <Bem
       prefix="patchwork-"
