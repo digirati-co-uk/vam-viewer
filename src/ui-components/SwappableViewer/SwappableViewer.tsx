@@ -9,6 +9,7 @@ import {
   // @ts-ignore
 } from 'canvas-panel-beta/lib/legacy';
 
+
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
@@ -40,6 +41,7 @@ function createRegionFromAnnotations(canvas: any) {
       viewportFocuses[0].target || viewportFocuses[0].on
     );
   }
+  return null;
 }
 
 interface SwappableViewerProps {
@@ -164,7 +166,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
       ) : (
         <>
           <YoutubeVideoSource />
-          <SingleTileSource canvas={canvas}>
+          <SingleTileSource manifest={manifest} canvas={canvas}>
             <FullscreenButton {...fullscreenProps} />
             {isInteractive ? (
               <ZoomButtons

@@ -29,7 +29,7 @@ import {
   FullPageViewport,
   Bem,
   withBemClass,
-} from '@canvas-panel/core';
+} from 'canvas-panel-beta/lib/legacy';
 
 const defaultConfiguration = {
   cssClassPrefix: '',

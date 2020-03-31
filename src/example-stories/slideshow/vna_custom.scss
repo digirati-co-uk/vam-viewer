@@ -88,6 +88,16 @@
   unicode-range: U+0030-0039;
 }
 
+html, body {
+  font-family: The Sans, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-style: normal;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
 $vna-colour-blue: #5bb4f9;
 $vna-colour-lime: #dbde0e;
 $vna-colour-orange: #ffac3c;
