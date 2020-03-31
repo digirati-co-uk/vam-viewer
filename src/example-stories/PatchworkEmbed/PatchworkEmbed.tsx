@@ -147,7 +147,10 @@ export const PatchworkEmbed: React.FC<{
           }
           setRef={(ref: any) => (viewport.current = ref)}
         >
-          <SingleTileSource viewportController={true}>
+          <SingleTileSource
+            // @ts-ignore
+            viewportController={true}
+          >
             <OpenSeadragonViewport>
               <OpenSeadragonViewer
                 useMaxDimensions={true}
@@ -166,9 +169,10 @@ export const PatchworkEmbed: React.FC<{
             // @ts-ignore
             // ratioFromMaxWidth={1000}
             growthStyle={growthStyle as any}
-            bemModifiers={anno => ({
+            bemModifiers={(anno: Annotation) => ({
               selected: annotation ? annotation.id === anno.id : false,
             })}
+            // @ts-ignore
             onClickAnnotation={onClickAnnotation}
           />
 
