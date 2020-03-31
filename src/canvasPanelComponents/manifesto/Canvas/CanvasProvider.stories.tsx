@@ -22,6 +22,7 @@ const MinimumViableViewerInner = () => {
       <ul>
         <li>
           <CanvasNavigation
+            // @ts-ignore
             dispatch={(action: any) => {
               switch (action.type) {
                 case 'NEXT_CANVAS':

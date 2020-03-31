@@ -156,7 +156,12 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
       ) : (
         <>
           <YoutubeVideoSource />
-          <SingleTileSource manifest={manifest} canvas={canvas}>
+
+          <SingleTileSource
+            // @ts-ignore
+            manifest={manifest}
+            canvas={canvas}
+          >
             <FullscreenButton {...fullscreenProps} />
             {isInteractive ? (
               <ZoomButtons

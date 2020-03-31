@@ -7,11 +7,13 @@ import { useSwipeable } from 'react-swipeable';
 // this is a hook to listen for swipes
 
 import './MobileAnnotationView.scss';
+import { Annotation } from 'manifesto.js';
+import { Selector } from 'canvas-panel-beta/lib/utility/annotation-selector';
 
 interface MobileAnnotationProps {
   animationFramePadding: number;
   disabled: boolean;
-  annotations: Array<any>;
+  annotations: Array<{ annotation: Annotation; on: { selector: Selector } }>;
   viewport: any;
   bem: any;
   children: any;
@@ -42,11 +44,14 @@ const MobileAnnotationView: React.FC<MobileAnnotationProps> = ({
     if (index === 0) {
       viewport.resetView();
     } else {
-      const { x, y, width, height } = annotations[index - 1].on.selector;
-      viewport.goToRect(
-        { x, y, width, height: height * 2 },
-        animationFramePadding
-      );
+      const selector = annotations[index - 1].on.selector;
+      if (selector) {
+        const { x, y, width, height } = selector;
+        viewport.goToRect(
+          { x, y, width, height: height ? height * 2 : height },
+          animationFramePadding
+        );
+      }
     }
     setCurrent(index);
   };
@@ -74,7 +79,7 @@ const MobileAnnotationView: React.FC<MobileAnnotationProps> = ({
     );
   };
 
-  const renderAnnotation = (annotation: object, next: object) => {
+  const renderAnnotation = (annotation: Annotation, next?: Annotation) => {
     return (
       <div className={bem.element('annotation-panel').modifiers({ disabled })}>
         <AnnotationDetail annotation={annotation} />
@@ -94,7 +99,7 @@ const MobileAnnotationView: React.FC<MobileAnnotationProps> = ({
 
   const annotation = current === 0 ? null : annotations[current - 1].annotation;
 
-  const next = annotations[current] ? annotations[current].annotation : null;
+  const next = annotations[current] ? annotations[current].annotation : undefined;
 
   return (
     <div
