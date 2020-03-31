@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   FullPageViewport,
   withBemClass,
@@ -66,8 +66,9 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
 }) => {
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
   const [isZoomedOut, setIsZoomedOut] = useState(true);
+  const [isZoomedIn, setIsZoomedIn] = useState(true);
   const [embeddedTour, setEmbeddedTour] = useState(false);
-  let viewport: any;
+  const [viewport, _setViewport] = useState<any>();
 
   const osdOptions = {
     visibilityRatio: 1,
@@ -79,7 +80,9 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
 
   useEffect(() => {
     if (region) {
-      viewport.goToRect(region, 0, 0.0000001);
+      if (viewport) {
+        viewport.goToRect(region, 0, 0.0000001);
+      }
     } else {
       const _region = createRegionFromAnnotations(canvas);
       if (_region) {
@@ -87,7 +90,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canvas, region]);
+  }, [canvas, region, viewport]);
 
   useEffect(() => {
     const describers = getEmbeddedAnnotations(canvas).filter(
@@ -103,24 +106,10 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   }, [canvas]);
 
   const setViewport = (view: any) => {
-    viewport = view;
-    if (viewport && (region || regionFromAnnotations)) {
-      viewport.goToRect(region || regionFromAnnotations, 0, 0);
+    _setViewport(view);
+    if (view && (region || regionFromAnnotations)) {
+      view.goToRect(region || regionFromAnnotations, 0, 0);
     }
-  };
-
-  const isZoomedIn = () => {
-    if (viewport) {
-      return viewport.getMaxZoom() <= viewport.getZoom();
-    }
-    return true;
-  };
-
-  const determineIsZoomedOut = () => {
-    if (viewport) {
-      return viewport.getMinZoom() >= viewport.getZoom();
-    }
-    return true;
   };
 
   const zoomOut = () => {
@@ -131,11 +120,19 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     viewport.zoomIn();
   };
 
-  const updateViewport = (isZoomOut: any) => {
-    if (isZoomedOut === false && isZoomedOut) {
-      viewport.resetView();
+  const updateViewport = (viewer: any) => {
+    const newIsZoomedIn = viewport.getMaxZoom() <= viewport.getZoom();
+    if (newIsZoomedIn !== isZoomedIn) {
+      setIsZoomedIn(newIsZoomedIn);
     }
-    setIsZoomedOut(isZoomedOut);
+
+    const newIsZoomedOut = viewport.getMinZoom() >= viewport.getZoom();
+    if (newIsZoomedOut !== isZoomedOut) {
+      if (!isZoomedOut && !regionFromAnnotations) {
+        viewport.resetView();
+      }
+      setIsZoomedOut(newIsZoomedOut);
+    }
   };
 
   return (
@@ -160,8 +157,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
             <FullscreenButton {...fullscreenProps} />
             {isInteractive ? (
               <ZoomButtons
-                onZoomOut={determineIsZoomedOut() ? null : zoomOut}
-                onZoomIn={isZoomedIn() ? null : zoomIn}
+                onZoomOut={isZoomedOut ? null : zoomOut}
+                onZoomIn={isZoomedIn ? null : zoomIn}
               />
             ) : (
               <></>
