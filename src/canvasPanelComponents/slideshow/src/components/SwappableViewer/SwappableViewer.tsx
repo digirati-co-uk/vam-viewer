@@ -5,17 +5,15 @@ import {
   withBemClass,
   OpenSeadragonViewport,
   parseSelectorTarget,
-  // @ts-ignore
-} from '@canvas-panel/core';
+} from 'canvas-panel-beta/lib/legacy';
 
-import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
+import { SingleTileSource } from 'canvas-panel-beta/lib/legacy';
 
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
 import { PatchworkPlugin } from '../../../../patchwork/src/index';
-//@ts-ignore
-import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
+import { YoutubeVideoSource } from '../../../../../components/YoutubeVideoSource';
 
 function getEmbeddedAnnotations(canvas: any) {
   return (canvas.__jsonld.annotations || []).reduce((list: any, next: any) => {
@@ -41,6 +39,7 @@ function createRegionFromAnnotations(canvas: any) {
       viewportFocuses[0].target || viewportFocuses[0].on
     );
   }
+  return null;
 }
 
 interface SwappableViewerProps {
@@ -69,9 +68,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
 }) => {
   const [regionFromAnnotations, setRegionFromAnnotations] = useState<any>();
   const [isZoomedOut, setIsZoomedOut] = useState(true);
-  const [annotations, setAnnotations] = useState([]);
-  const [video, setVideo] = useState(false);
-  const [videoUri, setVideoUri] = useState('');
   const [embeddedTour, setEmbeddedTour] = useState(false);
   let viewport: any;
 
@@ -99,7 +95,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     const describers = getEmbeddedAnnotations(canvas).filter(
       (object: any) => object.motivation === 'describing'
     );
-    setAnnotations(describers);
     setEmbeddedTour(
       canvas &&
         canvas.__jsonld &&
@@ -144,8 +139,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     setIsZoomedOut(isZoomOut);
   };
 
-  const isVideo = !!(video && videoUri);
-
   return (
     <div
       className={bem
@@ -168,26 +161,18 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           />
         </>
       ) : (
-        <SingleTileSource
-          manifest={manifest}
-          canvas={canvas}
-          notifyVideo={(bool: boolean, uri: string) => {
-            setVideo(bool);
-            setVideoUri(uri);
-          }}
-        >
-          {!isVideo ? <FullscreenButton {...fullscreenProps} /> : <></>}
-          {!isVideo && isInteractive ? (
-            <ZoomButtons
-              onZoomOut={determineIsZoomedOut() ? null : zoomOut}
-              onZoomIn={isZoomedIn() ? null : zoomIn}
-            />
-          ) : (
-            <></>
-          )}
-          {isVideo ? (
-            <IFrameYouTube url={videoUri} />
-          ) : (
+        <>
+          <YoutubeVideoSource />
+          <SingleTileSource manifest={manifest} canvas={canvas}>
+            <FullscreenButton {...fullscreenProps} />
+            {isInteractive ? (
+              <ZoomButtons
+                onZoomOut={determineIsZoomedOut() ? null : zoomOut}
+                onZoomIn={isZoomedIn() ? null : zoomIn}
+              />
+            ) : (
+              <></>
+            )}
             <FullPageViewport
               onUpdateViewport={updateViewport}
               setRef={setViewport}
@@ -201,8 +186,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
                 initialBounds={region || regionFromAnnotations}
               />
             </FullPageViewport>
-          )}
-        </SingleTileSource>
+          </SingleTileSource>
+        </>
       )}
     </div>
   );

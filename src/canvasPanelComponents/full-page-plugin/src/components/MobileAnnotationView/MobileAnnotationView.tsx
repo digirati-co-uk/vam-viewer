@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // @ts-ignore
-import { AnnotationDetail, withBemClass } from '@canvas-panel/core';
+import { AnnotationDetail, withBemClass } from 'canvas-panel-beta/lib/legacy';
 import AnnotationNavigation from '../AnnotationNavigation/AnnotationNavigation';
 
 import { useSwipeable } from 'react-swipeable';

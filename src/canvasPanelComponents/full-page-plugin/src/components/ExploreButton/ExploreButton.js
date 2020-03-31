@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { withBemClass } from '@canvas-panel/core';
+import { withBemClass } from 'canvas-panel-beta/lib/legacy';
 import './ExploreButton.scss';
-import { Responsive } from '@canvas-panel/core';
+import { Responsive } from 'canvas-panel-beta/lib/legacy';
 
 class ExploreButton extends Component {
   render() {

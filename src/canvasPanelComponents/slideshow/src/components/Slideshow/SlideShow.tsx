@@ -6,7 +6,7 @@ import {
   withBemClass,
   Responsive,
   // @ts-ignore
-} from '@canvas-panel/core';
+} from 'canvas-panel-beta/lib/legacy';
 // import MobileViewer from '../MobileViewer/MobileViewer';
 import MobilePageView from '../MobilePageView/MobilePageView';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
@@ -129,7 +129,9 @@ const SlideShow: React.FC<SlideShowProps> = ({
                             <SimpleSlideTransition id={currentIndex}>
                               <Slide
                                 fullscreenProps={fullscreenProps}
-                                behaviors={canvas.__jsonld.behavior || []}
+                                behaviors={
+                                  canvas ? canvas.__jsonld.behavior || [] : []
+                                }
                                 manifest={manifest}
                                 canvas={canvas}
                                 region={region}

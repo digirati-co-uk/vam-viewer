@@ -4,8 +4,8 @@ import {
   withBemClass,
   OpenSeadragonViewport,
   FullPageViewport,
-} from '@canvas-panel/core';
-import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
+  SingleTileSource,
+} from 'canvas-panel-beta/lib/legacy';
 import './MobileViewer.scss';
 import { InfoButton } from '../Icons/InfoButton.tsx';
 import { CloseIcon } from '../Icons/CloseIcon.tsx';

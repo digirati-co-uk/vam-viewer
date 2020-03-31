@@ -5,10 +5,10 @@ import { useSwipeable } from 'react-swipeable';
 
 interface IFrameYouTubeProps {
   url: string;
-  onNext: () => void;
-  onPrevious: () => void;
-  onDragStart: () => void;
-  onDragStop: () => void;
+  onNext?: () => void;
+  onPrevious?: () => void;
+  onDragStart?: () => void;
+  onDragStop?: () => void;
 }
 
 export const IFrameYouTube: React.FC<IFrameYouTubeProps> = ({

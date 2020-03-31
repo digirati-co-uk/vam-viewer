@@ -1,6 +1,6 @@
 import React from 'react';
 // @ts-ignore
-import { CanvasNavigation, LocaleString } from '@canvas-panel/core';
+import { CanvasNavigation, LocaleString } from 'canvas-panel-beta/lib/legacy';
 import { ManifestProvider, useManifest } from '../Manifest/ManifestProvider';
 import { CanvasProvider, useCanvas } from './CanvasProvider';
 

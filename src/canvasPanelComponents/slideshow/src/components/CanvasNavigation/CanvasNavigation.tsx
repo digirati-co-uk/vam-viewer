@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // @ts-ignore
-import { withBemClass } from '@canvas-panel/core';
+import { withBemClass } from 'canvas-panel-beta/lib/legacy';
 import withLocation from '../withLocation/withLocation';
 import queryString from 'query-string';
 
