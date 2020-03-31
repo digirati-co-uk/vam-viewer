@@ -83,6 +83,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
               <RangeNavigationProvider>
                 {({ ...rangeProps }) => {
                   const {
+                    // @ts-ignore
                     manifest,
                     canvas,
                     canvasList,
@@ -130,7 +131,9 @@ const SlideShow: React.FC<SlideShowProps> = ({
                             <SimpleSlideTransition id={currentIndex}>
                               <Slide
                                 fullscreenProps={fullscreenProps}
-                                behaviors={canvas.__jsonld.behavior || []}
+                                behaviors={
+                                  (canvas && canvas.__jsonld.behavior) || []
+                                }
                                 manifest={manifest}
                                 canvas={canvas}
                                 region={region}

@@ -22,16 +22,16 @@ const MinimumViableViewerInner = () => {
       <ul>
         <li>
           <CanvasNavigation
-            dispatch={(action: any) => {
-              switch (action.type) {
-                case 'NEXT_CANVAS':
-                  nextCanvas();
-                  break;
-                case 'PREV_CANVAS':
-                  prevCanvas();
-                  break;
-              }
-            }}
+          // dispatch={(action: any) => {
+          //   switch (action.type) {
+          //     case 'NEXT_CANVAS':
+          //       nextCanvas();
+          //       break;
+          //     case 'PREV_CANVAS':
+          //       prevCanvas();
+          //       break;
+          //   }
+          // }}
           />
         </li>
         <li>

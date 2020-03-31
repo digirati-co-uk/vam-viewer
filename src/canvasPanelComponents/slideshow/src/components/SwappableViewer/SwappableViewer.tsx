@@ -30,7 +30,7 @@ function getEmbeddedAnnotations(canvas: any) {
     return list;
   }, []);
 }
-
+// @ts-ignore
 function createRegionFromAnnotations(canvas: any) {
   const viewportFocuses = getEmbeddedAnnotations(canvas).filter(
     (annotation: any) => annotation.motivation === 'layout-viewport-focus'
@@ -115,13 +115,6 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     );
 
     setAnnotations(describers);
-    console.log(
-      (canvas &&
-        canvas.__jsonld &&
-        canvas.__jsonld.behavior &&
-        canvas.__jsonld.behavior.includes('embedded-tour')) ||
-        describers.length > 1
-    );
     setEmbeddedTour(
       (canvas &&
         canvas.__jsonld &&

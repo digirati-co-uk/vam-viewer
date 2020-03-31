@@ -201,6 +201,7 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   );
 };
 
+//@ts-ignore
 const navigation = withBemClass('canvas-navigation')(CanvasNavigation);
 
 export default withLocation(navigation);

@@ -1,7 +1,7 @@
 import { CanvasProvider } from './CanvasProvider';
 import { Manifest } from '../Manifest/Manifest';
 // @ts-ignore
-import { CanvasNavigation, LocaleString } from 'canvas-panel-beta/lib/legacy';
+import { CanvasNavigation, LocaleString } from '@canvas-panel/core';
 import React from 'react';
 
 export default { title: 'Legacy | Canvas Provider' };
