@@ -1,7 +1,7 @@
-import { createContext } from '../../utility/create-context';
+import { createContext } from '../../../utility/create-context';
 import { Manifest } from 'manifesto.js';
 import React, { useEffect, useState } from 'react';
-import { parseManifest } from '../../utility/parse-manifest';
+import { parseManifest } from '../../../utility/parse-manifest';
 
 const [useManifest, InternalManifestProvider] = createContext<Manifest>();
 

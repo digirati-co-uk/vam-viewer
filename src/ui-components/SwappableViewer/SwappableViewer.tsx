@@ -12,7 +12,7 @@ import {
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';
-import { PatchworkPlugin } from '../../../../../viewers/patch-work-plugin/src/index';
+import { PatchworkPlugin } from '../../viewers/patch-work-plugin/src/index';
 //@ts-ignore
 import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
 
@@ -154,10 +154,10 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   };
 
   const updateViewport = (isZoomOut: any) => {
-    if (isZoomOut === false && isZoomOut) {
+    if (isZoomedOut === false && isZoomOut) {
       viewport.resetView();
     }
-    setIsZoomedOut(isZoomOut);
+    setIsZoomedOut(isZoomedOut);
   };
 
   const isVideo = !!(video && videoUri);

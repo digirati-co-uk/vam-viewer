@@ -1,5 +1,5 @@
 import { Canvas, Sequence } from 'manifesto.js';
-import { createContext } from '../../utility/create-context';
+import { createContext } from '../../../utility/create-context';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useManifest } from '../Manifest/ManifestProvider';
 

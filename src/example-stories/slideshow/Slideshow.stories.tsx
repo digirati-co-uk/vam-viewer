@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 //@ts-ignore
-import { SlideShow } from '../../canvasPanelComponents/slideshow/src/index.js';
+import { SlideShow } from '../../viewers/slideshow/index.js';
 export default { title: 'Slideshow | Slideshow', decorators: [withKnobs] };
 import { withKnobs, text, boolean, color } from '@storybook/addon-knobs';
 

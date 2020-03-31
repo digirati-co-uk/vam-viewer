@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
+import { withBemClass } from 'canvas-panel-beta/lib/legacy';
 import './ZoomButtons.scss';
-import { Responsive, withBemClass } from 'canvas-panel-beta/lib/legacy';
 
 class ZoomButtons extends Component {
   render() {
-    const { bem, style, onZoomIn, onZoomOut } = this.props;
-
+    const { bem, onZoomIn, onZoomOut, right } = this.props;
     return (
-      <div
-        className={bem.modifiers({
-          mobile: Responsive.isMobile(),
-        })}
-        style={style}
-      >
+      <div className={bem.modifiers({ right })}>
         <button
-          className={bem.element('button').modifier('in')}
           onClick={onZoomIn}
+          className={bem.element('button').modifiers({
+            in: true,
+            disabled: !onZoomIn,
+          })}
+          title="Zoom in"
         >
           <svg
             viewBox="0 0 400 400"
@@ -25,8 +23,8 @@ class ZoomButtons extends Component {
           >
             <path fill="none" d="M-1-1h582v402H-1z" />
             <g>
-              <ellipse ry="200" rx="200" cy="200.413" cx="200" fill="#fff" />
-              <ellipse rx="100" ry="100" cy="36" cx="943.5" fill="#fff" />
+              <ellipse ry="200" rx="200" cy="200.413" cx="200" fill="#EAEAEA" />
+              <ellipse rx="100" ry="100" cy="36" cx="943.5" fill="#EAEAEA" />
               <path
                 d="M100 200h200M200 100v200"
                 fill="none"
@@ -37,8 +35,12 @@ class ZoomButtons extends Component {
           </svg>
         </button>
         <button
-          className={bem.element('button').modifier('out')}
           onClick={onZoomOut}
+          className={bem.element('button').modifiers({
+            out: true,
+            disabled: !onZoomOut,
+          })}
+          title="Zoom out"
         >
           <svg
             viewBox="0 0 400 400"
@@ -48,8 +50,8 @@ class ZoomButtons extends Component {
           >
             <path fill="none" d="M-1-1h582v402H-1z" />
             <g>
-              <ellipse ry="200" rx="200" cy="200.413" cx="200" fill="#fff" />
-              <ellipse rx="100" ry="100" cy="36" cx="943.5" fill="#fff" />
+              <ellipse ry="200" rx="200" cy="200.413" cx="200" fill="#EAEAEA" />
+              <ellipse rx="100" ry="100" cy="36" cx="943.5" fill="#EAEAEA" />
               <path
                 d="M100 200h200M200 300"
                 fill="none"
@@ -63,5 +65,4 @@ class ZoomButtons extends Component {
     );
   }
 }
-
 export default withBemClass('zoom-buttons')(ZoomButtons);

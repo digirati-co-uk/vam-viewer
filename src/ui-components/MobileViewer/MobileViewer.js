@@ -11,7 +11,7 @@ import { InfoButton } from '../Icons/InfoButton.tsx';
 import { CloseIcon } from '../Icons/CloseIcon.tsx';
 import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
 import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
-import { PatchworkPlugin } from '../../../../../viewers/patch-work-plugin/src/index';
+import { PatchworkPlugin } from '../../viewers/patch-work-plugin/src/index';
 
 const ExitFullscreenIcon = ({ className }) => (
   <svg
