@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { PatchworkPlugin } from '../../canvasPanelComponents/patchwork/src/index';
+import { PatchworkPlugin } from '../../viewers/patch-work-plugin/src/index';
 import './_pins.scss';
 export default { title: 'Pins Example | Pins' };
 
