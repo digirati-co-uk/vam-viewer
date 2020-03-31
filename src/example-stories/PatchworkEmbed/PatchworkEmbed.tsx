@@ -178,6 +178,7 @@ export const PatchworkEmbed: React.FC<{
               closeText={closeText}
               annotation={annotation}
               onClose={onClose}
+              // @ts-ignore
               cssClassMap={{
                 'annotation-detail': 'patchwork-annotation-detail',
               }}
