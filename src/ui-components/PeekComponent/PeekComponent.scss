@@ -1,5 +1,7 @@
 .peek-component {
   position: fixed;
+  pointer-events: none;
+  overflow: hidden;
   top: 0;
   bottom: 0;
   left: 0;
@@ -19,6 +21,7 @@
   }
 
   &__inner {
+    pointer-events: auto;
     flex: 1;
     position: relative;
     height: 100%;

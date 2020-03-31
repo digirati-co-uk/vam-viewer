@@ -1,4 +1,8 @@
 .mobile-viewer {
+
+  &--isFullScreen * {
+    background: red !important;
+  }
   height: 100%;
 
   &__inner {

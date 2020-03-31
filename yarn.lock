@@ -5406,10 +5406,10 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000989, can
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001031.tgz#76f1bdd39e19567b855302f65102d9a8aaad5930"
   integrity sha512-DpAP5a1NGRLgYfaNCaXIRyGARi+3tJA2quZXNNA1Du26VyVkqvy2tznNu5ANyN1Y5aX44QDotZSVSUSi2uMGjg==
 
-canvas-panel-beta@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/canvas-panel-beta/-/canvas-panel-beta-1.0.7.tgz#6baa460d521d7ede9bfc8f9615b2cfca079ca6d1"
-  integrity sha512-G4ZuxIr/HjfpkrFsxGp4fgQrdQXxLZil5tUZbqexFunhIaq+Qi83WEOsm/YPkVrBsSWdPvF2Qx/+OZPtqq6mNQ==
+canvas-panel-beta@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/canvas-panel-beta/-/canvas-panel-beta-1.1.2.tgz#6fb7ef9a8387d26249a46448181d99894473d357"
+  integrity sha512-hhz4zKJX1+tQM6PGs9XepkdvzyAAyK/eo1W+q0hwL3ywICO2Nb4ee9cVXhdG8e1q2MuqGkUWdDLv7fWlZfQ35w==
   dependencies:
     "@canvas-panel/core" "^0.2.0"
     "@storybook/react" "^5.2.4"
