@@ -131,11 +131,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                               <Slide
                                 fullscreenProps={fullscreenProps}
                                 behaviors={
-<<<<<<< HEAD:src/ui-components/Slideshow/SlideShow.tsx
-                                  (canvas && canvas.__jsonld.behavior) || []
-=======
                                   canvas ? canvas.__jsonld.behavior || [] : []
->>>>>>> eb36618... Added canvas panel beta:src/canvasPanelComponents/slideshow/src/components/Slideshow/SlideShow.tsx
                                 }
                                 manifest={manifest}
                                 canvas={canvas}
