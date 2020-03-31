@@ -6,7 +6,7 @@ import {
   withBemClass,
   Responsive,
   // @ts-ignore
-} from '@canvas-panel/core';
+} from 'canvas-panel-beta/lib/legacy';
 // import MobileViewer from '../MobileViewer/MobileViewer';
 import MobilePageView from '../MobilePageView/MobilePageView';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';

@@ -5,10 +5,9 @@ import {
   withBemClass,
   OpenSeadragonViewport,
   parseSelectorTarget,
+  SingleTileSource,
   // @ts-ignore
-} from '@canvas-panel/core';
-
-import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
+} from 'canvas-panel-beta/lib/legacy';
 
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
@@ -41,6 +40,18 @@ function createRegionFromAnnotations(canvas: any) {
       viewportFocuses[0].target || viewportFocuses[0].on
     );
   }
+}
+
+function checkIfYouTubeVideo(canvas: any) {
+  let isVideo = false;
+  let url = '';
+  (canvas.__jsonld.items || []).map((item: any) => {
+    (item.items || []).filter((sub: any) => {
+      isVideo = sub.body.id.includes('youtube');
+      if (isVideo) url = sub.body.id;
+    });
+  });
+  return { url, isVideo };
 }
 
 interface SwappableViewerProps {
@@ -96,9 +107,13 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   }, [canvas, region]);
 
   useEffect(() => {
+    const video = checkIfYouTubeVideo(canvas);
+    setVideo(video.isVideo);
+    setVideoUri(video.url);
     const describers = getEmbeddedAnnotations(canvas).filter(
       (object: any) => object.motivation === 'describing'
     );
+
     setAnnotations(describers);
     setEmbeddedTour(
       canvas &&
@@ -168,14 +183,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
           />
         </>
       ) : (
-        <SingleTileSource
-          manifest={manifest}
-          canvas={canvas}
-          notifyVideo={(bool: boolean, uri: string) => {
-            setVideo(bool);
-            setVideoUri(uri);
-          }}
-        >
+        <SingleTileSource canvas={canvas}>
           {!isVideo ? <FullscreenButton {...fullscreenProps} /> : <></>}
           {!isVideo && isInteractive ? (
             <ZoomButtons

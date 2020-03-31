@@ -4,8 +4,8 @@ import {
   withBemClass,
   OpenSeadragonViewport,
   FullPageViewport,
-} from '@canvas-panel/core';
-import { SingleTileSource } from '../../../../core/components/SingleTileSource/SingleTileSource';
+  SingleTileSource,
+} from 'canvas-panel-beta/lib/legacy';
 import './MobileViewer.scss';
 import { InfoButton } from '../Icons/InfoButton.tsx';
 import { CloseIcon } from '../Icons/CloseIcon.tsx';
@@ -71,6 +71,18 @@ function getEmbeddedAnnotations(canvas) {
   }, []);
 }
 
+function checkIfYouTubeVideo(canvas) {
+  let isVideo = false;
+  let url = '';
+  (canvas.__jsonld.items || []).map(item => {
+    (item.items || []).filter(sub => {
+      isVideo = sub.body.id.includes('youtube');
+      if (isVideo) url = sub.body.id;
+    });
+  });
+  return { url, isVideo };
+}
+
 class MobileViewer extends Component {
   static defaultProps = {
     applyOffset: () => null,
@@ -92,17 +104,29 @@ class MobileViewer extends Component {
 
   static getDerivedStateFromProps(props, state) {
     let annotations;
+    let video = false;
+    let videoUri = '';
     if (props.canvas) {
       annotations = getEmbeddedAnnotations(props.canvas).filter(
         anno => anno.motivation === 'describing'
       );
+      const vid = checkIfYouTubeVideo(props.canvas);
+      video = vid.isVideo;
+      videoUri = vid.url;
     }
+
     const tour =
       props.canvas &&
       props.canvas.__jsonld &&
       props.canvas.__jsonld.behavior &&
       props.canvas.__jsonld.behavior.includes('embedded-tour');
-    return { ...state, annotations: annotations, embeddedTour: tour };
+    return {
+      ...state,
+      annotations: annotations,
+      embeddedTour: tour,
+      video,
+      videoUri,
+    };
   }
 
   onConstrain = (viewer, x, y) => {
@@ -223,12 +247,7 @@ class MobileViewer extends Component {
                   )}
                 </>
               ) : (
-                <SingleTileSource
-                  {...props}
-                  notifyVideo={(bool, videoUri) =>
-                    this.setState({ video: bool, videoUri: videoUri })
-                  }
-                >
+                <SingleTileSource {...props}>
                   {current ? (
                     <Attribution bem={bem} hidden={!current || dragging}>
                       {attributionLabel} {attribution}

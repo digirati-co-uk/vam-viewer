@@ -4,15 +4,7 @@ import * as Manifesto from 'manifesto.js';
 import getDataUriFromCanvas from '../../utility/getDataUriFromCanvas';
 import functionOrMapChildren, {
   FunctionOrMapChildrenType,
-} from '../../utility/functionOrMapChildren';
-
-// const Props = {
-//   preLoad: any => any,
-//   manifest: Manifesto.Manifest,
-//   canvas: Manifesto.Canvas,
-//   children: any,
-//   fallbackWidth: number,
-// };
+} from 'canvas-panel-beta/lib/legacy';
 
 class SingleTileSource extends Component {
   state = {
@@ -21,8 +13,6 @@ class SingleTileSource extends Component {
   };
 
   static propTypes = {
-    // canvas: PropTypes.instanceOf(Manifesto.Canvas),
-    // manifest: PropTypes.instanceOf(Manifesto.Manifest),
     preLoad: PropTypes.func,
     children: FunctionOrMapChildrenType,
     fallbackWidth: PropTypes.number,
@@ -33,6 +23,7 @@ class SingleTileSource extends Component {
   };
 
   componentWillMount() {
+    debugger;
     const imageUri = getDataUriFromCanvas(this.props.canvas);
     this.updateImageUri(imageUri);
   }

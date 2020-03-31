@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LocaleString, withBemClass } from '@canvas-panel/core';
+import { LocaleString, withBemClass } from 'canvas-panel-beta/lib/legacy';
 import './CanvasDetail.scss';
 
 class CanvasDetail extends Component {

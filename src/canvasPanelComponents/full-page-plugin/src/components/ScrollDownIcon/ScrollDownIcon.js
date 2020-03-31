@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withBemClass } from '@canvas-panel/core';
+import { withBemClass } from 'canvas-panel-beta/lib/legacy';
 import './ScrollDownIcon.scss';
 import getCurrentScrollY from '../../utils/getCurrentScrollY';
 

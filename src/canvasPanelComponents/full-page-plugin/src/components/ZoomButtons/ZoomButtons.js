@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ZoomButtons.scss';
-import { Responsive, withBemClass } from '@canvas-panel/core';
+import { Responsive, withBemClass } from 'canvas-panel-beta/lib/legacy';
 
 class ZoomButtons extends Component {
   render() {

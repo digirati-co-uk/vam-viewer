@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FlipMove from 'react-flip-move';
-import { withBemClass } from '@canvas-panel/core';
+import { withBemClass } from 'canvas-panel-beta/lib/legacy';
 import './PeekComponent.scss';
 
 class PeekComponent extends Component {
