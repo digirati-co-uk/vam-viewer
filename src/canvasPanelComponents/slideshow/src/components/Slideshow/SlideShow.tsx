@@ -122,6 +122,8 @@ const SlideShow: React.FC<SlideShowProps> = ({
                               .modifiers({ isMobile: qualifiesForMobile })}
                             onSwipedLeft={nextRange}
                             onSwipedRight={previousRange}
+                            onSwipedDown={() => {}}
+                            onSwipedUp={() => {}}
                             preventDefaultTouchmoveEvent={true}
                             trackMouse={true}
                           >
