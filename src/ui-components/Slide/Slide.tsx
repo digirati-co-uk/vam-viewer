@@ -81,7 +81,7 @@ const Slide: React.FC<SlideProps> = ({
     >
       <SwappableViewer
         fullscreenProps={fullscreenProps}
-        isInteractive={fullscreenProps.isFullscreen || !mobile}
+        isInteractive={true}
         manifest={manifest}
         canvas={canvas}
         region={region}
@@ -106,19 +106,7 @@ const Slide: React.FC<SlideProps> = ({
           ) =>
             mobile ? (
               <>
-                {open ? (
-                  renderInfoPanel(label, attribution, body)
-                ) : (
-                  <>
-                    {/* Can be added back in if needed */}
-                    {/* <div className={bem.element('overlay-floating')}>
-                      <p className={bem.element('required-statement')}>
-                        {attributionLabel}
-                        {attribution}
-                      </p>
-                    </div> */}
-                  </>
-                )}
+                {open ? renderInfoPanel(label, attribution, body) : <></>}
                 <InfoButton bem={bem} onClick={setOpen} />
               </>
             ) : (

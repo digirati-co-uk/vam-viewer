@@ -142,7 +142,6 @@ const SlideShow: React.FC<SlideShowProps> = ({
                                 backgroundColor={backgroundColor}
                                 mobile={qualifiesForMobile}
                                 manifestUri={manifestUri}
-
                               />
                             </SimpleSlideTransition>
                             <CanvasNavigation

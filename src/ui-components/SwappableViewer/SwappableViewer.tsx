@@ -75,8 +75,8 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     constrainDuringPan: true,
     showNavigator: false,
     immediateRender: false,
-    animationTime: .5,
-    blendTime: .3,
+    animationTime: 0.5,
+    blendTime: 0.3,
     preload: true,
   };
 
@@ -123,18 +123,17 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
   };
 
   const updateViewport = (viewer: any) => {
-    const newIsZoomedIn = viewport.getMaxZoom() <= viewport.getZoom();
-    if (newIsZoomedIn !== isZoomedIn) {
-      setIsZoomedIn(newIsZoomedIn);
-    }
-
-    const newIsZoomedOut = viewport.getMinZoom() >= viewport.getZoom();
-    if (newIsZoomedOut !== isZoomedOut) {
-      if (!isZoomedOut && !regionFromAnnotations) {
-        viewport.resetView();
-      }
-      setIsZoomedOut(newIsZoomedOut);
-    }
+    // const newIsZoomedIn = viewport.getMaxZoom() <= viewport.getZoom();
+    // if (newIsZoomedIn !== isZoomedIn) {
+    //   setIsZoomedIn(newIsZoomedIn);
+    // }
+    // const newIsZoomedOut = viewport.getMinZoom() >= viewport.getZoom();
+    // if (newIsZoomedOut !== isZoomedOut) {
+    //   if (!isZoomedOut && !regionFromAnnotations) {
+    //     viewport.resetView();
+    //   }
+    //   setIsZoomedOut(newIsZoomedOut);
+    // }
   };
 
   return (
