@@ -116,7 +116,7 @@ class Viewer extends Component {
                   <OpenSeadragonViewport
                     useMaxDimensions={true}
                     osdOptions={{
-                      immediateRender: false,
+                      immediateRender: true,
                       showNavigator: false,
                     }}
                   />

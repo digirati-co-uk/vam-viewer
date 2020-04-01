@@ -3,18 +3,32 @@
   background: #fff;
   top: 30px;
   left: 30px;
-  max-width: 320px;
   border-radius: 3px;
   padding: 15px;
   font-size: 14px;
-  max-height: 320px;
-  overflow-y: auto;
-  overflow-x: scroll;
   color: #000;
   z-index: 99999999;
-  .annotatedzoom-annotation-detail__image {
+  max-width: 320px;
+  @media (max-width: 479px) {
     max-width: 320px;
+    overflow-y: auto;
   }
+  max-height: 50vh;
+  .annotatedzoom-annotation-detail__image {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+}
+
+.patchwork-annotation-detail__content {
+  @media (max-width: 479px) {
+    overflow-y: hidden;
+  }
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  position: relative;
 }
 
 .patchwork-annotation-detail__label {
@@ -128,12 +142,17 @@
   border: none;
   cursor: pointer;
   line-height: 30px;
+  &:focus {
+    outline: none;
+  }
 }
 
 @media (max-width: 479px) {
   .patchwork-annotation-detail {
-    bottom: 30px;
+    bottom: 20px;
     top: auto;
+    left: 10px;
+    right: 10px;
   }
 }
 

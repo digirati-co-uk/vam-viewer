@@ -93,11 +93,11 @@ const SlideShow: React.FC<SlideShowProps> = ({
                     region,
                     goToRange,
                   } = rangeProps;
-
                   return (
                     <>
                       {qualifiesForMobile && isMobileFullScreen ? (
                         <MobilePageView
+                          isMobileFullScreen={isMobileFullScreen}
                           addressable={addressable}
                           id={id}
                           manifest={manifest}
@@ -126,13 +126,14 @@ const SlideShow: React.FC<SlideShowProps> = ({
                             onSwipedDown={() => {}}
                             onSwipedUp={() => {}}
                             preventDefaultTouchmoveEvent={true}
-                            trackMouse={true}
+                            trackMouse={false}
+                            trackTouch={false}
                           >
                             <SimpleSlideTransition id={currentIndex}>
                               <Slide
                                 fullscreenProps={fullscreenProps}
                                 behaviors={
-                                  (canvas && canvas.__jsonld.behavior) || []
+                                  canvas ? canvas.__jsonld.behavior || [] : []
                                 }
                                 manifest={manifest}
                                 canvas={canvas}
@@ -141,6 +142,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
                                 backgroundColor={backgroundColor}
                                 mobile={qualifiesForMobile}
                                 manifestUri={manifestUri}
+
                               />
                             </SimpleSlideTransition>
                             <CanvasNavigation

@@ -6,6 +6,7 @@ import queryString from 'query-string';
 
 import { ResetIcon } from '../Icons/Reset';
 import './CanvasNavigation.scss';
+import { BemBlockType } from 'canvas-panel-beta/lib/legacy/components/Bem/Bem';
 
 interface CanvasNavigationProps {
   previousRange: () => void;
@@ -13,7 +14,7 @@ interface CanvasNavigationProps {
   canvasList: Array<Object>;
   currentIndex: number;
   goToRange: (arg0: number) => void;
-  bem: string | Object;
+  bem: BemBlockType & string;
   hash: any;
   size: number;
   addressable: boolean;
@@ -146,18 +147,20 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
           goToRange(0);
         }}
         title="Reset slideshow"
-        className={bem
+        className={(bem
           // @ts-ignore
-          .element('reset')
-          .modifiers({ isFirstPage: currentIndex === 0 })}
+          .element('reset') as any).modifiers({
+          isFirstPage: currentIndex === 0,
+        })}
       >
         <ResetIcon />
       </button>
       <button
-        className={bem
+        className={(bem
           // @ts-ignore
-          .element('previous')
-          .modifiers({ isFirstPage: currentIndex === 0 })}
+          .element('previous') as any).modifiers({
+          isFirstPage: currentIndex === 0,
+        })}
         title="Previous slide"
         onClick={ev => {
           ev.preventDefault();
@@ -176,10 +179,11 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
         </svg>
       </button>
       <button
-        className={bem
+        className={(bem
           // @ts-ignore
-          .element('next')
-          .modifiers({ isLastPage: currentIndex === size - 1 })}
+          .element('next') as any).modifiers({
+          isLastPage: currentIndex === size - 1,
+        })}
         title="Next slide"
         onClick={ev => {
           ev.preventDefault();
