@@ -247,13 +247,6 @@ class MobileViewer extends Component {
                 ) : (
                   <SingleTileSource {...props}>
                     {current ? (
-                      <Attribution bem={bem} hidden={!current || dragging}>
-                        {attributionLabel} {attribution}
-                      </Attribution>
-                    ) : (
-                      <React.Fragment />
-                    )}
-                    {current ? (
                       <ExitFullscreen
                         bem={bem}
                         onClick={onExitFullscreen}
@@ -262,7 +255,7 @@ class MobileViewer extends Component {
                     ) : (
                       <React.Fragment />
                     )}
-                    {current && label ? (
+                    {current && (label || attribution) ? (
                       <InfoButton
                         bem={bem}
                         onClick={onOpen}
@@ -328,7 +321,7 @@ class MobileViewer extends Component {
                   </SingleTileSource>
                 )}
               </div>
-              {current && label ? (
+              {current && (label || attribution) ? (
                 <InfoPanel
                   bem={bem}
                   hidden={dragging === true || !isOpen}
