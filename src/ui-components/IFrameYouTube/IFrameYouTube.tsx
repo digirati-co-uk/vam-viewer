@@ -28,14 +28,19 @@ export const IFrameYouTube: React.FC<IFrameYouTubeProps> = ({
   };
   return (
     <div
-      style={{ height: '100%', background: '#000' }}
+      style={{
+        height: '100%',
+        background: '#000',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
       {...handlers}
       onTouchEnd={onDragStop}
     >
       <iframe
-        style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-        width="100%"
-        height="100%"
+        width="80%"
+        height="80%"
         src={`${url}`}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
