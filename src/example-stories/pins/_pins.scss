@@ -9,11 +9,15 @@
   color: #000;
   z-index: 99999999;
   max-width: 320px;
+  overflow: scroll;
+
   @media (max-width: 479px) {
     max-width: 320px;
     overflow-y: auto;
   }
+
   max-height: 50vh;
+
   .annotatedzoom-annotation-detail__image {
     max-width: 100%;
     width: auto;
@@ -25,6 +29,7 @@
   @media (max-width: 479px) {
     overflow-y: hidden;
   }
+
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
@@ -142,6 +147,7 @@
   border: none;
   cursor: pointer;
   line-height: 30px;
+
   &:focus {
     outline: none;
   }
