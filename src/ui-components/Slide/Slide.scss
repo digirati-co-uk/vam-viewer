@@ -52,9 +52,17 @@
       line-height: 1.4;
       color: white;
     }
+  }
 
-    &__info-icon {
-      float: right;
+  &__info-icon {
+    padding: 10px;
+    float: right;
+    box-sizing: unset;
+
+    *,
+    ::after,
+    ::before {
+      box-sizing: unset;
     }
   }
 
@@ -306,7 +314,7 @@
 
     &__info-panel-attribution {
       font-size: 12px;
-      width: 100%;
+      width: 80%;
       line-height: initial;
     }
   }

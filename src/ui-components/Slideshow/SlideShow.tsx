@@ -126,8 +126,8 @@ const SlideShow: React.FC<SlideShowProps> = ({
                             onSwipedDown={() => {}}
                             onSwipedUp={() => {}}
                             preventDefaultTouchmoveEvent={true}
-                            trackMouse={false}
-                            trackTouch={false}
+                            trackMouse={true}
+                            trackTouch={true}
                           >
                             <SimpleSlideTransition id={currentIndex}>
                               <Slide
@@ -142,7 +142,6 @@ const SlideShow: React.FC<SlideShowProps> = ({
                                 backgroundColor={backgroundColor}
                                 mobile={qualifiesForMobile}
                                 manifestUri={manifestUri}
-
                               />
                             </SimpleSlideTransition>
                             <CanvasNavigation

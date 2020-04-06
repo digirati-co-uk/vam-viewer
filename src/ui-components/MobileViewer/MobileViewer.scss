@@ -3,6 +3,7 @@
   &--isFullScreen * {
     background: red !important;
   }
+
   height: 100%;
 
   &__inner {
@@ -136,9 +137,18 @@
     }
 
     &-icon {
+      padding:20px;
       cursor: pointer;
       filter: drop-shadow(1px 1px 1px #1d1e20);
+      box-sizing: unset;
+
+      *,
+      ::after,
+      ::before {
+        box-sizing: unset;
+      }
     }
+
 
     &-panel {
       color: #000;
@@ -178,7 +188,7 @@
 
   &__info-panel-attribution {
     font-size: 12px;
-    width: 100%;
+    width: 80%;
     line-height: initial;
   }
 }
