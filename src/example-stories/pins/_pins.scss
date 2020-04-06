@@ -9,7 +9,7 @@
   color: #000;
   z-index: 99999999;
   max-width: 320px;
-  overflow: scroll;
+  overflow: auto;
 
   @media (max-width: 479px) {
     max-width: 320px;
