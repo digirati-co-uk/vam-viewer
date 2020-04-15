@@ -6,6 +6,7 @@
   &__text {
     margin: 10px 0;
     line-height: 1.5;
+    overflow: auto;
   }
 
   &__viewport {
@@ -30,7 +31,6 @@
     height: 100%;
     width: 100%;
     font-size: 16px;
-    pointer-events: none;
   }
 
   &__title {
@@ -82,9 +82,6 @@
 
   &--layout-split {
     @media screen and (min-width: 768px) {
-      .slide__overlay {
-        pointer-events: none;
-      }
 
       .slide__overlay-content {
         background: white;
@@ -173,8 +170,6 @@
       .slide__overlay {
         width: 100%;
         display: flex;
-
-        pointer-events: none;
       }
 
       .slide__overlay-content {
@@ -184,6 +179,10 @@
         padding: 10px;
         margin: 10px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        & * {
+          line-height: 1.4;
+          color: black;
+        }
       }
 
       &.slide--info-position-left {
