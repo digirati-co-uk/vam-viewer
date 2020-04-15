@@ -170,7 +170,6 @@
       .slide__overlay {
         width: 100%;
         display: flex;
-        pointer-events: none;
       }
 
       .slide__overlay-content {
@@ -180,6 +179,10 @@
         padding: 10px;
         margin: 10px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        & * {
+          line-height: 1.4;
+          color: black;
+        }
       }
 
       &.slide--info-position-left {
