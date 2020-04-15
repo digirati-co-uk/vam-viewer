@@ -30,7 +30,6 @@
     height: 100%;
     width: 100%;
     font-size: 16px;
-    pointer-events: none;
   }
 
   &__title {
@@ -82,9 +81,6 @@
 
   &--layout-split {
     @media screen and (min-width: 768px) {
-      .slide__overlay {
-        pointer-events: none;
-      }
 
       .slide__overlay-content {
         background: white;

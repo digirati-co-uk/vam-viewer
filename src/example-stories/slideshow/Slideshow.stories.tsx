@@ -164,3 +164,21 @@ export const WithVideoExample: React.FC = () => {
     </div>
   );
 };
+
+export const WithClickableLinks: React.FC = () => {
+  const slideShowEl = useRef('slideShowEl');
+  return (
+    <div id="slideShowEl" style={{ height: '100vh' }}>
+      <SlideShow
+        element={slideShowEl}
+        manifestUri={text(
+          'Manifest',
+          'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/micromosaics-example.json'
+        )}
+        addressable={boolean('Make URLs Addressable', true)}
+        id={0}
+        backgroundColor={color('Background Colour', '#000000')}
+      />
+    </div>
+  );
+};
