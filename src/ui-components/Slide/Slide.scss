@@ -4,6 +4,8 @@
   position: relative;
 
   &__text {
+    overflow: auto;
+    pointer-events: all;
     margin: 10px 0;
     line-height: 1.5;
   }
@@ -82,9 +84,9 @@
 
   &--layout-split {
     @media screen and (min-width: 768px) {
-      .slide__overlay {
-        pointer-events: none;
-      }
+      // .slide__overlay {
+      //   // pointer-events: none;
+      // }
 
       .slide__overlay-content {
         background: white;
