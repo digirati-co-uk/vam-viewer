@@ -6,6 +6,7 @@
   height: 100%;
   width: 100%;
   font-size: 16px;
+  pointer-events: none;
   &__title {
     font-size: 2em;
     margin-top: 0;
@@ -35,11 +36,14 @@
 
   &--layout-split {
     @media screen and (min-width: 768px) {
+      &__overlay {
+        pointer-events: none;
+      }
       &__overlay-content {
         background: white;
         width: 100%;
         height: 100%;
-        position: absolute;
+        position: relative;
         display: inline-block;
         padding: 23px 40px;
       }
@@ -107,6 +111,8 @@
       &__overlay {
         width: 100%;
         display: flex;
+
+        pointer-events: none;
       }
       &__overlay-content {
         background: white;
@@ -156,6 +162,7 @@
     display: flex;
     flex-direction: column;
     &__overlay {
+      pointer-events: none;
       width: 100%;
       flex: 1;
       position: relative;
