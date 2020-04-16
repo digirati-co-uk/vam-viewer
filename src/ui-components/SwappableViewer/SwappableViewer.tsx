@@ -157,20 +157,17 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
               manifest={manifest}
               canvas={canvas}
             >
-              {isInteractive ? (
-                <ZoomButtons
-                  onZoomOut={isZoomedOut ? null : zoomOut}
-                  onZoomIn={isZoomedIn ? null : zoomIn}
-                />
-              ) : (
-                <></>
-              )}
               <FullPageViewport
                 onUpdateViewport={updateViewport}
                 setRef={setViewport}
                 position="absolute"
                 interactive={isInteractive || !isZoomedOut}
               >
+                {isInteractive ? (
+                  <ZoomButtons onZoomOut={zoomOut} onZoomIn={zoomIn} />
+                ) : (
+                  <></>
+                )}
                 <OpenSeadragonViewport
                   useMaxDimensions={true}
                   interactive={isInteractive}
