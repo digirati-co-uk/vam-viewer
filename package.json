@@ -16,7 +16,7 @@
     "start": "fesk-start --cjs",
     "build-types": "tsc -p ./ --emitDeclarationOnly",
     "test": "jest",
-    "build:prod": "NODE_ENV=production fesk-build --cjs --umd && tsc -p ./ --emitDeclarationOnly"
+    "prepare": "NODE_ENV=production fesk-build --cjs --umd && tsc -p ./ --emitDeclarationOnly"
   },
   "devDependencies": {
     "@fesk/babel-config": "^1.3.0-next.2945936d",
