@@ -7,10 +7,10 @@ import {
   SingleTileSource,
 } from 'canvas-panel-beta/lib/legacy';
 import './MobileViewer.scss';
-import { InfoButton } from '../Icons/InfoButton.tsx';
-import { CloseIcon } from '../Icons/CloseIcon.tsx';
-import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
-import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube.tsx';
+import { InfoButton } from '../Icons/InfoButton';
+import { CloseIcon } from '../Icons/CloseIcon';
+import CanvasNavigation from '../CanvasNavigation/CanvasNavigation';
+import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube';
 import { PatchworkPlugin } from '../../viewers/patch-work-plugin/src/index';
 import { CanvasProvider } from 'canvas-panel-beta/lib/manifesto/Canvas/CanvasProvider';
 import { PatchworkEmbed } from '../../example-stories/PatchworkEmbed/PatchworkEmbed';

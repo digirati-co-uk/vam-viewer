@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 // @ts-ignore
 import { withBemClass } from 'canvas-panel-beta/lib/legacy';
 //@ts-ignore
-import SwappableViewer from '../SwappableViewer/SwappableViewer.tsx';
+import SwappableViewer from '../SwappableViewer/SwappableViewer';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';
 //@ts-ignore
-import { InfoButton } from '../Icons/InfoButton.tsx';
+import { InfoButton } from '../Icons/InfoButton';
 //@ts-ignore
-import { CloseIcon } from '../Icons/CloseIcon.tsx';
+import { CloseIcon } from '../Icons/CloseIcon';
 import './Slide.scss';
 
 interface SlideProps {
