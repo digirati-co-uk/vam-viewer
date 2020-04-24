@@ -16,7 +16,6 @@ export function createSlideShow(
 ) {
   render(
     <SlideShow
-      element={container}
       manifestUri={iiifResource}
       addressable={addressable}
       id={id}
@@ -61,4 +60,3 @@ export function createEmbeddedZoom(
     container
   );
 }
-

@@ -7,11 +7,9 @@ import { withKnobs, text, boolean, color } from '@storybook/addon-knobs';
 
 // crossorigin = 'anonymous';
 export const SingleSlideShow: React.FC = () => {
-  const slideShowEl = useRef('slideShowEl');
   return (
     <div id="slideShowEl" style={{ height: '75vh' }}>
       <SlideShow
-        element={slideShowEl}
         manifestUri={text(
           'Manifest',
           'https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json'
@@ -25,12 +23,9 @@ export const SingleSlideShow: React.FC = () => {
 };
 
 export const MultipleSlideShows: React.FC = () => {
-  const slideShowEl = useRef('slideShowEl');
-
   return (
     <div id="slideShowEl" style={{ height: '75vh' }}>
       <SlideShow
-        element={slideShowEl}
         manifestUri={text(
           'Top Manifest',
           'https://iiif-collection.ch.digtest.co.uk/p3/testingmosaics-v4.json'
@@ -40,7 +35,6 @@ export const MultipleSlideShows: React.FC = () => {
         backgroundColor={color('Top Background Colour', '#000000')}
       />
       <SlideShow
-        element={slideShowEl}
         manifestUri={text(
           'Bottom Manifest',
           'https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga4.json'
@@ -54,12 +48,9 @@ export const MultipleSlideShows: React.FC = () => {
 };
 
 export const EmbeddedPins: React.FC = () => {
-  const slideShowEl = useRef('slideShowEl');
-
   return (
     <div id="slideShowEl" style={{ height: '100vh' }}>
       <SlideShow
-        element={slideShowEl}
         manifestUri={text(
           'Top Manifest',
           'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/ocean-liners.json'
@@ -73,8 +64,6 @@ export const EmbeddedPins: React.FC = () => {
 };
 
 export const EmbeddedPinsInNormal: React.FC = () => {
-  const slideShowEl = useRef('slideShowEl');
-
   return (
     <>
       <div>
@@ -106,7 +95,6 @@ export const EmbeddedPinsInNormal: React.FC = () => {
       </div>
       <div id="slideShowEl" style={{ height: '70vh' }}>
         <SlideShow
-          element={slideShowEl}
           manifestUri={text(
             'Top Manifest',
             'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/embedded-tour.json'
@@ -148,11 +136,9 @@ export const EmbeddedPinsInNormal: React.FC = () => {
 };
 
 export const WithVideoExample: React.FC = () => {
-  const slideShowEl = useRef('slideShowEl');
   return (
     <div id="slideShowEl" style={{ height: '100vh' }}>
       <SlideShow
-        element={slideShowEl}
         manifestUri={text(
           'Manifest',
           'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/balenciaga-example.json'
@@ -166,11 +152,9 @@ export const WithVideoExample: React.FC = () => {
 };
 
 export const WithClickableLinks: React.FC = () => {
-  const slideShowEl = useRef('slideShowEl');
   return (
     <div id="slideShowEl" style={{ height: '100vh' }}>
       <SlideShow
-        element={slideShowEl}
         manifestUri={text(
           'Manifest',
           'https://raw.githubusercontent.com/digirati-co-uk/vam-viewer/master/examples/micromosaics-example.json'
