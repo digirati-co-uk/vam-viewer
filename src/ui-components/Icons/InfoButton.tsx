@@ -2,8 +2,8 @@ import React from 'react';
 
 interface InfoButtonProps {
   bem: any;
-  onClick: (args: any) => void;
-  hidden: boolean;
+  onClick?: (args: any) => void;
+  hidden?: boolean;
 }
 
 interface InfoIconProps {

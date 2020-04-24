@@ -16,7 +16,7 @@ interface SlideProps {
   manifest: any;
   canvas: any;
   region: any;
-  renderPanel: (args: any) => void;
+  renderPanel?: (args: any) => void;
   fullscreenProps: any;
   backgroundColor: string;
   mobile: boolean;

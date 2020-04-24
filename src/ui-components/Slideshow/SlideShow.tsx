@@ -19,13 +19,13 @@ import { Swipeable } from 'react-swipeable';
 import './SlideShow.scss';
 
 interface SlideShowProps {
-  mobileBreakPoint: number;
-  backgroundColor: string;
-  addressable: boolean;
-  id: number;
-  jsonLd: object;
+  mobileBreakPoint?: number;
+  backgroundColor?: string;
+  addressable?: boolean;
+  id?: number;
+  jsonLd?: object;
   manifestUri: string;
-  renderPanel: () => void;
+  renderPanel?: () => void;
   bem: any;
 }
 
