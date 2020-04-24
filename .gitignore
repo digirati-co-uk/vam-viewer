@@ -4,3 +4,4 @@ lib
 *.log
 *.tsbuildinfo
 .idea/workspace.xml
+.DS_Store
