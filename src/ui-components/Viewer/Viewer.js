@@ -17,7 +17,7 @@ import ExploreButton from '../ExploreButton/ExploreButton';
 import getCurrentScrollY from '../../utility/getCurrentScrollY';
 import './Viewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
-import MobileAnnotationView from '../MobileAnnotationView/MobileAnnotationView.tsx';
+import MobileAnnotationView from '../MobileAnnotationView/MobileAnnotationView';
 
 class Viewer extends Component {
   static defaultProps = {

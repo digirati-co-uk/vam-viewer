@@ -11,21 +11,21 @@ import MobilePageView from '../MobilePageView/MobilePageView';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 // @ts-ignore
-import Slide from '../Slide/Slide.tsx';
+import Slide from '../Slide/Slide';
 // @ts-ignore
-import CanvasNavigation from '../CanvasNavigation/CanvasNavigation.tsx';
+import CanvasNavigation from '../CanvasNavigation/CanvasNavigation';
 import { Swipeable } from 'react-swipeable';
 
 import './SlideShow.scss';
 
 interface SlideShowProps {
-  mobileBreakPoint: number;
-  backgroundColor: string;
-  addressable: boolean;
-  id: number;
-  jsonLd: object;
+  mobileBreakPoint?: number;
+  backgroundColor?: string;
+  addressable?: boolean;
+  id?: number;
+  jsonLd?: object;
   manifestUri: string;
-  renderPanel: () => void;
+  renderPanel?: () => void;
   bem: any;
 }
 

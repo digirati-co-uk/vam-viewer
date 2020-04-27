@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "rootDir": "src",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "allowJs": true,
@@ -41,11 +40,6 @@
   },
   "include": ["src/**/*"],
   "exclude": [
-    "**/*.stories.tsx",
-    "node_modules",
-    "dist",
-    "lib",
-    "__mocks__",
     "**/*.test.ts"
   ]
 }

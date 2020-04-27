@@ -2,7 +2,7 @@ import React from 'react';
 
 interface CloseIconProps {
   className: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 export const CloseIcon: React.FC<CloseIconProps> = ({ onClick, className }) => (
   <svg
