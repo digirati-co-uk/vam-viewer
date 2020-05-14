@@ -13,6 +13,8 @@ export const YoutubeVideoSource: React.FC = props => {
       const body = annotation.getBody();
       if (
         body &&
+        body[0] &&
+        body[0].getType &&
         (body[0].getType() || '').toLowerCase() === 'video' &&
         body[0].id.indexOf('youtube.com') !== -1
       ) {
