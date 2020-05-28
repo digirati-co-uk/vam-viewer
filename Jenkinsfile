@@ -5,9 +5,6 @@ runBuild{
     stage('Test') {
         sh 'yarn test'
     }
-    stage('Deploy') {
-        sh 'yarn deploy'
-    }
 }
 
 void runBuild(Closure pipeline) {
