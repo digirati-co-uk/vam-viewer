@@ -1,6 +1,6 @@
-pipeline {
-    agent "linux"
-
+ node('linux') {
+  container('buildkit') {
+    checkout(scm)
     stages {
         stage('Build') {
             steps {
@@ -18,4 +18,5 @@ pipeline {
             }
         }
     }
+  }
 }
