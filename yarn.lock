@@ -5099,10 +5099,10 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000989, can
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001031.tgz#76f1bdd39e19567b855302f65102d9a8aaad5930"
   integrity sha512-DpAP5a1NGRLgYfaNCaXIRyGARi+3tJA2quZXNNA1Du26VyVkqvy2tznNu5ANyN1Y5aX44QDotZSVSUSi2uMGjg==
 
-canvas-panel-beta@2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/canvas-panel-beta/-/canvas-panel-beta-2.0.5.tgz#88e4fe82b77883a408e1b73b987a98d452754595"
-  integrity sha512-KJUTJAhPKXk04K3hrbLIkDeMujch80eYAgSh1k9i9K+dk4tAzW0omB0la7wGCz5dYas9ojphZw/XJYYq1SXkyw==
+canvas-panel-beta@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/canvas-panel-beta/-/canvas-panel-beta-2.0.6.tgz#096f19ad87d3c0e860f439ce4cd33c8340f8140e"
+  integrity sha512-m5I6Ef2MwxG6SgBA2e6fzrM1c9r6szX6bA72pKyeZNqTlFEJIzPJfzwJJmP2lDLqJW5FZ622XhfpAsoxiRl4Ww==
   dependencies:
     "@canvas-panel/core" "^0.2.0"
     "@fesk/bem-js" "1.0.1"
