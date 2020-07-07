@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { SlideShow } from './viewers/slideshow/index.js';
-import { PopOutViewer } from './viewers/full-page-plugin/index.js';
-import { PatchworkPlugin } from './viewers/patch-work-plugin/src/index.js';
+import { SlideShow } from './viewers/slideshow';
+import { PopOutViewer } from './viewers/full-page-plugin';
+import { PatchworkPlugin } from './viewers/patch-work-plugin/src';
 
-import './viewers/patch-work-plugin/src/index';
+export { SlideShow, PopOutViewer, PatchworkPlugin };
 
 // export functions here
 export function createSlideShow(
