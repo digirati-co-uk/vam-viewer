@@ -1,21 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-// import {
-//   Manifest,
-//   Viewport,
-//   SingleTileSource,
-//   CanvasProvider,
-//   OpenSeadragonViewer,
-//   OpenSeadragonViewport,
-//   AnnotationDetail,
-//   AnnotationCanvasRepresentation,
-//   Fullscreen,
-//   FullPageViewport,
-//   Bem,
-//   withBemClass,
-// } from 'canvas-panel-beta/lib/legacy';
-
-// Temp until resolve issue with BemModifiers not reaching pins
 import {
   Manifest,
   Viewport,
@@ -29,7 +13,7 @@ import {
   FullPageViewport,
   Bem,
   withBemClass,
-} from 'canvas-panel-beta/lib/legacy';
+} from 'canvas-panel-beta';
 
 const defaultConfiguration = {
   cssClassPrefix: '',

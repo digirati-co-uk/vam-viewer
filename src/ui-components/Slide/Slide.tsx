@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // @ts-ignore
-import { withBemClass } from 'canvas-panel-beta/lib/legacy';
+import { withBemClass } from 'canvas-panel-beta';
 //@ts-ignore
 import SwappableViewer from '../SwappableViewer/SwappableViewer';
 import CanvasDetail from '../CanvasDetail/CanvasDetail';

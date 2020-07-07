@@ -6,7 +6,7 @@ import {
   withBemClass,
   Responsive,
   // @ts-ignore
-} from 'canvas-panel-beta/lib/legacy';
+} from 'canvas-panel-beta';
 import MobilePageView from '../MobilePageView/MobilePageView';
 import SimpleSlideTransition from '../SimpleSlideTransition/SimpleSlideTransition';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';

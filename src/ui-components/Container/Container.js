@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  functionOrMapChildren,
-  withBemClass,
-} from 'canvas-panel-beta/lib/legacy';
+import { functionOrMapChildren, withBemClass } from 'canvas-panel-beta';
 
 import './Container.scss';
 import getCurrentScrollY from '../../utility/getCurrentScrollY';

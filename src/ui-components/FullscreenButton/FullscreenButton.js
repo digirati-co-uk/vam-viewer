@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withBemClass } from 'canvas-panel-beta/lib/legacy';
+import { withBemClass } from 'canvas-panel-beta';
 import './FullscreenButton.scss';
 
 class FullscreenButton extends Component {
@@ -19,11 +19,7 @@ class FullscreenButton extends Component {
     if (isFullscreen) {
       return (
         <button onClick={exitFullscreen} className={bem.modifier('off')}>
-          <svg
-            viewBox="28 28 40 40"
-            width="100%"
-            height="100%"
-          >
+          <svg viewBox="28 28 40 40" width="100%" height="100%">
             <title>exit-fullscreen</title>
             <path
               d="M40.2296858,36.1045504 L33.1224269,29 L29,33.1224269 L36.1045504,40.2296858 L32.3315276,44 L44,44 L44,32.3315276 L40.2296858,36.1045504 Z M55.7703142,59.8954496 L62.8775731,67 L67,62.8775731 L59.8954496,55.7703142 L63.6684724,52 L52,52 L52,63.6684724 L55.7703142,59.8954496 Z"

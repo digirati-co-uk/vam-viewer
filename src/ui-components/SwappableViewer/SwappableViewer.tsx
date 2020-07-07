@@ -5,7 +5,7 @@ import {
   OpenSeadragonViewport,
   parseSelectorTarget,
   SingleTileSource,
-} from 'canvas-panel-beta/lib/legacy';
+} from 'canvas-panel-beta';
 import './SwappableViewer.scss';
 import ZoomButtons from '../ZoomButtons/ZoomButtons';
 import FullscreenButton from '../FullscreenButton/FullscreenButton';

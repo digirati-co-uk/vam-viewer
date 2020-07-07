@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FlipMove from 'react-flip-move';
-import { withBemClass } from 'canvas-panel-beta/lib/legacy';
+import { withBemClass } from 'canvas-panel-beta';
 import './PeekComponent.scss';
 
 class PeekComponent extends Component {
@@ -52,7 +52,10 @@ class PeekComponent extends Component {
             leaveAnimation="none"
             duration={300}
             onFinish={(_, e) => {
-              e.parentElement.parentElement.scrollTo({ left: 0, behavior: 'smooth' })
+              e.parentElement.parentElement.scrollTo({
+                left: 0,
+                behavior: 'smooth',
+              });
             }}
           >
             <div

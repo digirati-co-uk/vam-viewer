@@ -10,7 +10,7 @@ import {
   SingleTileSource,
   Viewport,
   withBemClass,
-} from 'canvas-panel-beta/lib/legacy';
+} from 'canvas-panel-beta';
 import { Annotation, Canvas } from 'manifesto.js';
 
 const defaultConfig = {
@@ -155,7 +155,6 @@ export const PatchworkEmbed: React.FC<{
             viewport.current = ref;
           }}
           onConstrain={onConstrain}
-
         >
           <SingleTileSource
             // @ts-ignore
@@ -163,7 +162,8 @@ export const PatchworkEmbed: React.FC<{
           >
             <OpenSeadragonViewport
               onDragStart={onDragStart}
-              onDragStop={onDragStop}>
+              onDragStop={onDragStop}
+            >
               <OpenSeadragonViewer
                 useMaxDimensions={true}
                 osdOptions={{
