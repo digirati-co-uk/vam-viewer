@@ -7,7 +7,7 @@
     "lib"
   ],
   "git repository": "https://github.com/digirati-co-uk/vam-viewer",
-  "main": "dist/umd/fesk-ts.js",
+  "main": "dist/umd/@digirati/vam-viewer.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "Stephen Fraser <stephen.fraser@digirati.com>",
