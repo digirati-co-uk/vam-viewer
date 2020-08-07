@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withBemClass } from 'canvas-panel-beta/lib/legacy';
+import { withBemClass } from 'canvas-panel-beta';
 import './ProgressIndicator.scss';
 
 class ProgressIndicator extends Component {

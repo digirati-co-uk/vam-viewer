@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useCanvas } from 'canvas-panel-beta/lib/manifesto/Canvas/CanvasProvider';
+import { useCanvas } from 'canvas-panel-beta';
 import { IFrameYouTube } from '../IFrameYouTube/IFrameYouTube';
 
 export const YoutubeVideoSource: React.FC = props => {

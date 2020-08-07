@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BezierEasing from 'bezier-easing';
 import PagePanel from '../PagePanel/PagePanel';
-import { AnnotationDetail } from 'canvas-panel-beta/lib/legacy';
+import { AnnotationDetail } from 'canvas-panel-beta';
 
 class AnnotationListView extends Component {
   static defaultProps = {

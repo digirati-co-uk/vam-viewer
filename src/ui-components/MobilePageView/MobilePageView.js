@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withBemClass } from 'canvas-panel-beta/lib/legacy';
+import { withBemClass } from 'canvas-panel-beta';
 import './MobilePageView.scss';
 import TapDetector from '../TapDetector/TapDetector';
 import MobileViewer from '../MobileViewer/MobileViewer';

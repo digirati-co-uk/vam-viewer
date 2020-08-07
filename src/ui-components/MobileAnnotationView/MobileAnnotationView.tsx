@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // @ts-ignore
-import { AnnotationDetail, withBemClass } from 'canvas-panel-beta/lib/legacy';
+import { AnnotationDetail, withBemClass } from 'canvas-panel-beta';
 import AnnotationNavigation from '../AnnotationNavigation/AnnotationNavigation';
 
 import { useSwipeable } from 'react-swipeable';
@@ -8,7 +8,15 @@ import { useSwipeable } from 'react-swipeable';
 
 import './MobileAnnotationView.scss';
 import { Annotation } from 'manifesto.js';
-import { Selector } from 'canvas-panel-beta/lib/utility/annotation-selector';
+
+type Selector = {
+  type?: string;
+  value?: string;
+  x: number;
+  y: number;
+  width?: number | null;
+  height?: number | null;
+};
 
 interface MobileAnnotationProps {
   animationFramePadding: number;
@@ -99,7 +107,9 @@ const MobileAnnotationView: React.FC<MobileAnnotationProps> = ({
 
   const annotation = current === 0 ? null : annotations[current - 1].annotation;
 
-  const next = annotations[current] ? annotations[current].annotation : undefined;
+  const next = annotations[current]
+    ? annotations[current].annotation
+    : undefined;
 
   return (
     <div

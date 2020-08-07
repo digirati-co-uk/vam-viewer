@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 // @ts-ignore
-import { withBemClass } from 'canvas-panel-beta/lib/legacy';
+import { withBemClass, BemBlockType } from 'canvas-panel-beta';
 import withLocation from '../withLocation/withLocation';
 import queryString from 'query-string';
 
 import { ResetIcon } from '../Icons/Reset';
 import './CanvasNavigation.scss';
-import { BemBlockType } from 'canvas-panel-beta/lib/legacy/components/Bem/Bem';
 
 interface CanvasNavigationProps {
   previousRange: () => void;

@@ -9,7 +9,7 @@ import {
   AnnotationListProvider,
   Responsive,
   withBemClass,
-} from 'canvas-panel-beta/lib/legacy';
+} from 'canvas-panel-beta';
 import Container from '../Container/Container';
 import TitlePanel from '../TitlePanel/TitlePanel';
 import AnnotationListView from '../AnnotationListView/AnnotationListView';
