@@ -98,6 +98,7 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     const describers = getEmbeddedAnnotations(canvas).filter(
       (object: any) => object.motivation === 'describing'
     );
+
     setEmbeddedTour(
       (canvas &&
         canvas.__jsonld &&
@@ -136,17 +137,20 @@ const SwappableViewer: React.FC<SwappableViewerProps> = ({
     // }
   };
 
+  const describers = getEmbeddedAnnotations(canvas).filter(
+    (object: any) => object.motivation === 'describing'
+  );
+
   return (
     <>
-      <FullscreenButton {...fullscreenProps} />
       <div
         className={bem
           .element('viewport')
           .modifiers({ interactive: isInteractive || !isZoomedOut })}
       >
+        <FullscreenButton {...fullscreenProps} />
         {embeddedTour ? (
           <>
-            <FullscreenButton {...fullscreenProps} />
             <PatchworkEmbed canvas={canvas} fitContainer={true} {...props} />
           </>
         ) : (

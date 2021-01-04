@@ -39,6 +39,7 @@ const SlideShow: React.FC<SlideShowProps> = ({
   renderPanel,
   bem,
 }) => {
+
   const [innerWidth, setInnerWidth] = useState(0);
   const [qualifiesForMobile, setQualifiesForMobile] = useState(false);
   const [isMobileFullScreen, setIsMobileFullScreen] = useState(false);
@@ -100,13 +101,21 @@ const SlideShow: React.FC<SlideShowProps> = ({
                           isMobileFullScreen={isMobileFullScreen}
                           addressable={addressable}
                           id={id}
+                          // @ts-ignore
                           manifest={manifest}
+                          // @ts-ignore
                           previousRange={previousRange}
+                          // @ts-ignore
                           nextRange={nextRange}
+                          // @ts-ignore
                           fullscreenProps={fullscreenProps}
+                          // @ts-ignore
                           exitFullscreen={setIsMobileFullScreen}
+                          // @ts-ignore
                           canvas={canvas}
+                          // @ts-ignore
                           manifestUri={manifestUri}
+                          // @ts-ignore
                           {...rangeProps}
                         />
                       ) : (
