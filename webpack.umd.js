@@ -38,10 +38,10 @@ const config = Object.assign({}, baseConfig, {
 config.externals = {
   'node-fetch': 'fetch',
   'fetch-cookie/node-fetch': 'fetch',
-  react: 'react',
-  'react-dom': 'react-dom',
+  react: 'React',
+  'react-dom': 'ReactDOM',
   'react-reconciler': 'react-reconciler',
-  openseadragon: 'openseadragon',
+  openseadragon: 'OpenSeadragon',
 };
 
 module.exports = config;
