@@ -9,13 +9,18 @@
 <script crossorigin src="https://unpkg.com/openseadragon"></script>
 <script src="./dist/umd/@digirati/vam-viewer.js"></script>
 <link rel="stylesheet" href="./dist/assets/app.css" />
-<div id="test"></div>
+<div style="">
+  <div id="test"></div>
+</div>
 <script>
   console.log(OpenSeadragon);
   console.log(
     VAMViewer.createSlideShow(
       document.getElementById('test'),
-      'https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga1-behaviors.json'
+      'https://raw.githubusercontent.com/4d4mm/adam-digirati.github.io/master/balenciaga1-behaviors.json',
+      true,
+      'white',
+      'test'
     )
   );
 </script>
