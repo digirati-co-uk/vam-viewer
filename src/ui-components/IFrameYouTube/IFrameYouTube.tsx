@@ -26,6 +26,7 @@ export const IFrameYouTube: React.FC<IFrameYouTubeProps> = ({
       onDragStart();
     }
   };
+
   return (
     <div
       style={{
@@ -41,7 +42,7 @@ export const IFrameYouTube: React.FC<IFrameYouTubeProps> = ({
       <iframe
         width="100%"
         height="60%"
-        src={`${url}`}
+        src={`http://www.youtube.com/embed/${new URL(url).searchParams.get('v')}`}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

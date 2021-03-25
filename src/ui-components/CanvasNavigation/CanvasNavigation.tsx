@@ -38,66 +38,41 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   const goToSlide = (index: number | string) => {
     index = index + '';
     if (addressable) {
-      const qParam = queryString.parse(window.location.hash);
-      if (
-        qParam.id &&
-        Array.isArray(qParam.id) &&
-        qParam.slideshow &&
-        Array.isArray(qParam.slideshow)
-      ) {
-        const indexOfQueryId = qParam.id.find(query => parseInt(query) === id);
-        if (indexOfQueryId) {
-          qParam.slideshow[parseInt(indexOfQueryId)] = currentIndex + '';
-          document.location.hash = queryString.stringify(qParam);
-        }
-      } else {
-        if (typeof qParam.id === 'string' && parseInt(qParam.id) !== id) {
-          document.location.hash =
-            document.location.hash + `&${buildId(currentIndex)}`;
-        } else {
-          document.location.hash = `#${buildId(currentIndex)}`;
-        }
-      }
-    }
-  };
+      const searchParams = new URLSearchParams(document.location.search);
+      const slideShowID = document.location.hash.slice(1);
 
-  const buildId = (index: number | string) => {
-    return `id=${id}&slideshow=${index}`;
+      if (!slideShowID || (id !== slideShowID)) {
+        history.pushState(null, '', `#${String(id)}`);
+      }
+      searchParams.set('slide', index);
+      const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?" + searchParams.toString() + window.location.hash;
+      history.pushState(null, '', newUrl);
+    }
   };
 
   const getSlideByID = () => {
-    const qParam = queryString.parse(window.location.hash);
-    let slideshow: any;
-    if (
-      qParam.id &&
-      Array.isArray(qParam.id) &&
-      qParam.slideshow &&
-      Array.isArray(qParam.slideshow)
-    ) {
-      const indexOfQueryId = qParam.id.find(
-        (query: string) => parseInt(query) === id
-      );
-      if (indexOfQueryId)
-        slideshow = qParam.slideshow[parseInt(indexOfQueryId)];
-      if (!slideshow || slideshow < 0 || slideshow >= canvasList.length)
-        slideshow = '0';
+    const searchParams = new URLSearchParams(window.location.search);
+    if (String(searchParams.get('slide')) !== "null") {
+      return parseInt(String(searchParams.get('slide')));
     } else {
-      slideshow = qParam.slideshow;
+      return 0;
     }
-    if (!slideshow) slideshow = '0';
-    return parseInt(slideshow);
   };
 
   useEffect(() => {
-    if (addressable && hash) {
-      if (typeof hash.slideshow === 'string') {
-        let slideId = hash.slideshow;
+    const searchParams = new URLSearchParams(document.location.search);
+    const hashToSlide = {
+        slide: String(searchParams.get('slide'))
+    };
+    if (addressable && hashToSlide) {
+      if (typeof hashToSlide.slide === 'string') {
+        let slideId = hashToSlide.slide;
         if (slideId) {
           parseInt(slideId);
         }
         let intSlideId = slideId ? parseInt(slideId) : 0;
         if (
-          !hash ||
+          !hashToSlide ||
           !intSlideId ||
           intSlideId < 0 ||
           intSlideId >= canvasList.length
@@ -114,7 +89,7 @@ const CanvasNavigation: React.FC<CanvasNavigationProps> = ({
   }, []);
 
   useEffect(() => {
-    goToSlide(getSlideByID());
+    goToSlide(currentIndex);
     document.addEventListener('keyup', handleKeyPress);
     return () => {
       document.removeEventListener('keyup', handleKeyPress);
